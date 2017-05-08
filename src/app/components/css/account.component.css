@@ -1,0 +1,44 @@
+.account-header {
+  padding: 15px 15px 10px;
+  background: white;
+  color: #FF0000;
+}
+
+.account-header span {
+  display: block;
+  font-size: 40px;
+}
+
+.account-container {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  max-width: 150px;
+  margin-top: 20px;
+  background: white;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  box-shadow: 0 2px 5px lightgray;
+  font-size: 115%;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.account-body {
+  padding: 15px;
+}
+
+.account-container:hover {
+  box-shadow: 0 10px 20px gray;
+}
+
+.account-balance {
+  background: white;
+  color: lightgrey;
+}
+
+@media screen and (max-width: 768px) {
+  .account-container {
+    width: 100%;
+    max-width: none;
+  }
+}

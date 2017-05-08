@@ -1,0 +1,14 @@
+<div class="title-bar">
+  <div class="title">Make a payment</div>
+</div>
+<div class="workflow">
+  <step [stepIndex]="stepIndex"
+        [title]="'Select an account'"
+        [selection]="account ? account.name : undefined"
+        (stepClick)="onStepClick($event)">
+    <account-selector (onSelectChange)="onAccountClick($event)"></account-selector>
+  </step>
+  <step [stepIndex]="stepIndex"
+        [title]="'Select destinatary'"
+        (stepClick)="onStepClick($event)"></step>
+</div>

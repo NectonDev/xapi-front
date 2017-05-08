@@ -1,0 +1,90 @@
+.step-header {
+  display: inline-block;
+  position: relative;
+}
+
+.step-header .step-order {
+  display: inline-block;
+  border-radius: 100%;
+  text-align: center;
+  box-shadow: 0 2px 5px lightgray;
+  transform: translateX(-50%);
+}
+
+.step-header .step-order span {
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.step-header .header-top {
+  display: inline-block;
+  position: relative;
+}
+
+.step-header .header-top .step-title {
+
+}
+
+.step-header .selection {
+  display: block;
+  position: relative;
+  background: black;
+}
+
+.step-header .selection div {
+  display: inline-block;
+  position: absolute;
+  width: 10px;
+  height: 1px;
+  background: red;
+}
+
+.step-header .selection .selection-text {
+}
+
+.step-header .subtitle {
+
+}
+
+.step-content {
+  padding-left: 20px;
+  padding-bottom: 20px;
+  overflow-y: hidden;
+}
+
+.selected.step-header {
+  font-size: 180%;
+}
+
+.selected.step-header .step-order {
+  width: 40px;
+  height: 40px;
+  background: #FF0000;
+  color: white;
+}
+
+.selected.step-header .header-top {
+  color: #FF0000;
+  top: 2px;
+}
+
+.unselected.step-header {
+  font-size: 150%;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.unselected.step-header .step-order {
+  width: 35px;
+  height: 35px;
+  background: white;
+  color: #FF0000;
+}
+
+.unselected.step-header .header-top {
+  margin-left: 10px;
+  color: gray;
+  top: 3px;
+}
