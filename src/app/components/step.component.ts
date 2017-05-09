@@ -7,17 +7,18 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   animations: [
     trigger('selectionTrigger', [
       state('selected', style({
-        maxHeight: '1000px'
+        maxHeight: '200vh'
       })),
       state('unselected', style({
-        maxHeight: '0'
+        maxHeight: 0
       })),
-      transition('selected <=> unselected', animate('300ms ease-in'))
+      transition('unselected => selected', animate('300ms ease-in')),
+      transition('selected => unselected', animate('300ms ease-out'))
     ])
   ]
 })
 export class StepComponent {
-  private static STEP_COUNT: number = 0;
+  static STEP_COUNT: number = 0;
   private _step: number;
 
   @Output() stepClick: EventEmitter<number> = new EventEmitter();
@@ -45,5 +46,9 @@ export class StepComponent {
 
   private onClick(): void {
     this.stepClick.emit(this._step);
+  }
+
+  private isLastStep(): boolean {
+    return this._step === StepComponent.STEP_COUNT;
   }
 }

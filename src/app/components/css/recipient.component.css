@@ -1,0 +1,43 @@
+.recipient-container {
+  display: inline-block;
+  position: relative;
+  width: 170px;
+  max-width: 170px;
+  margin-top: 20px;
+  background: white;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  box-shadow: 0 2px 5px lightgray;
+  font-size: 115%;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.recipient-container:hover {
+  box-shadow: 0 10px 20px gray;
+}
+
+.recipient-header {
+  padding: 15px 15px 10px;
+  background: white;
+  color: #FF0000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.recipient-header span {
+  display: block;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+.recipient-body {
+  padding: 15px;
+  color: gray;
+}
+
+@media screen and (max-width: 768px) {
+  .recipient-container {
+    width: 100%;
+    max-width: none;
+  }
+}

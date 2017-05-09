@@ -1,6 +1,7 @@
-<div class="step"
+<div class="step" id="step"
      [class.selected]="isSelected()"
-     [class.unselected]="!isSelected()">
+     [class.unselected]="!isSelected()"
+     [class.last-unselected]="!isSelected() && isLastStep()">
   <div class="step-header"
        (click)="onClick()">
     <div class="step-order"><span>{{_step}}</span></div>

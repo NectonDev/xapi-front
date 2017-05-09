@@ -1,0 +1,9 @@
+<div class="recipient-container">
+  <div class="recipient-header" [@headerState]="recipient.getState()">
+    <span class="glyphicon glyphicon-user"></span>
+    {{recipient.getName()}}
+  </div>
+  <div class="recipient-body">
+    {{recipient.getAccount().getCurrencyType()}} account ending with {{recipient.getAccount().getLastDigits()}}
+  </div>
+</div>

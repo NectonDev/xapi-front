@@ -6,6 +6,8 @@ import { AppComponent }  from './components/app.component';
 import { AccountSelectorComponent } from './components/account_selector.component';
 import { AccountComponent } from './components/account.component';
 import { StepComponent } from './components/step.component';
+import { RecipientComponent } from './components/recipient.component';
+import { RecipientSelectorComponent } from './components/recipient_selector.component';
 
 @NgModule({
   imports: [
@@ -15,7 +17,9 @@ import { StepComponent } from './components/step.component';
   declarations: [
     AppComponent,
     AccountSelectorComponent,
+    RecipientSelectorComponent,
     AccountComponent,
+    RecipientComponent,
     StepComponent
   ],
   bootstrap:    [ AppComponent ]

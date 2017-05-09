@@ -3,29 +3,37 @@
   position: relative;
 }
 
-.step-header .step-order {
+.step-order {
   display: inline-block;
   border-radius: 100%;
   text-align: center;
-  box-shadow: 0 2px 5px lightgray;
+  box-shadow: 0 1px 3px gray;
   transform: translateX(-50%);
 }
 
-.step-header .step-order span {
+.step-order span {
   display: block;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
 }
 
-.step-header .header-top {
+.header-top {
   display: inline-block;
   position: relative;
 }
 
+.selection {
+  position: relative;
+  padding-bottom: 15px;
+  padding-top: 15px;
+}
+
 .selection .dot {
   display: inline-block;
-  vertical-align: middle;
+  position: absolute;
+  bottom: 50%;
+  transform: translateY(50%);
   width: 10px;
   height: 1px;
   background: red;
@@ -35,54 +43,68 @@
   display: inline-block;
   vertical-align: middle;
   padding-left: 15px;
-  color: grey;
+  color: #9E9E9E;
 }
 
-.step-header .subtitle {
+.subtitle {
 
 }
 
 .step-content {
   padding-left: 20px;
   padding-bottom: 20px;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .selected .step-header {
   font-size: 180%;
 }
 
-.selected .step-header .step-order {
+.selected .step-order {
   width: 40px;
   height: 40px;
   background: #FF0000;
   color: white;
 }
 
-.selected .step-header .header-top {
+.selected .header-top {
+  margin-left: -15px;
   color: #FF0000;
   top: 2px;
 }
 
 .unselected .step-header {
-  font-size: 150%;
+  font-size: 125%;
   cursor: pointer;
   cursor: hand;
 }
 
-.unselected .step-header .step-order {
-  width: 35px;
-  height: 35px;
+.unselected .step-order {
+  width: 30px;
+  height: 30px;
   background: white;
   color: #FF0000;
 }
 
-.unselected .step-header .header-top {
-  margin-left: -10px;
-  color: gray;
+.unselected .header-top {
+  margin-left: -5px;
+  color: #9E9E9E;
   top: 3px;
 }
 
 .unselected .step-content {
   padding-bottom: 0;
+}
+
+.last-unselected .selection {
+  height: 12px;
+}
+
+.last-unselected .selection .dot {
+  bottom: 0;
+  transform: none;
+}
+
+.last-unselected .selection-text {
+  margin-bottom: -5px;
 }

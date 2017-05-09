@@ -4,13 +4,16 @@
 <div class="workflow">
   <step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
-        [title]="'Select an account'"
-        [selection]="account ? account.name : undefined"
+        [title]="'Select a recipient'"
+        [selection]="recipient ? recipient.getName() : undefined"
         (stepClick)="onStepClick($event)">
-    <account-selector (onSelectChange)="onAccountClick($event)"></account-selector>
+    <recipient-selector (onSelectChange)="onRecipientClick($event)"></recipient-selector>
   </step>
   <step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
-        [title]="'Select destinatary'"
-        (stepClick)="onStepClick($event)"></step>
+        [title]="'Select an account'"
+        [selection]="account ? account.getName() : undefined"
+        (stepClick)="onStepClick($event)">
+    <account-selector (onSelectChange)="onAccountClick($event)"></account-selector>
+  </step>
 </div>

@@ -2,11 +2,14 @@
   padding: 15px 15px 10px;
   background: white;
   color: #FF0000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .account-header span {
   display: block;
   font-size: 40px;
+  margin-bottom: 5px;
 }
 
 .account-container {
@@ -24,7 +27,7 @@
 }
 
 .account-body {
-  padding: 15px;
+  padding: 10px;
 }
 
 .account-container:hover {
