@@ -10,12 +10,23 @@ export class AppComponent  {
 
   private account: Account;
   private stepIndex: number = 1;
+  private progressIndex: number = 1;
 
   private onAccountClick(account: Account): void {
     this.account = account;
+    this.doProgress(1);
+  }
+
+  private doProgress(step: number): void {
+    if (this.progressIndex === step) {
+      this.progressIndex++;
+      this.stepIndex = this.progressIndex;
+    }
   }
 
   private onStepClick(step: number): void {
-    this.stepIndex = step;
+    if (step <= this.progressIndex) {
+      this.stepIndex = step;
+    }
   }
 }

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {animate, state, style, transition, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from '@angular/animations';
 @Component({
   selector: 'step',
   templateUrl: './html/step.component.html',
@@ -24,6 +24,7 @@ export class StepComponent {
   @Input() selection: string;
   @Input() title: string;
   @Input() stepIndex: number;
+  @Input() progressIndex: number;
   @Input() subtitle: string;
 
   constructor() {
@@ -32,6 +33,14 @@ export class StepComponent {
 
   private isSelected(): boolean {
     return this._step === this.stepIndex;
+  }
+
+  private isTime(): boolean {
+    return this._step <= this.progressIndex;
+  }
+
+  private hasSelection(): boolean {
+    return this.selection !== undefined;
   }
 
   private onClick(): void {

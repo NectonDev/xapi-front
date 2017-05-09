@@ -23,25 +23,19 @@
   position: relative;
 }
 
-.step-header .header-top .step-title {
-
-}
-
-.step-header .selection {
-  display: block;
-  position: relative;
-  background: black;
-}
-
-.step-header .selection div {
+.selection .dot {
   display: inline-block;
-  position: absolute;
+  vertical-align: middle;
   width: 10px;
   height: 1px;
   background: red;
 }
 
-.step-header .selection .selection-text {
+.selection .selection-text {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 15px;
+  color: grey;
 }
 
 .step-header .subtitle {
@@ -54,37 +48,41 @@
   overflow-y: hidden;
 }
 
-.selected.step-header {
+.selected .step-header {
   font-size: 180%;
 }
 
-.selected.step-header .step-order {
+.selected .step-header .step-order {
   width: 40px;
   height: 40px;
   background: #FF0000;
   color: white;
 }
 
-.selected.step-header .header-top {
+.selected .step-header .header-top {
   color: #FF0000;
   top: 2px;
 }
 
-.unselected.step-header {
+.unselected .step-header {
   font-size: 150%;
   cursor: pointer;
   cursor: hand;
 }
 
-.unselected.step-header .step-order {
+.unselected .step-header .step-order {
   width: 35px;
   height: 35px;
   background: white;
   color: #FF0000;
 }
 
-.unselected.step-header .header-top {
-  margin-left: 10px;
+.unselected .step-header .header-top {
+  margin-left: -10px;
   color: gray;
   top: 3px;
+}
+
+.unselected .step-content {
+  padding-bottom: 0;
 }
