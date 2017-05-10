@@ -16,4 +16,11 @@
         (stepClick)="onStepClick($event)">
     <account-selector (onSelectChange)="onAccountClick($event)"></account-selector>
   </step>
+  <step [stepIndex]="stepIndex"
+        [progressIndex]="progressIndex"
+        [title]="'Your transfer'"
+        [selection]="account ? account.getName() : undefined"
+        (stepClick)="onStepClick($event)">
+    <transfer (onOperationDone)="onOperationDone()"></transfer>
+  </step>
 </div>

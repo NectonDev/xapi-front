@@ -4,6 +4,7 @@
     {{recipient.getName()}}
   </div>
   <div class="recipient-body">
-    {{recipient.getAccount().getCurrencyType()}} account ending with {{recipient.getAccount().getLastDigits()}}
+    <div class="account">{{recipient.getAccount().getCurrencyType()}} account</div>
+    <div class="ending">ending with {{recipient.getAccount().getLastDigits()}}</div>
   </div>
 </div>

@@ -1,25 +1,22 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Component, EventEmitter, Input, Output, ElementRef, ViewChild} from '@angular/core';
+import {animate, state, style, transition, trigger, AnimationEvent} from '@angular/animations';
 @Component({
   selector: 'step',
   templateUrl: './html/step.component.html',
   styleUrls: ['./css/step.component.css'],
   animations: [
     trigger('selectionTrigger', [
-      state('selected', style({
-        maxHeight: '200vh'
-      })),
-      state('unselected', style({
-        maxHeight: 0
-      })),
-      transition('unselected => selected', animate('300ms ease-in')),
-      transition('selected => unselected', animate('300ms ease-out'))
+      state('selected', style({height: '*'})),
+      state('unselected', style({height: '0px'})),
+      transition('unselected => selected', animate('200ms')),
+      transition('selected => unselected', animate('200ms')),
     ])
   ]
 })
 export class StepComponent {
   static STEP_COUNT: number = 0;
   private _step: number;
+  @ViewChild('content') _contentEl: ElementRef;
 
   @Output() stepClick: EventEmitter<number> = new EventEmitter();
   @Input() selection: string;
@@ -50,5 +47,17 @@ export class StepComponent {
 
   private isLastStep(): boolean {
     return this._step === StepComponent.STEP_COUNT;
+  }
+
+  private onAnimationDone(event: AnimationEvent): void {
+    if (event.toState === 'selected') {
+      this._contentEl.nativeElement.style.overflowY = 'auto';
+    }
+  }
+
+  private onAnimationStart(event: AnimationEvent): void {
+    if (event.toState === 'unselected') {
+      this._contentEl.nativeElement.style.overflowY = '';
+    }
   }
 }

@@ -35,6 +35,14 @@
   color: gray;
 }
 
+.account {
+  display: block;
+}
+
+.ending {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   .recipient-container {
     width: 100%;

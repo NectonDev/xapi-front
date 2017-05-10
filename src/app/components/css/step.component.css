@@ -34,7 +34,7 @@
   position: absolute;
   bottom: 50%;
   transform: translateY(50%);
-  width: 10px;
+  width: 40px;
   height: 1px;
   background: red;
 }
@@ -42,7 +42,7 @@
 .selection .selection-text {
   display: inline-block;
   vertical-align: middle;
-  padding-left: 15px;
+  padding-left: 45px;
   color: #9E9E9E;
 }
 
@@ -52,8 +52,12 @@
 
 .step-content {
   padding-left: 20px;
-  padding-bottom: 20px;
-  overflow-y: auto;
+  overflow-y: hidden;
+  max-height: 50vh;
+}
+
+.idle-space {
+  height: 20px;
 }
 
 .selected .step-header {
@@ -74,7 +78,7 @@
 }
 
 .unselected .step-header {
-  font-size: 125%;
+  font-size: 120%;
   cursor: pointer;
   cursor: hand;
 }
@@ -92,10 +96,6 @@
   top: 3px;
 }
 
-.unselected .step-content {
-  padding-bottom: 0;
-}
-
 .last-unselected .selection {
   height: 12px;
 }
@@ -107,4 +107,10 @@
 
 .last-unselected .selection-text {
   margin-bottom: -5px;
+}
+
+@media (max-width: 480px) {
+  .selected .step-content {
+    margin-bottom: 20px;
+  }
 }

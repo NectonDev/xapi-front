@@ -1,6 +1,6 @@
 <div class="container-flex ">
   <ul class="row">
-    <li *ngFor="let recipient of recipients" class="col-lg-2 col-md-3 col-sm-4 col-xs-12">
+    <li *ngFor="let recipient of recipients" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xxs">
       <recipient [recipient]="recipient" (click)="onRecipientClick(recipient)"></recipient>
     </li>
   </ul>
