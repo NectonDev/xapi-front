@@ -1,15 +1,15 @@
 import {Component, EventEmitter, Input, Output, ElementRef, ViewChild} from '@angular/core';
-import {animate, state, style, transition, trigger, AnimationEvent} from '@angular/animations';
+import {animate, state, style, transition, trigger, AnimationEvent, keyframes} from '@angular/animations';
 @Component({
   selector: 'step',
-  templateUrl: './html/step.component.html',
-  styleUrls: ['./css/step.component.css'],
+  templateUrl: './step.component.html',
+  styleUrls: ['./step.component.css'],
   animations: [
     trigger('selectionTrigger', [
       state('selected', style({height: '*'})),
-      state('unselected', style({height: '0px'})),
+      state('unselected', style({height: 0})),
       transition('unselected => selected', animate('200ms')),
-      transition('selected => unselected', animate('200ms')),
+      transition('selected => unselected', animate('200ms'))
     ])
   ]
 })
@@ -57,7 +57,7 @@ export class StepComponent {
 
   private onAnimationStart(event: AnimationEvent): void {
     if (event.toState === 'unselected') {
-      this._contentEl.nativeElement.style.overflowY = '';
+        this._contentEl.nativeElement.style.overflowY = '';
     }
   }
 }

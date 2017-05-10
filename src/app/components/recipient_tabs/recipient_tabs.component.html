@@ -1,0 +1,25 @@
+<div class="tabs">
+  <div class="tab" (click)="onTabClick(0)">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span class="text">New recipient</span>
+  </div>
+  <div class="tab" (click)="onTabClick(1)">
+    <span class="glyphicon glyphicon-user"></span>
+    <span class="text">Existing recipient</span>
+  </div>
+</div>
+<div class="content" [@contentTrigger]="_contentState" (@contentTrigger.done)="onAnimationDone($event)">
+  <div [hidden]="isSelected(0)" class="new-recipient">
+    <label for="country">Country</label>
+    <select name="country" id="country">
+      <option>Spain</option>
+      <option>Great Britain</option>
+      <option>India</option>
+      <option>United States</option>
+    </select>
+    <input name="name" placeholder="Recipient's name">
+    <input name="surname" placeholder="Recipient's surname">
+    <input name="address" placeholder="Recipient's address">
+  </div>
+  <recipient-selector [hidden]="isSelected(1)" (onSelectChange)="onRecipientClick($event)"></recipient-selector>
+</div>

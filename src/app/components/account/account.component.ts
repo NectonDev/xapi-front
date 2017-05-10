@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {Account} from '../models/account';
-import {state, style, trigger} from "@angular/animations";
+import {Account} from '../../models/account';
+import {state, style, trigger} from '@angular/animations';
 
 @Component({
   selector: 'account',
-  templateUrl: './html/account.component.html',
-  styleUrls: ['./css/account.component.css'],
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css'],
   animations: [
     trigger('headerState', [
       state('selected', style({

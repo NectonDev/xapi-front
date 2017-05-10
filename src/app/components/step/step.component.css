@@ -51,9 +51,7 @@
 }
 
 .step-content {
-  padding-left: 20px;
   overflow-y: hidden;
-  max-height: 50vh;
 }
 
 .idle-space {
@@ -75,6 +73,10 @@
   margin-left: -15px;
   color: #FF0000;
   top: 2px;
+}
+
+.selected .step-content {
+  padding-bottom: 20px;
 }
 
 .unselected .step-header {
@@ -110,6 +112,9 @@
 }
 
 @media (max-width: 480px) {
+  .step-content {
+    max-height: 50vh;
+  }
   .selected .step-content {
     margin-bottom: 20px;
   }

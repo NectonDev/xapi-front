@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import { ACCOUNTS } from '../mocks/account.mock';
-import {Account} from '../models/account';
+import { ACCOUNTS } from '../../mocks/account.mock';
+import {Account} from '../../models/account';
 
 @Component({
   selector: 'account-selector',
-  templateUrl: './html/account_selector.component.html',
-  styleUrls: ['./css/account_selector.component.css']
+  templateUrl: './account_selector.component.html',
+  styleUrls: ['./account_selector.component.css']
 })
 export class AccountSelectorComponent {
   private accounts: Account[] = ACCOUNTS;

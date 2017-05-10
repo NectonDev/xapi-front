@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Account } from '../models/account';
-import { Recipient } from '../models/recipient';
-import { StepComponent } from './step.component';
+import { Account } from '../../models/account';
+import { Recipient } from '../../models/recipient';
+import { StepComponent } from '../step/step.component';
 
 @Component({
   selector: 'my-app',
-  templateUrl: './html/app.component.html',
-  styleUrls: ['./css/app.component.css']
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
 
@@ -15,7 +15,7 @@ export class AppComponent  {
   private stepIndex: number = 1;
   private progressIndex: number = 1;
 
-  private onRecipientClick(recipient: Recipient): void {
+  private onRecipientChange(recipient: Recipient): void {
     this.recipient = recipient;
     this.doProgress(1);
   }
