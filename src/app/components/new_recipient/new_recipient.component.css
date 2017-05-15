@@ -1,0 +1,104 @@
+.content {
+  position: relative;
+  margin-top: 20px;
+}
+
+.form-container {
+  display: inline-block;
+}
+
+.iban {
+  position: absolute;
+  left: 100%;
+  margin-left: 20px;
+}
+
+label {
+  display: block;
+  color: gray;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 5px lightgray;
+  padding: 5px 15px;
+  margin-bottom: 10px;
+}
+
+button {
+  background: white;
+  color: red;
+  border: 1px solid red;
+  margin-top: 10px;
+  width: 100%;
+  padding: 3px 5px;
+  border-radius: 5px;
+}
+
+button:hover {
+  color: white;
+  background: red;
+}
+
+input {
+  width: 100%;
+  border: lightgrey 1px solid;
+  padding: 5px 10px;
+}
+
+input + input {
+  margin-top: 10px;
+}
+
+.vertical-input input {
+  display: block;
+}
+
+.vertical-input input + input {
+  margin-top: 10px;
+}
+
+.horizontal-input {
+  display: inline-block;
+  width: 100%;
+}
+
+.horizontal-input input {
+  display: inline-block;
+}
+
+.horizontal-input input + input {
+  margin-top: 10px;
+}
+
+.vertical-input + .horizontal-input, input + .horizontal-input, select + .horizontal-input,
+.horizontal-input + .vertical-input, input + .vertical-input, select + .vertical-input {
+  margin-top: 10px;
+}
+
+.important-input {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 5px lightgray;
+}
+
+@media (max-width: 480px) {
+  select {
+    width: 90%;
+  }
+  input {
+    width: 90%;
+  }
+  .important-input {
+    width: 90%;
+  }
+  .important-input input {
+    width: 100%;
+  }
+}

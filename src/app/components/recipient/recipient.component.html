@@ -1,10 +1,22 @@
 <div class="recipient-container">
-  <div class="recipient-header" [@headerState]="recipient.getState()">
+  <div *ngIf="recipient">
+    <div class="recipient-header" [@headerState]="recipient.getState()">
     <span class="glyphicon glyphicon-user"></span>
-    {{recipient.getName()}}
+      {{recipient.getName()}}
+    </div>
+    <div class="recipient-body">
+      <div class="account">{{recipient.getAccount().getCurrencyType()}} account</div>
+      <div class="ending">ending with {{recipient.getAccount().getLastDigits()}}</div>
+    </div>
   </div>
-  <div class="recipient-body">
-    <div class="account">{{recipient.getAccount().getCurrencyType()}} account</div>
-    <div class="ending">ending with {{recipient.getAccount().getLastDigits()}}</div>
+  <div class="new-recipient" *ngIf="!recipient">
+    <div class="recipient-header">
+      <span class="glyphicon glyphicon-plus"></span>
+      New Recipient
+    </div>
+    <div class="recipient-body">
+      <div class="account">Create</div>
+      <div class="ending">new recipient</div>
+    </div>
   </div>
 </div>

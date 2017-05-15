@@ -45,3 +45,9 @@
     max-width: none;
   }
 }
+
+@media (max-width: 480px) {
+  .account-container {
+    margin-top: 0;
+  }
+}

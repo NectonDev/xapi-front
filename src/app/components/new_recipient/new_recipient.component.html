@@ -1,0 +1,70 @@
+<div class="content">
+
+  <div class="form-container">
+    <label for="country">Country</label>
+
+    <select #countrySelect [(ngModel)]="selectedCountry" name="country" id="country">
+      <option>Spain</option>
+      <option>Great Britain</option>
+      <option>India</option>
+      <option>United States</option>
+    </select>
+
+    <div [smooth-fade]="isSelected('Spain')">
+      <div class="vertical-input" *ngIf="isSelected('Spain')">
+        <input #name name="name" placeholder="Recipient's name">
+        <input #surname name="surname" placeholder="Recipient's surname">
+        <input #address name="address" placeholder="Recipient's address">
+      </div>
+      <div class="horizontal-input important-input">
+        <input name="iban" placeholder="IBAN">
+        <button type="button" (click)="checkIban()">check</button>
+      </div>
+    </div>
+
+    <div [smooth-fade]="isSelected('Great Britain')">
+      <div class="vertical-input" *ngIf="isSelected('Great Britain')">
+        <input #name name="name" placeholder="Recipient's Name">
+        <input #surname name="surname" placeholder="Recipient's Surname">
+        <input #address name="address" placeholder="Recipient's Address">
+      </div>
+      <div class="horizontal-input important-input">
+        <input name="sort-code" placeholder="Sort Code">
+        <input name="account-number" placeholder="Account Number">
+        <button type="button" (click)="checkIban()">check</button>
+      </div>
+    </div>
+
+    <div [smooth-fade]="isSelected('India')">
+      <div class="vertical-input" *ngIf="isSelected('India')">
+        <input #name name="name" placeholder="Recipient's Name">
+        <input #surname name="surname" placeholder="Recipient's Surname">
+        <input #address name="address" placeholder="Recipient's Address">
+      </div>
+      <div class="horizontal-input important-input">
+        <input name="iban" placeholder="IBAN">
+        <button type="button" (click)="checkIban()">check</button>
+      </div>
+    </div>
+
+    <div [smooth-fade]="isSelected('United States')">
+      <div class="vertical-input" *ngIf="isSelected('United States')">
+        <input #name name="name" placeholder="Recipient's Name">
+        <input #surname name="surname" placeholder="Recipient's Surname">
+        <input #address name="address" placeholder="Recipient's Address">
+      </div>
+      <div class="horizontal-input important-input">
+        <input name="routing-number" placeholder="Routing Number">
+        <input name="account-number" placeholder="Account Number">
+        <button type="button" (click)="checkIban()">check</button>
+      </div>
+    </div>
+
+    <button type="button" *ngIf="hasSelection()" (click)="onSubmit()">
+      Submit
+    </button>
+  </div>
+
+  <iban [iban]="iban"></iban>
+
+</div>

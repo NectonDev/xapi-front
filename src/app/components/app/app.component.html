@@ -7,7 +7,7 @@
         [title]="'Select a recipient'"
         [selection]="recipient ? recipient.getName() : undefined"
         (stepClick)="onStepClick($event)">
-    <recipient-tabs (onRecipientChange)="onRecipientChange($event)"></recipient-tabs>
+    <recipient-selector (onSelectChange)="onRecipientChange($event)"></recipient-selector>
   </step>
   <step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"

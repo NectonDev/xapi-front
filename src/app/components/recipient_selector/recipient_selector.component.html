@@ -1,7 +1,20 @@
-<div class="container-flex ">
-  <ul class="row">
-    <li *ngFor="let recipient of recipients" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xxs">
-      <recipient [recipient]="recipient" (click)="onRecipientClick(recipient)"></recipient>
-    </li>
-  </ul>
+<div class="content" (window:resize)="onWindowResize()">
+  <div class="new-recipient-container">
+    <recipient [recipient]="undefined" (click)="formVisible = true"></recipient>
+    <new-recipient class="new-recipient" (submitNewRecipient)="onSubmitNewRecipient($event)" *ngIf="formVisible"></new-recipient>
+  </div>
+  <div class="right">
+    <div class="arrow" (click)="scrollList(-1)" *ngIf="isScrollNeeded()">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </div>
+    <div #recipientListContainer class="recipient-list-container">
+      <div #recipientList class="recipient-list">
+        <recipient class="recipient" *ngFor="let recipient of recipients"
+                   [recipient]="recipient" (click)="onRecipientClick(recipient)"></recipient>
+      </div>
+    </div>
+    <div class="arrow" (click)="scrollList(1)" *ngIf="isScrollNeeded()">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </div>
+  </div>
 </div>

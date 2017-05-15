@@ -9,12 +9,17 @@ import { StepComponent } from './components/step/step.component';
 import { RecipientComponent } from './components/recipient/recipient.component';
 import { RecipientSelectorComponent } from './components/recipient_selector/recipient_selector.component';
 import {TransferComponent} from './components/transfer/transfer.component';
-import {RecipientTabsComponent} from './components/recipient_tabs/recipient_tabs.component';
+import {SmoothFadeDirective} from './directives/smooth_fade.directive';
+import {NewRecipientComponent} from './components/new_recipient/new_recipient.component';
+import {FormsModule} from '@angular/forms';
+import {TabButtonDirective} from './directives/tab_button.directive';
+import {IbanComponent} from './components/iban/iban.component';
 
 @NgModule({
   imports: [
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,
@@ -24,7 +29,10 @@ import {RecipientTabsComponent} from './components/recipient_tabs/recipient_tabs
     RecipientComponent,
     StepComponent,
     TransferComponent,
-    RecipientTabsComponent
+    NewRecipientComponent,
+    IbanComponent,
+    SmoothFadeDirective,
+    TabButtonDirective
   ],
   bootstrap:    [ AppComponent ]
 })
