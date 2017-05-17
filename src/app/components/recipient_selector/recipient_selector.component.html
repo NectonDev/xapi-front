@@ -1,20 +1,33 @@
 <div class="content" (window:resize)="onWindowResize()">
-  <div class="new-recipient-container">
+
+  <div class="blank-recipient">
     <recipient [recipient]="undefined" (click)="formVisible = true"></recipient>
-    <new-recipient class="new-recipient" (submitNewRecipient)="onSubmitNewRecipient($event)" *ngIf="formVisible"></new-recipient>
-  </div>
-  <div class="right">
-    <div class="arrow" (click)="scrollList(-1)" *ngIf="isScrollNeeded()">
-      <span class="glyphicon glyphicon-chevron-left"></span>
+    <div id="new-recipient-out" class="new-recipient" [smooth-fade]="formVisible">
+      <new-recipient class="new-recipient" (submitNewRecipient)="onSubmitNewRecipient($event)" *ngIf="formVisible"></new-recipient>
     </div>
-    <div #recipientListContainer class="recipient-list-container">
-      <div #recipientList class="recipient-list">
-        <recipient class="recipient" *ngFor="let recipient of recipients"
-                   [recipient]="recipient" (click)="onRecipientClick(recipient)"></recipient>
+  </div>
+
+  <div class="right">
+
+    <div class="slideshow">
+      <div class="arrow" (click)="scrollList(-1)" *ngIf="isScrollNeeded()">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+      </div>
+      <div #recipientListContainer class="recipient-list-container">
+        <div #recipientList class="recipient-list">
+          <recipient class="recipient" *ngFor="let recipient of recipients"
+                     [recipient]="recipient" (click)="onRecipientClick(recipient)"></recipient>
+        </div>
+      </div>
+      <div class="arrow" (click)="scrollList(1)" *ngIf="isScrollNeeded()">
+        <span class="glyphicon glyphicon-chevron-right"></span>
       </div>
     </div>
-    <div class="arrow" (click)="scrollList(1)" *ngIf="isScrollNeeded()">
-      <span class="glyphicon glyphicon-chevron-right"></span>
+
+    <div id="new-recipient-in" class="new-recipient" [smooth-fade]="formVisible">
+      <new-recipient class="new-recipient" (submitNewRecipient)="onSubmitNewRecipient($event)" *ngIf="formVisible"></new-recipient>
     </div>
+
   </div>
+
 </div>

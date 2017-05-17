@@ -13,7 +13,8 @@
 }
 
 .recipient-container:hover {
-  box-shadow: 0 10px 20px gray;
+  box-shadow: 0 5px 10px lightgray;
+  outline: 1px solid lightgrey;
 }
 
 .recipient-header {

@@ -22,8 +22,8 @@
   font-family: Roboto, Helvetica Neue, sans-serif;
   box-shadow: 0 2px 5px lightgray;
   font-size: 115%;
+  text-align: center;
   cursor: pointer;
-  cursor: hand;
 }
 
 .account-body {
@@ -31,7 +31,8 @@
 }
 
 .account-container:hover {
-  box-shadow: 0 10px 20px gray;
+  box-shadow: 0 5px 10px lightgray;
+  outline: 1px solid lightgrey;
 }
 
 .account-balance {

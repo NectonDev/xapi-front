@@ -11,7 +11,7 @@ import {IBAN} from '../../mocks/iban.mock';
 })
 export class NewRecipientComponent {
 
-  @Input() selectedCountry: string;
+  @Input() selectedCountry: string = '';
   @Output() submitNewRecipient: EventEmitter<Recipient> = new EventEmitter();
   @ViewChild('name') name: ElementRef;
   @ViewChild('surname') surname: ElementRef;

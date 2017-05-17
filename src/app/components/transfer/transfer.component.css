@@ -1,14 +1,206 @@
+.content {
+  margin-left: 40px;
+}
+
 .card {
   display: inline-block;
   background: white;
-  padding: 10px;
+  padding: 20px;
   width: 90%;
-  max-width: 500px;
   box-shadow: 0 2px 5px lightgray;
   margin-top: 20px;
-  margin-bottom: 10px;
 }
 
-input {
-  border: none;
+.payment-type-container {
+  display: block;
+  color: red;
+  font-size: 120%;
+  margin-bottom: 20px;
 }
+
+.payment-type-container label {
+  font-weight: normal;
+}
+
+.payment-type-container * {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.radio-button {
+  position: relative;
+  margin-left: 10px !important;
+  -webkit-transition: color 200ms;
+  -moz-transition: color 200ms;
+  -ms-transition: color 200ms;
+  -o-transition: color 200ms;
+  transition: color 200ms;
+}
+
+.radio-button * {
+  cursor: pointer;
+}
+
+.radio-button.deselected {
+  color: gray;
+}
+
+.radio-button.deselected:hover {
+  color: darkslategray;
+}
+
+.radio-button input {
+  visibility: hidden;
+}
+
+.radio-button .dot {
+  display: inline-block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  transform: translateY(-50%);
+  -webkit-transition: border 200ms;
+  -moz-transition: border 200ms;
+  -ms-transition: border 200ms;
+  -o-transition: border 200ms;
+  transition: border 200ms;
+}
+
+.radio-button.selected .dot {
+  border: 2px solid red;
+}
+
+.radio-button.deselected .dot {
+  border: 2px solid gray;
+}
+
+.radio-button.deselected:hover .dot {
+  border: 2px solid darkslategray;
+}
+
+.radio-button .dot::before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  background: none;
+  border-radius: 100%;
+  -webkit-transition: background 200ms;
+  -moz-transition: background 200ms;
+  -ms-transition: background 200ms;
+  -o-transition: background 200ms;
+  transition: background 200ms;
+}
+
+.radio-button.selected .dot::before {
+  background: red;
+}
+
+.radio-button label {
+  margin-left: 5px;
+}
+
+.money-input {
+  display: flex;
+  position: relative;
+  max-width: 400px;
+}
+
+.money-input input {
+  border: 1px lightgrey solid;
+  padding: 5px 10px;
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
+}
+
+.money-input .currency {
+  position: relative;
+  padding-left: 10px;
+  color: red;
+  font-size: 120%;
+  text-align: center;
+}
+
+.money-input .currency span {
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fees-box {
+  border-left: 1px gray solid;
+  margin-left: 10px;
+  padding: 10px 0;
+}
+
+.fees-box span {
+  color: red;
+}
+
+.fees-box li {
+  display: block;
+  position: relative;
+  padding-left: 15px;
+  list-style: none;
+  color: darkgray;
+}
+
+.fees-box li::before {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: gray;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+}
+
+.estimated-arrival {
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.estimated-arrival span {
+  color: red;
+}
+
+button {
+  background: white;
+  border: red 1px solid;
+  color: red;
+  box-shadow: 0 2px 5px lightgray;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
+}
+
+button:hover {
+  box-shadow: 0 0 0;
+  background: red;
+  color: white;
+}
+

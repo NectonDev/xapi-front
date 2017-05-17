@@ -1,7 +1,13 @@
-<div class="container-flex ">
-  <ul class="row">
-    <li *ngFor="let account of accounts" class="col-lg-2 col-md-3 col-sm-4 col-xs-6 col-xxs">
-      <account [account]="account" (click)="onAccountClick(account)"></account>
-    </li>
-  </ul>
+<div class="container" (window:resize)="onWindowResize()">
+  <div class="glyphicon-container" *ngIf="isScrollNeeded()" (click)="scrollList(-1)">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </div>
+  <div #accountListContainer class="account-list-container">
+    <div #accountList class="account-list">
+      <account class="account" *ngFor="let account of accounts" [account]="account" (click)="onAccountClick(account)"></account>
+    </div>
+  </div>
+  <div class="glyphicon-container" *ngIf="isScrollNeeded()">
+    <span class="glyphicon glyphicon-chevron-right" (click)="scrollList(1)"></span>
+  </div>
 </div>

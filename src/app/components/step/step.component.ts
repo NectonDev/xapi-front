@@ -23,7 +23,6 @@ export class StepComponent {
   @Input() title: string;
   @Input() stepIndex: number;
   @Input() progressIndex: number;
-  @Input() subtitle: string;
 
   constructor() {
     this._step = ++StepComponent.STEP_COUNT;

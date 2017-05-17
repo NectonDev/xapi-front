@@ -1,25 +1,24 @@
 <div class="step"
      [class.selected]="isSelected()"
      [class.unselected]="!isSelected()"
-     [class.last-unselected]="!isSelected() && isLastStep()">
-  <div class="step-header"
-       (click)="onClick()">
-    <div class="step-order"><span>{{_step}}</span></div>
-    <div class="header-top">
-      <div class="step-title">{{title}}</div>
-    </div>
-    <div class="subtitle">{{subtitle}}</div>
+     [class.last-unselected]="!isSelected() && isLastStep()"
+     [class.last-selected]="isSelected() && isLastStep()">
+
+  <div class="step-header" (click)="onClick()">
+    <div class="header-order"><span>{{_step}}</span></div>
+    <div class="header-title">{{title}}</div>
   </div>
-  <div #content class="step-content"
-       [@selectionTrigger]="isSelected() ? 'selected' : 'unselected'"
-       (@selectionTrigger.done)="onAnimationDone($event)"
-       (@selectionTrigger.start)="onAnimationStart($event)">
+
+  <div class="step-content">
     <ng-content></ng-content>
   </div>
+
   <div class="selection" *ngIf="!isSelected() && isTime() && hasSelection()">
     <div class="dot"></div>
     <div class="selection-text">{{selection}}</div>
   </div>
+
   <div class="idle-space" *ngIf="!isSelected() && !hasSelection() && !isLastStep()">
   </div>
+
 </div>

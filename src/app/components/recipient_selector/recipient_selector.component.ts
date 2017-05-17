@@ -12,6 +12,14 @@ import { Recipient } from '../../models/recipient';
 })
 export class RecipientSelectorComponent implements AfterViewInit {
 
+  @ViewChild('recipientListContainer') recipientListContainer: ElementRef;
+  @ViewChild('recipientList') recipientList: ElementRef;
+  private recipients: Recipient[] = RECIPIENTS;
+  private _formVisible: boolean = false;
+  private listWidth: number;
+  private listContainerWidth: number;
+  private listContainerOffset = 0;
+  @Output() onSelectChange: EventEmitter<Recipient> = new EventEmitter();
   ngAfterViewInit() {
     this.updateComputedValues();
   }
@@ -24,15 +32,6 @@ export class RecipientSelectorComponent implements AfterViewInit {
     this._formVisible = value;
   }
 
-  @ViewChild('recipientListContainer') recipientListContainer: ElementRef;
-  @ViewChild('recipientList') recipientList: ElementRef;
-  private recipients: Recipient[] = RECIPIENTS;
-  private _formVisible: boolean = false;
-  private listWidth: number;
-  private listContainerWidth: number;
-  private listContainerOffset = 0;
-  @Output() onSelectChange: EventEmitter<Recipient> = new EventEmitter();
-
   onRecipientClick(recipient: Recipient): void {
     this.onSelectChange.emit(recipient);
     recipient.select();
@@ -44,22 +43,18 @@ export class RecipientSelectorComponent implements AfterViewInit {
   }
 
   private updateComputedValues() {
-    this.listContainerWidth = Number.parseInt(window.getComputedStyle(
-      this.recipientListContainer.nativeElement
-    ).width);
-    this.listWidth = Number.parseInt(window.getComputedStyle(
-      this.recipientList.nativeElement
-    ).width);
+    this.listContainerWidth = Number.parseInt(window.getComputedStyle(this.recipientListContainer.nativeElement).width);
+    this.listWidth = Number.parseInt(window.getComputedStyle(this.recipientList.nativeElement).width);
   }
 
   private scrollList(direction: number) {
     this.updateComputedValues();
-    this.listContainerOffset += this.listContainerWidth * direction;
-    let maxOffset = this.listWidth - this.listContainerWidth;
+    this.listContainerOffset += Math.round(this.listContainerWidth / 2) * direction;
+    let maxOffset = this.listWidth + 20 - this.listContainerWidth;
     let offsetIsGreaterThanAllowed = this.listContainerOffset > maxOffset;
     let offsetUnderZero = this.listContainerOffset < 0;
     this.listContainerOffset = offsetIsGreaterThanAllowed ? maxOffset : offsetUnderZero ? 0 : this.listContainerOffset;
-    this.recipientListContainer.nativeElement.scrollLeft = this.listContainerOffset;
+    this.recipientList.nativeElement.style.left = `${-this.listContainerOffset + 10}px`;
   }
 
   private isScrollNeeded(): boolean {

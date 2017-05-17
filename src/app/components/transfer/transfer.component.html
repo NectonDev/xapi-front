@@ -1,3 +1,50 @@
-<div class="card">
-  <input type="text" name="iniQ">
+<div class="content">
+
+  <div class="card">
+    <div class="payment-type-container">
+      <span>Payment type:</span>
+      <div class="radio-button" (click)="setRadioButtonSelected(1);setSantanderFee('fast')"
+           [class.selected]="isRadioButtonSelected(1)"
+           [class.deselected]="!isRadioButtonSelected(1)">
+        <input type="radio" name="payment-type" value="fast" id="fast-radio">
+        <div class="dot"></div>
+        <label for="fast-radio">fast</label>
+      </div>
+      <div class="radio-button" (click)="setRadioButtonSelected(2);setSantanderFee('cheap')"
+           [class.selected]="isRadioButtonSelected(2)"
+           [class.deselected]="!isRadioButtonSelected(2)">
+        <input type="radio" name="payment-type" value="cheap" id="cheap-radio">
+        <div class="dot"></div>
+        <label for="cheap-radio">cheap</label>
+      </div>
+    </div>
+
+    <div class="money-input">
+      <input type="text" name="from-credit" placeholder="0.00"
+             [(ngModel)]="fromCredit" value="{{_fromCredit}}">
+      <div class="currency">
+        <span>GBP</span>
+      </div>
+    </div>
+
+    <div class="fees-box">
+      <li><span>{{santanderFee}}</span> Santander Fee</li>
+      <li><span>{{exchangeRate}}</span> Exchange Rate</li>
+    </div>
+
+    <div class="money-input">
+      <input type="text" name="to-credit" placeholder="0.00"
+             [(ngModel)]="toCredit" value="{{_toCredit}}">
+      <div class="currency">
+        <span>USD</span>
+      </div>
+    </div>
+
+    <div class="estimated-arrival">
+      Estimated arrival: <span>{{eta}}</span>
+    </div>
+
+    <button type="button">Review your transfer</button>
+  </div>
+
 </div>

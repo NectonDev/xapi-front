@@ -12,14 +12,15 @@ import {TransferComponent} from './components/transfer/transfer.component';
 import {SmoothFadeDirective} from './directives/smooth_fade.directive';
 import {NewRecipientComponent} from './components/new_recipient/new_recipient.component';
 import {FormsModule} from '@angular/forms';
-import {TabButtonDirective} from './directives/tab_button.directive';
 import {IbanComponent} from './components/iban/iban.component';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    HttpModule
   ],
   declarations: [
     AppComponent,
@@ -31,9 +32,9 @@ import {IbanComponent} from './components/iban/iban.component';
     TransferComponent,
     NewRecipientComponent,
     IbanComponent,
-    SmoothFadeDirective,
-    TabButtonDirective
+    SmoothFadeDirective
   ],
+  providers: [ HttpModule ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }
