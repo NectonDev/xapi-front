@@ -2,7 +2,6 @@ export class Account {
 
   static ACCOUNT_BANK: string = 'bank';
   static ACCOUNT_CARD: string = 'card';
-  static ACCOUNTS: Account[] = [];
   static CURRENCY_TYPES = new Map()
     .set('GBP', '£')
     .set('EUR', '€');
@@ -10,7 +9,6 @@ export class Account {
     .set(Account.ACCOUNT_BANK, 'glyphicon-piggy-bank')
     .set(Account.ACCOUNT_CARD, 'glyphicon-credit-card');
 
-  private state: string = 'unselected';
   private currencyType: string;
   private accountType: string;
   private number: string;
@@ -31,14 +29,9 @@ export class Account {
       this.credit = credit;
       this.number = number;
       this.name = name;
-      Account.ACCOUNTS.push(this);
     } else {
       throw new DOMException();
     }
-  }
-
-  public getState(): string {
-    return this.state;
   }
 
   public getCurrencyType(): string {
@@ -79,19 +72,5 @@ export class Account {
 
   public takeCredit(amount: number): void {
     this.credit -= amount;
-  }
-
-  public select(): void {
-    this.state = 'selected';
-    for (let i = 0; i < Account.ACCOUNTS.length; i++) {
-      let account: Account = Account.ACCOUNTS[i];
-      if (account !== this) {
-        account.deselect();
-      }
-    }
-  }
-
-  public deselect(): void {
-    this.state = 'deselected';
   }
 }

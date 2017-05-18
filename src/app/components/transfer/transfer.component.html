@@ -19,29 +19,65 @@
       </div>
     </div>
 
-    <div class="money-input">
+    <div class="money-input" style="margin-top: 10px">
       <input type="text" name="from-credit" placeholder="0.00"
              [(ngModel)]="fromCredit" value="{{_fromCredit}}">
       <div class="currency">
-        <span>GBP</span>
+        <select [(ngModel)]="fromCurrency">
+          <option value="GBP">GBP</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
       </div>
     </div>
 
     <div class="fees-box">
       <li><span>{{santanderFee}}</span> Santander Fee</li>
-      <li><span>{{exchangeRate}}</span> Exchange Rate</li>
+      <li><span>1 : {{exchangeRate}}</span> Exchange Rate</li>
     </div>
 
     <div class="money-input">
       <input type="text" name="to-credit" placeholder="0.00"
              [(ngModel)]="toCredit" value="{{_toCredit}}">
       <div class="currency">
-        <span>USD</span>
+        <select [(ngModel)]="toCurrency">
+          <option value="GBP">GBP</option>
+          <option value="EUR">EUR</option>
+          <option value="USD">USD</option>
+        </select>
       </div>
     </div>
 
     <div class="estimated-arrival">
       Estimated arrival: <span>{{eta}}</span>
+    </div>
+
+    <div class="transaction-reference-container">
+      <!--<label for="reference">Transaction reference:</label>-->
+      <input #reference name="reference" placeholder="Reference" id="reference">
+    </div>
+
+    <div class="advanced-options-container non-selectable" [class.expanded]="showingAdvancedOptions">
+      <div class="advanced-options-header" (click)="toggleAdvancedOptions()">
+        <span class="advanced-options-title">Advanced Options</span>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </div>
+      <div class="advanced-options-list" [smooth-fade]="showingAdvancedOptions">
+        <div *ngIf="showingAdvancedOptions">
+          <div class="check-box">
+            <input [(ngModel)]="isDelegatePayment" type="checkbox" id="delegate-payment">
+            <label for="delegate-payment">Delegate payment of fees to recipient</label>
+          </div>
+          <div class="check-box">
+            <input [(ngModel)]="isPayFeesWithDifferentAccount" type="checkbox" id="different-account-fees">
+            <label for="different-account-fees">Use different account for fees payment</label>
+          </div>
+          <div [smooth-fade]="isPayFeesWithDifferentAccount">
+            <account-selector *ngIf="isPayFeesWithDifferentAccount"
+                              (onSelectChange)="onAccountSelect($event)"></account-selector>
+          </div>
+        </div>
+      </div>
     </div>
 
     <button type="button">Review your transfer</button>

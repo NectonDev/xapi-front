@@ -2,12 +2,11 @@
   display: inline-block;
   position: relative;
   width: 170px;
-  margin-top: 20px;
   max-width: 170px;
   background: white;
   font-family: Roboto, Helvetica Neue, sans-serif;
   box-shadow: 0 2px 5px lightgray;
-  font-size: 115%;
+  font-size: 17px;
   text-align: center;
   cursor: pointer;
 }

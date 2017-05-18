@@ -58,7 +58,11 @@ export class RecipientSelectorComponent implements AfterViewInit {
   }
 
   private isScrollNeeded(): boolean {
-    return this.listWidth > this.listContainerWidth;
+    let retValue = this.listWidth > this.listContainerWidth;
+    if (!retValue) {
+      this.recipientList.nativeElement.style.left = '';
+    }
+    return retValue;
   }
 
   private onWindowResize() {

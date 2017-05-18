@@ -1,5 +1,5 @@
 <div class="account-container">
-  <div class="account-header" [@headerState]="account.getState()">
+  <div class="account-header" [@headerState]="accountSelected ? 'selected' : 'unselected'">
     <span class="glyphicon {{account.getAccountTypeIcon()}}"></span>
     {{account.getName()}}
   </div>

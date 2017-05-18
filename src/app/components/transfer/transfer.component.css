@@ -1,5 +1,5 @@
 .content {
-  margin-left: 40px;
+  //margin-left: 40px;
 }
 
 .card {
@@ -8,17 +8,21 @@
   padding: 20px;
   width: 90%;
   box-shadow: 0 2px 5px lightgray;
-  margin-top: 20px;
-}
-
-.payment-type-container {
-  display: block;
+  //margin-top: 20px;
   color: red;
   font-size: 120%;
-  margin-bottom: 20px;
 }
 
-.payment-type-container label {
+.currency span {
+  font-size: 100%;
+}
+
+.currency select {
+  padding: 5px;
+  border: 1px lightgrey solid;
+}
+
+.radio-button label {
   font-weight: normal;
 }
 
@@ -174,7 +178,8 @@
 }
 
 .estimated-arrival {
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
   color: gray;
 }
 
@@ -204,3 +209,53 @@ button:hover {
   color: white;
 }
 
+.advanced-options-container {
+  display: block;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.advanced-options-header {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.advanced-options-title {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.advanced-options-header .glyphicon {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: transform 200ms;
+  -moz-transition: transform 200ms;
+  -ms-transition: transform 200ms;
+  -o-transition: transform 200ms;
+  transition: transform 200ms;
+}
+
+.advanced-options-container.expanded .glyphicon {
+  transform: rotate(90deg);
+}
+
+.check-box {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.check-box + .check-box {
+  margin-top: 0
+}
+
+.check-box label {
+  font-weight: 100;
+  color: gray;
+}
+
+.transaction-reference-container input {
+  border: 1px lightgrey solid;
+  padding: 5px 10px;
+  width: 100%;
+  max-width: 400px;
+}

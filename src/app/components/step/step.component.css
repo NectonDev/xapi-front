@@ -104,11 +104,12 @@
   -ms-transition: all 500ms ease-out;
   -o-transition: all 500ms ease-out;
   transition: all 500ms ease-out;
-  padding-right: 20px;
 }
 
 .selected .step-content {
   padding-bottom: 20px;
+  padding-left: 20px;
+  padding-top: 15px;
   max-height: 1000px;
 }
 
@@ -134,8 +135,15 @@
 }
 
 /* Extra Small Devices, Phones */
-@media only screen and (min-width : 480px) {
+@media only screen and (max-width : 480px) {
   .selected .step-content {
-    margin-bottom: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 480px) and (max-width : 768px) {
+  .selected .step-content {
+    padding-right: 20px;
   }
 }

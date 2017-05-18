@@ -1,6 +1,5 @@
 .content {
   display: flex;
-  margin-left: 40px;
 }
 
 .right {
@@ -12,7 +11,6 @@
 .slideshow {
   display: flex;
   width: 100%;
-  height: 200px;
 }
 
 .arrow {
@@ -29,6 +27,10 @@
   display: inline-block;
   transform: translateY(-50%);
   cursor: pointer;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  padding: 5px;
 }
 
 .arrow span:hover{
@@ -48,7 +50,7 @@
   -webkit-flex: 1; /* Safari 6.1+ */
   -ms-flex: 1; /* IE 10 */
   flex: 1;
-  height: 210px;
+  height: 175px;
   overflow: hidden;
 }
 
@@ -83,8 +85,7 @@
 @media only screen and (max-width : 480px) {
   .content {
     display: table;
-    width: calc(100% - 20px);
-    margin-left: 20px;
+    width: 100%;
   }
   .blank-recipient {
     display: table-footer-group;
@@ -98,6 +99,14 @@
   }
   #new-recipient-in {
     display: none;
+  }
+  .recipient-list-container {
+    overflow: visible;
+    overflow-x: scroll;
+  }
+  .recipient-list {
+    position: relative;
+    max-width: 0;
   }
 }
 

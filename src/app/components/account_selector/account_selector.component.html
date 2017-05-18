@@ -4,7 +4,9 @@
   </div>
   <div #accountListContainer class="account-list-container">
     <div #accountList class="account-list">
-      <account class="account" *ngFor="let account of accounts" [account]="account" (click)="onAccountClick(account)"></account>
+      <account class="account" *ngFor="let account of accounts"
+               [accountSelected]="account === selectedAccount"
+               [account]="account" (click)="onAccountClick(account)"></account>
     </div>
   </div>
   <div class="glyphicon-container" *ngIf="isScrollNeeded()">

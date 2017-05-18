@@ -21,6 +21,6 @@
         [title]="'Your transfer'"
         [selection]="account ? account.getName() : undefined"
         (stepClick)="onStepClick($event)">
-    <transfer (onOperationDone)="onOperationDone()"></transfer>
+    <transfer [account]="account" [recipient]="recipient" (onOperationDone)="onOperationDone()"></transfer>
   </step>
 </div>

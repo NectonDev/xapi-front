@@ -1,13 +1,13 @@
 .container {
   display: flex;
   width: 100%;
-  padding-left: 40px;
+  padding: 0;
 }
 
 .account-list-container {
   display: inline-block;
   position: relative;
-  height: 200px;
+  height: 170px;
   vertical-align: middle;
   -webkit-flex: 1; /* Safari 6.1+ */
   -ms-flex: 1; /* IE 10 */
@@ -25,8 +25,8 @@
 span {
   position: relative;
   transform: translateY(-50%);
-  font-size: 40px;
-  color: red;
+  font-size: 40px !important;
+  color: red !important;
   cursor: pointer;
 }
 

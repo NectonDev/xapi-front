@@ -17,4 +17,5 @@ import {state, style, trigger} from '@angular/animations';
 })
 export class AccountComponent {
   @Input() account: Account;
+  @Input() accountSelected: boolean;
 }

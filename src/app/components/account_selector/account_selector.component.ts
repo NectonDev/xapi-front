@@ -14,6 +14,7 @@ export class AccountSelectorComponent implements AfterViewInit {
   private listWidth: number;
   private listContainerWidth: number;
   private accounts: Account[] = ACCOUNTS;
+  private selectedAccount: Account;
   @Output() onSelectChange: EventEmitter<Account> = new EventEmitter();
 
   ngAfterViewInit() {
@@ -22,7 +23,7 @@ export class AccountSelectorComponent implements AfterViewInit {
 
   onAccountClick(account: Account): void {
     this.onSelectChange.emit(account);
-    account.select();
+    this.selectedAccount = account;
   }
 
   private scrollList(direction: number) {
@@ -45,6 +46,12 @@ export class AccountSelectorComponent implements AfterViewInit {
   }
 
   private isScrollNeeded(): boolean {
-    return this.listWidth > this.listContainerWidth;
+    let listWith = !this.listWidth ? 1 : this.listWidth;
+    let listContainerWidth = !this.listContainerWidth ? 1 : this.listContainerWidth;
+    let retValue = listWith > listContainerWidth;
+    if (!retValue) {
+      this.accountList.nativeElement.style.marginLeft = '';
+    }
+    return retValue;
   }
 }
