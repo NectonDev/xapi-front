@@ -1,0 +1,88 @@
+<div class="content">
+
+  <div class="form-container">
+
+    <div class="flags">
+      <app-flags-dropdown [(selectedKey)]="selectedCountry" [keysAndFlagsMap]="countryFlags"></app-flags-dropdown>
+    </div>
+
+    <div class="horizontal-sm">
+      <div [appSmoothFade]="hasSelection()">
+        <div class="vertical-input important-input" *ngIf="hasSelection()">
+          <input #name name="name" placeholder="Payee's full name">
+          <input #surname name="address" placeholder="Payee's address">
+        </div>
+      </div>
+    </div>
+
+    <div class="horizontal-sm">
+      <div [appSmoothFade]="isSelected('Spain')">
+        <div *ngIf="isSelected('Spain')">
+          <div class="horizontal-input important-input">
+            <input name="iban" placeholder="IBAN of Account">
+            <app-iban [iban]="iban" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('United Kingdom')">
+        <div *ngIf="isSelected('United Kingdom')">
+          <div class="horizontal-input important-input">
+            <input name="sort-code" placeholder="Sort Code">
+            <input name="account-number" placeholder="Account Number">
+            <app-iban [iban]="iban" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('India')">
+        <div *ngIf="isSelected('India')">
+          <div class="horizontal-input important-input">
+            <input name="iban" placeholder="IBAN of Account">
+            <app-iban [iban]="iban" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('United States')">
+        <div *ngIf="isSelected('United States')">
+          <div class="horizontal-input important-input">
+            <input name="routing-number" placeholder="Routing Number">
+            <input name="account-number" placeholder="Account Number">
+            <app-iban [iban]="iban" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,120 @@
+.content {
+  display: block;
+  position: relative;
+}
+
+.form-container {
+  display: block;
+  max-width: 500px;
+}
+
+label {
+  display: block;
+  color: gray;
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  display: inline-block;
+  width: 100%;
+  border: none;
+  background: white;
+  box-shadow: 0 2px 5px lightgray;
+  padding: 10px;
+}
+
+button {
+  width: 100%;
+}
+
+button.submit-button::before {
+  display: block;
+  position: absolute;
+  content: '';
+  width: 1px;
+  height: 20px;
+  top: 0;
+  left: 50%;
+  transform: translateY(calc(-100% - 1px)) translateX(-50%);
+  background: red;
+}
+
+input {
+  width: 100%;
+  padding: 8px 10px;
+}
+
+.flags {
+  padding: 0 10px;
+  background: white;
+  box-shadow: 0 2px 5px lightgray;
+  height: 40px;
+  -webkit-transition: box-shadow 200ms;
+  -moz-transition: box-shadow 200ms;
+  -ms-transition: box-shadow 200ms;
+  -o-transition: box-shadow 200ms;
+  transition: box-shadow 200ms;
+}
+
+.flags:hover {
+  box-shadow: -2px 3px 10px lightgray;
+}
+
+input + input {
+  margin-top: 10px;
+}
+
+.vertical-input input {
+  display: block;
+}
+
+.vertical-input input + input {
+  margin-top: 10px;
+}
+
+.horizontal-input {
+  display: inline-block;
+  width: 100%;
+}
+
+.horizontal-input input {
+  display: inline-block;
+}
+
+.horizontal-input input + input {
+  margin-top: 10px;
+}
+
+.vertical-input + .horizontal-input, input + .horizontal-input, select + .horizontal-input,
+.horizontal-input + .vertical-input, input + .vertical-input, select + .vertical-input {
+  margin-top: 10px;
+}
+
+.important-input {
+  background: white;
+  padding: 10px;
+  box-shadow: 0 2px 5px lightgray;
+  margin-top: 10px;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (max-width : 480px) {
+}
+
+/* Small Devices, Tablets */
+@media only screen and (min-width : 480px) and (max-width : 768px) {
+  .horizontal-sm {
+    display: inline-block;
+    -webkit-flex: 1; /* Safari 6.1+ */
+    -ms-flex: 1; /* IE 10 */
+    flex: 1;
+  }
+  .horizontal-sm + .horizontal-sm {
+    margin-left: 10px;
+  }
+  .important-input {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,84 @@
+<div class="content">
+
+  <div class="card">
+    <div class="payment-type-container">
+      <span>Payment type:</span>
+      <div class="radio-button" (click)="selectedRbPaymentType = 1;setSantanderFee('fast')"
+           [class.selected]="isPaymentTypeRbSelected(1)"
+           [class.deselected]="!isPaymentTypeRbSelected(1)">
+        <input type="radio" name="payment-type" value="fast" id="fast-radio">
+        <div class="dot"></div>
+        <label for="fast-radio">fast</label>
+      </div>
+
+      <div class="radio-button" (click)="selectedRbPaymentType = 2;setSantanderFee('cheap')"
+           [class.selected]="isPaymentTypeRbSelected(2)"
+           [class.deselected]="!isPaymentTypeRbSelected(2)">
+        <input type="radio" name="payment-type" value="cheap" id="cheap-radio">
+        <div class="dot"></div>
+        <label for="cheap-radio">cheap</label>
+      </div>
+    </div>
+
+    <div class="money-input" style="margin-top: 10px">
+      <input type="text" name="from-credit"
+             placeholder="{{currencySymbolsService.getSymbolFor(fromCurrency)}}0.00 (Original amount)"
+             [(ngModel)]="fromCredit" value="{{fromCredit}}">
+      <div class="currency">
+        <app-flags-dropdown [(selectedKey)]="fromCurrency" [keysAndFlagsMap]="currencyMap"
+                            [allowSelection]="false"></app-flags-dropdown>
+      </div>
+    </div>
+
+    <div class="fees-box">
+      <div class="names-box">
+        <span class="fee-name important">Santander Fee</span>
+        <span class="fee-name">Exchange Rate</span>
+      </div>
+      <div class="values-box">
+        <li class="important">{{santanderFee}}</li>
+        <li>1 : {{exchangeRate}}</li>
+      </div>
+    </div>
+
+    <div class="money-input">
+      <input type="text" name="to-credit"
+             placeholder="{{currencySymbolsService.getSymbolFor(toCurrency)}}0.00 (Amount after conversion and fees)"
+             style="border: 1px solid lightgray"
+             [(ngModel)]="toCredit" value="{{toCredit}}">
+      <div class="currency">
+        <app-flags-dropdown [(selectedKey)]="toCurrency" [keysAndFlagsMap]="currencyMap"></app-flags-dropdown>
+      </div>
+    </div>
+
+    <div class="estimated-arrival">
+      Estimated arrival: <span>{{eta}}</span>
+    </div>
+
+    <div class="transaction-reference-container">
+      <input #reference name="reference" placeholder="Reference" id="reference">
+    </div>
+
+    <div class="advanced-options-container non-selectable" [class.expanded]="showingAdvancedOptions">
+      <div class="advanced-options-header" (click)="toggleAdvancedOptions()">
+        <span class="advanced-options-title">Advanced Options</span>
+        <span class="glyphicon glyphicon-chevron-right"></span>
+      </div>
+
+      <div class="advanced-options-list" [appSmoothFade]="showingAdvancedOptions">
+        <div *ngIf="showingAdvancedOptions">
+          <input type="checkbox" id="custom-fees-checkbox">
+          <label for="custom-fees-checkbox">Custom fees payment mode:</label>
+          <select id="select-fees-payment">
+            <option>Dedicated account</option>
+            <option>Shared</option>
+            <option>Payee only</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <button type="button">Review your transfer</button>
+  </div>
+
+</div>

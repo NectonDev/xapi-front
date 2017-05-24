@@ -1,0 +1,106 @@
+html {
+  background: #F5F5F5 !important;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+.non-selectable, .non-selectable * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+input {
+  border: none;
+  color: black;
+  border-bottom: 1px solid lightgrey;
+  padding: 8px 10px 8px 10px;
+  -webkit-transition: all 200ms;
+  -moz-transition: all 200ms;
+  -ms-transition: all 200ms;
+  -o-transition: all 200ms;
+  transition: all 200ms;
+}
+
+input:hover {
+  border-color: transparent !important;
+  box-shadow: -2px 3px 10px lightgray !important;
+  margin-left: 0;
+  padding: 8px 5px 8px 15px;
+}
+
+input:focus {
+  border-color: gray !important;
+  box-shadow: -2px 3px 10px lightgray !important;
+  padding: 8px 5px 8px 15px;
+}
+
+button {
+  position: relative;
+  background: red;
+  border: red 1px solid;
+  color: white;
+  box-shadow: 0 2px 5px lightgray;
+  margin-top: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 0;
+  padding: 8px 10px;
+  -webkit-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+  -moz-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+  -ms-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+  -o-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+  transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+}
+
+button:hover {
+  box-shadow: 0 0 0;
+  outline: 2px solid red;
+  background: white;
+  color: red;
+}
+
+button.inverted {
+  background: white;
+  color: red;
+}
+
+button.inverted:hover {
+  background: red;
+  color:white;
+}
+
+button.deactivated {
+  position: relative;
+  background: white;
+  color: gray;
+  border: 1px solid lightgray;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  pointer-events: none;
+}
+
+button.deactivated::before {
+  background: gray;
+  background: -webkit-linear-gradient(to bottom, red, lightgray); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(to bottom, red, lightgray); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(to bottom, red, lightgray); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to bottom, red, lightgray); /* Standard syntax */
+}
+
+label {
+  display: inline-block !important;
+  font-weight: 100 !important;
+  cursor: pointer !important;
+}
+
+span {
+  cursor: default !important;
+}

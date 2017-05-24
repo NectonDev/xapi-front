@@ -1,0 +1,15 @@
+<div class="container">
+  <div class="glyphicon-container" *ngIf="isScrollNeeded" (click)="scrollList(-1)">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+  </div>
+  <div #accountListContainer class="account-list-container">
+    <div #accountList class="account-list">
+      <app-account class="account" *ngFor="let account of accounts"
+               [accountSelected]="account === selectedAccount"
+               [account]="account" (click)="selectedAccount = account"></app-account>
+    </div>
+  </div>
+  <div class="glyphicon-container" *ngIf="isScrollNeeded">
+    <span class="glyphicon glyphicon-chevron-right" (click)="scrollList(1)"></span>
+  </div>
+</div>

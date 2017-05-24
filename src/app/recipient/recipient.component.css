@@ -1,0 +1,98 @@
+.recipient-container {
+  display: inline-block;
+  position: relative;
+  width: 170px;
+  max-width: 170px;
+  background: white;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  box-shadow: 0 2px 5px lightgray;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.recipient-container:hover {
+  box-shadow: 0 5px 10px lightgray;
+  outline: 1px solid lightgrey;
+}
+
+.recipient-container * {
+  cursor: pointer !important;
+}
+
+.recipient-header {
+  position: relative;
+  padding: 15px 15px 10px;
+  background: white;
+  color: #FF0000;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  z-index: 0;
+  -webkit-transition: color 100ms;
+  -moz-transition: color 100ms;
+  -ms-transition: color 100ms;
+  -o-transition: color 100ms;
+  transition: color 100ms;
+}
+
+.recipient-header::after {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: red;
+  max-height: 0;
+  -webkit-transition: max-height 500ms;
+  -moz-transition: max-height 500ms;
+  -ms-transition: max-height 500ms;
+  -o-transition: max-height 500ms;
+  transition: max-height 500ms;
+  z-index: -1;
+}
+
+.recipient-container:hover .recipient-header {
+  color: white !important;
+}
+
+.recipient-container:hover .recipient-header::after {
+  max-height: 200px;
+}
+
+.recipient-header span {
+  display: block;
+  font-size: 40px;
+  margin-bottom: 5px;
+}
+
+.recipient-body {
+  padding: 15px;
+  color: gray;
+}
+
+.account {
+  display: block;
+}
+
+.ending {
+  display: block;
+}
+
+.highlighted {
+  color: gray;
+}
+
+@media (max-width: 768px) {
+  .recipient-container {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .recipient-container + .recipient-container {
+    margin-top: 20px;
+  }
+}

@@ -1,0 +1,29 @@
+<div class="content" [appSmoothFade]="!!iban">
+
+  <div *ngIf="iban">
+    <div class="entry" *ngIf="iban.bank">
+      <span>Bank</span>
+      <div class="value">{{iban.bank}}</div>
+    </div>
+    <div class="entry" *ngIf="iban.branch">
+      <span>Branch</span>
+      <div class="value">{{iban.branch}}</div>
+    </div>
+    <div class="entry" *ngIf="iban.bic">
+      <span>BIC</span>
+      <div class="value">{{iban.bic}}</div>
+    </div>
+    <div class="entry" *ngIf="iban.address">
+      <span>Address</span>
+      <div class="value">{{iban.address}}</div>
+    </div>
+    <div class="entry" *ngIf="iban.city">
+      <span>City</span>
+      <div class="value">{{iban.city}}</div>
+    </div>
+    <div class="entry" *ngIf="iban.country">
+      <span>Country</span>
+      <div class="value">{{iban.country}}</div>
+    </div>
+
+</div>

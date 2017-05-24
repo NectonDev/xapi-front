@@ -1,0 +1,353 @@
+.content {
+}
+
+.card {
+  display: inline-block;
+  background: white;
+  padding: 20px;
+  width: 90%;
+  box-shadow: 0 2px 5px lightgray;
+  color: red;
+}
+
+.card + .card {
+  margin-top: 10px;
+}
+
+.sub-card {
+  display: block;
+  position: relative;
+}
+
+* + .sub-card {
+  margin-top: 10px;
+}
+
+.sub-card-title {
+  display: block;
+  position: relative;
+  padding-left: 10px;
+}
+
+.sub-card-title::before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 50%;
+  background: red;
+}
+
+.sub-card-title::after {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  width: 5px;
+  height: 1px;
+  background: red;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.sub-card-body {
+  display: block;
+  position: relative;
+  border-left: 1px solid red;
+  padding-left: 10px;
+}
+
+.currency span {
+  font-size: 100%;
+}
+
+.advanced-options-list * {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 !important;
+}
+
+.advanced-options-list label {
+  margin-top: 10px;
+  color: gray;
+}
+
+.advanced-options-list label:hover {
+  font-weight: 100;
+  margin-top: 10px;
+  color: darkslategray;
+}
+
+.advanced-options-list input {
+  width: auto;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.advanced-options-list select {
+  padding: 5px 10px;
+  margin-left: 10px;
+  color: black;
+  border: 1px solid lightgrey;
+}
+
+.currency select {
+  padding: 5px;
+  border: 1px lightgrey solid;
+}
+
+.payment-type-container * {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+
+.radio-button {
+  position: relative;
+  margin-left: 10px !important;
+  -webkit-transition: color 200ms;
+  -moz-transition: color 200ms;
+  -ms-transition: color 200ms;
+  -o-transition: color 200ms;
+  transition: color 200ms;
+}
+
+.radio-button * {
+  cursor: pointer;
+}
+
+.radio-button.deselected {
+  color: gray;
+}
+
+.radio-button.deselected:hover {
+  color: darkslategray;
+}
+
+.radio-button input {
+  display: none;
+}
+
+.radio-button .dot {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  -webkit-transition: border 200ms;
+  -moz-transition: border 200ms;
+  -ms-transition: border 200ms;
+  -o-transition: border 200ms;
+  transition: border 200ms;
+}
+
+.radio-button.selected .dot {
+  border: 2px solid red;
+}
+
+.radio-button.deselected .dot {
+  border: 2px solid gray;
+}
+
+.radio-button.deselected:hover .dot {
+  border: 2px solid darkslategray;
+}
+
+.radio-button .dot::before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  background: none;
+  border-radius: 100%;
+  -webkit-transition: background 200ms;
+  -moz-transition: background 200ms;
+  -ms-transition: background 200ms;
+  -o-transition: background 200ms;
+  transition: background 200ms;
+}
+
+.radio-button.selected .dot::before {
+  background: red;
+}
+
+input {
+  -webkit-flex: 1; /* Safari 6.1+ */
+  -ms-flex: 1; /* IE 10 */
+  flex: 1;
+  width: 100%;
+  max-width: 400px;
+}
+
+.money-input {
+  display: flex;
+  position: relative;
+  max-width: 400px;
+}
+
+.money-input .currency {
+  position: relative;
+  margin-left: 10px;
+  padding: 0 5px;
+  color: red;
+  font-size: 120%;
+  text-align: center;
+  border-bottom: 1px solid lightgray;
+  -webkit-transition: border 200ms, box-shadow 200ms;
+  -moz-transition: border 200ms, box-shadow 200ms;
+  -ms-transition: border 200ms, box-shadow 200ms;
+  -o-transition: border 200ms, box-shadow 200ms;
+  transition: border 200ms, box-shadow 200ms;
+}
+
+.money-input .currency:hover {
+  border-color: transparent;
+  -webkit-box-shadow: -2px 3px 10px lightgray;
+  -moz-box-shadow: -2px 3px 10px lightgray;
+  box-shadow: -2px 3px 10px lightgray;
+}
+
+.money-input .currency span {
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.fees-box {
+  display: block;
+  margin-left: 10px;
+}
+
+.fees-box .names-box {
+  display: inline-block;
+  text-align: right;
+}
+
+.fees-box .names-box span {
+  display: block;
+  color: gray;
+}
+
+.fees-box .names-box span.important {
+  color: red;
+}
+
+.fees-box .values-box {
+  display: inline-block;
+  position: relative;
+  margin-left: 10px;
+  border-left: 1px gray solid;
+  padding: 20px 0 20px 10px;
+}
+
+.fees-box .values-box li {
+  position: relative;
+  list-style: none;
+  color: gray;
+  padding-left: 10px;
+}
+
+.fees-box .values-box li::before {
+  display: block;
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  content: '';
+  width: 10px;
+  height: 1px;
+  background: gray;
+}
+
+.fees-box .values-box li::after {
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  content: '';
+  width: 3px;
+  height: 5px;
+  background: gray;
+}
+
+.fees-box .values-box li.important {
+  color: red;
+}
+
+.estimated-arrival {
+  margin-top: 10px;
+  color: gray;
+}
+
+.estimated-arrival span {
+  color: red;
+}
+
+.advanced-options-container {
+  display: block;
+  margin-top: 10px;
+}
+
+.advanced-options-container * {
+  cursor: pointer !important;
+}
+
+.advanced-options-header {
+  display: inline-block;
+}
+
+.advanced-options-title {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.advanced-options-header .glyphicon {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transition: transform 200ms;
+  -moz-transition: transform 200ms;
+  -ms-transition: transform 200ms;
+  -o-transition: transform 200ms;
+  transition: transform 200ms;
+}
+
+.advanced-options-container.expanded .glyphicon {
+  transform: rotate(90deg);
+}
+
+.check-box {
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.check-box + .check-box {
+  margin-top: 0
+}
+
+.check-box label {
+  color: gray;
+}

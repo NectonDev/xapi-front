@@ -1,0 +1,14 @@
+<div class="account-container">
+  <div class="account-header" [@headerState]="accountSelected ? 'selected' : 'unselected'">
+    <span class="glyphicon {{account.getAccountTypeIcon()}}"></span>
+    {{account.getName()}}
+  </div>
+  <div class="account-body">
+    <div class="account-credit">
+      {{currencySymbolsService.getSymbolFor(account.getCurrencyType())}}{{account.getCredit()}}
+    </div>
+    <div class="account-balance">
+      Available balance
+    </div>
+  </div>
+</div>

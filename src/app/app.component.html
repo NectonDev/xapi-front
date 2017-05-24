@@ -1,0 +1,32 @@
+<div class="title-bar">
+  <div class="title">Make a payment</div>
+</div>
+<div class="workflow">
+  <app-step [stepIndex]="stepIndex"
+        [progressIndex]="progressIndex"
+        [title]="'Send money to:'"
+        [selection]="recipient ? recipient.getName() : undefined"
+        (stepClick)="onStepClick($event)">
+    <app-tabs-manager>
+      <app-tab [title]="'Other Payee'">
+        <app-new-recipient (submitNewRecipient)="recipient = $event"></app-new-recipient>
+      </app-tab>
+      <app-tab [title]="'Registered Payee'">
+        <app-recipient-selector [(selectedRecipient)]="recipient"></app-recipient-selector>
+      </app-tab>
+    </app-tabs-manager>
+  </app-step>
+  <app-step [stepIndex]="stepIndex"
+        [progressIndex]="progressIndex"
+        [title]="'Pay with:'"
+        [selection]="account ? account.getName() : undefined"
+        (stepClick)="onStepClick($event)">
+    <app-account-selector [(selectedAccount)]="account"></app-account-selector>
+  </app-step>
+  <app-step [stepIndex]="stepIndex"
+        [progressIndex]="progressIndex"
+        [title]="'Your transfer'"
+        (stepClick)="onStepClick($event)">
+    <app-transfer [account]="account" [recipient]="recipient"></app-transfer>
+  </app-step>
+</div>
