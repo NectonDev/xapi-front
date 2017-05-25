@@ -1,23 +1,21 @@
 .content {
   display: block;
   position: relative;
-  -webkit-transition: all 1000ms, border 200ms;
-  -moz-transition: all 1000ms, border 200ms;
-  -ms-transition: all 1000ms, border 200ms;
-  -o-transition: all 1000ms, border 200ms;
-  transition: all 1000ms, border 200ms;
-  background: white;
+  background: red;
+  color: white;
   max-width: 200px;
   cursor: pointer;
-  border: 1px solid white;
   -webkit-box-shadow: -2px 5px 5px lightgray;
   -moz-box-shadow: -2px 5px 5px lightgray;
   box-shadow: -2px 5px 5px lightgray;
+  margin-top: 10px;
+  transition: all 1000ms, border 200ms, background 200ms, color 100ms, outline 200ms;
 }
 
 .content:hover {
-  border-radius: 2px;
-  border: 1px solid red;
+  outline: 3px solid red;
+  background: white;
+  color: red;
 }
 
 .content::before {
@@ -33,15 +31,21 @@
   -webkit-box-shadow: -2px 5px 5px lightgray;
   -moz-box-shadow: -2px 5px 5px lightgray;
   box-shadow: -2px 5px 5px lightgray;
+  -webkit-transition: width 1000ms;
+  -moz-transition: width 1000ms;
+  -ms-transition: width 1000ms;
+  -o-transition: width 1000ms;
+  transition: width 1000ms;
+}
+
+.content.is-selected::before {
+  width: 40px;
 }
 
 .title {
   display: inline-block;
   text-align: center;
   padding: 8px 10px;
-  border: 1px solid white;
-  color: red;
-  background: white;
   -webkit-transition: all 200ms !important;
   -moz-transition: all 200ms !important;
   -ms-transition: all 200ms !important;
@@ -51,4 +55,34 @@
 
 .selected-content {
   padding: 0;
+  display: none;
+}
+
+.content.is-selected .selected-content {
+  display: block;
+  padding: 0 10px 10px 10px;
+}
+
+.content.is-selected {
+  margin-left: 20px;
+  max-width: 100vw;
+  background: transparent;
+  box-shadow: -5px 5px 30px lightgray;
+  padding: 10px;
+  cursor: default;
+  border: none;
+  border-left: 2px solid red;
+  outline: none;
+  color: red;
+}
+
+.content.is-selected .title {
+  background: transparent;
+  border: none;
+  pointer-events: none;
+  font-size: 120%;
+}
+
+.content.is-first {
+  margin-top: 0;
 }

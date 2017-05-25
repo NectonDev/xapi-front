@@ -5,12 +5,6 @@
   height: 100%;
   cursor: default;
 }
-.content.expandable {
-  cursor: pointer;
-}
-.content.expandable * {
-  cursor: pointer !important;
-}
 .selection {
   display: flex;
   position: relative;
@@ -62,6 +56,7 @@ ul {
 }
 ul li {
   padding: 5px;
+  color: red !important;
 }
 ul li * {
   display: inline-block;
@@ -70,7 +65,7 @@ ul li * {
 ul li + li {
   border-top: 1px lightgrey solid;
 }
-li:hover {
+ul li:hover {
   background: red;
-  color: white;
+  color: white !important;
 }

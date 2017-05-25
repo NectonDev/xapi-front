@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="glyphicon-container" *ngIf="isScrollNeeded" (click)="scrollList(-1)">
+  <div class="arrow glyphicon-container" *ngIf="isScrollNeeded" (click)="scrollList(-1)">
     <span class="glyphicon glyphicon-chevron-left"></span>
   </div>
   <div #accountListContainer class="account-list-container">
@@ -9,7 +9,7 @@
                [account]="account" (click)="selectedAccount = account"></app-account>
     </div>
   </div>
-  <div class="glyphicon-container" *ngIf="isScrollNeeded">
+  <div class="arrow glyphicon-container" *ngIf="isScrollNeeded">
     <span class="glyphicon glyphicon-chevron-right" (click)="scrollList(1)"></span>
   </div>
 </div>

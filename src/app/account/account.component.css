@@ -1,6 +1,29 @@
+.account-container {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  max-width: 150px;
+  background: white;
+  font-family: Roboto, Helvetica Neue, sans-serif;
+  box-shadow: 0 2px 5px lightgray;
+  font-size: 17px;
+  text-align: center;
+  cursor: pointer;
+  transition: box-shadow 200ms;
+}
+
+.account-container:hover {
+  box-shadow: 0 5px 10px lightgray;
+  outline: 1px solid lightgrey;
+}
+
+.account-container * {
+  cursor: pointer !important;
+}
+
 .account-header {
   position: relative;
-  padding: 15px 15px 10px;
+  padding: 15px 15px 5px;
   background: white;
   color: #FF0000;
   white-space: nowrap;
@@ -11,10 +34,6 @@
   -ms-transition: color 100ms;
   -o-transition: color 100ms;
   transition: color 100ms;
-}
-
-.account-container:hover .account-header {
-  color: white;
 }
 
 .account-header span {
@@ -45,33 +64,23 @@
   max-height: 200px;
 }
 
-.account-container {
-  display: inline-block;
-  position: relative;
-  width: 150px;
-  max-width: 150px;
-  background: white;
-  font-family: Roboto, Helvetica Neue, sans-serif;
-  box-shadow: 0 2px 5px lightgray;
-  font-size: 17px;
-  text-align: center;
-  cursor: pointer;
-}
-
-.account-container * {
-  cursor: pointer !important;
+.account-container:hover .account-header {
+  color: white;
 }
 
 .account-body {
-  padding: 10px;
-}
-
-.account-container:hover {
-  box-shadow: 0 5px 10px lightgray;
-  outline: 1px solid lightgrey;
+  position: relative;
+  padding: 10px 10px 20px;
 }
 
 .account-balance {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
   background: white;
   color: lightgrey;
   font-size: 70%;
@@ -79,17 +88,4 @@
 
 .account-credit {
   border-bottom: 1px solid lightgray;
-}
-
-@media screen and (max-width: 768px) {
-  .account-container {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-@media (max-width: 480px) {
-  .account-container {
-    margin-top: 0;
-  }
 }

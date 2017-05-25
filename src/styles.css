@@ -18,8 +18,9 @@ body {
 
 input {
   border: none;
-  color: black;
-  border-bottom: 1px solid lightgrey;
+  background: white !important;
+  color: black !important;
+  border: 1px solid lightgrey;
   padding: 8px 10px 8px 10px;
   -webkit-transition: all 200ms;
   -moz-transition: all 200ms;
@@ -41,7 +42,55 @@ input:focus {
   padding: 8px 5px 8px 15px;
 }
 
-button {
+input.inverted {
+  background: red !important;
+  color: white !important;
+  border: 0;
+}
+
+input.inverted::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: white;
+}
+input.inverted:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: white;
+  opacity:  1;
+}
+input.inverted::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: white;
+  opacity:  1;
+}
+input.inverted:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+input.inverted:-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+}
+
+input.inverted:hover, input.inverted:focus {
+  background: white !important;
+  color: red !important;
+  outline: 3px solid red;
+}
+
+input.inverted:hover::-webkit-input-placeholder, input.inverted:focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+  color: red;
+}
+input.inverted:hover:-moz-placeholder, input.inverted:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  color: red;
+  opacity:  1;
+}
+input.inverted:hover::-moz-placeholder, input.inverted:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
+  color: red;
+  opacity:  1;
+}
+input.inverted:hover:-ms-input-placeholder, input.inverted:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: red;
+}
+input.inverted:hover:-ms-input-placeholder, input.inverted:focus:-ms-input-placeholder { /* Microsoft Edge */
+  color: red;
+}
+
+button, button:focus {
   position: relative;
   background: red;
   border: red 1px solid;
@@ -103,4 +152,32 @@ label {
 
 span {
   cursor: default !important;
+}
+
+* .check-box {
+  margin-top: 10px;
+}
+
+.check-box {
+  display: inline-block;
+}
+
+.check-box input {
+  display: none !important;
+}
+
+.check-box span {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid red;
+  color: transparent;
+}
+
+.check-box input:checked + span {
+  color: red;
+}
+
+.check-box label {
+  color: red !important;
 }

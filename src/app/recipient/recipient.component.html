@@ -2,17 +2,22 @@
   <div *ngIf="recipient">
     <div class="recipient-header" [@headerState]="selected ? 'selected' : 'unselected'">
       <span class="glyphicon glyphicon-user"></span>
-      {{recipient.getName()}}
+      <span class="text">{{recipient.getName()}}</span>
     </div>
     <div class="recipient-body">
-      <div class="account">{{recipient.getAccount().getCurrencyType()}} account</div>
-      <div class="ending">ending with {{recipient.getAccount().getLastDigits()}}</div>
+      <div class="flag">
+        <span class="currency-flag {{currencyFlagsService.getCurrencyFlagFromCurrencyName(recipient.getAccount().getCurrencyType())}}"></span>
+        {{recipient.getAccount().getCurrencyType()}}
+      </div>
+      <div class="recipient-body-description">
+        <div class="ending">account ending with {{recipient.getAccount().getLastDigits()}}</div>
+      </div>
     </div>
   </div>
   <div class="new-recipient" *ngIf="!recipient">
     <div class="recipient-header">
       <span class="glyphicon glyphicon-plus"></span>
-      New Recipient
+      <span class="text">New Recipient</span>
     </div>
     <div class="recipient-body">
       <div class="account">Create</div>

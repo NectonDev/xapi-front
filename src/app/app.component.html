@@ -8,14 +8,16 @@
         [selection]="recipient ? recipient.getName() : undefined"
         (stepClick)="onStepClick($event)">
     <app-tabs-manager>
-      <app-tab [title]="'Other Payee'">
+      <app-tab [title]="'New Payee'">
         <app-new-recipient (submitNewRecipient)="recipient = $event"></app-new-recipient>
       </app-tab>
-      <app-tab [title]="'Registered Payee'">
+
+      <app-tab [title]="'Existing Payee'">
         <app-recipient-selector [(selectedRecipient)]="recipient"></app-recipient-selector>
       </app-tab>
     </app-tabs-manager>
   </app-step>
+
   <app-step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
         [title]="'Pay with:'"
@@ -23,6 +25,7 @@
         (stepClick)="onStepClick($event)">
     <app-account-selector [(selectedAccount)]="account"></app-account-selector>
   </app-step>
+
   <app-step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
         [title]="'Your transfer'"

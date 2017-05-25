@@ -3,6 +3,7 @@ import {Recipient} from '../../models/recipient';
 import {Account} from '../../models/account';
 import {Iban} from '../../models/iban';
 import {IBAN} from '../../mocks/iban.mock';
+import {RECIPIENTS} from "../../mocks/recipient.mock";
 
 @Component({
   selector: 'app-new-recipient',
@@ -13,10 +14,12 @@ export class NewRecipientComponent {
   countryFlags = new Map();
   @Input() selectedCountry = '';
   @Output() submitNewRecipient: EventEmitter<Recipient> = new EventEmitter();
-  @ViewChild('name') name: ElementRef;
-  @ViewChild('surname') surname: ElementRef;
+  name: string;
+  address: string;
+  save: boolean;
   iban: Iban;
   private ibanValid: boolean;
+
   constructor() {
     this.countryFlags.set('Spain', 'eur');
     this.countryFlags.set('India', 'usd');
@@ -36,11 +39,11 @@ export class NewRecipientComponent {
   }
 
   onSubmit() {
-    const name = this.name.nativeElement.value;
-    const surname = this.surname.nativeElement.value;
-    this.submitNewRecipient.emit(new Recipient(`${name} ${surname}`, new Account(
-      'EUR', Account.ACCOUNT_BANK, 1000, '1234567890', 'Personal Account'
-    )));
+    const newRecipient = new Recipient(this.name, new Account(
+      'EUR', Account.ACCOUNT_BANK, this.selectedCountry, 1000, '1234567890', 'Personal Account'
+    ));
+    this.submitNewRecipient.emit(newRecipient);
+    RECIPIENTS.push(newRecipient);
   }
 
   checkIban() {

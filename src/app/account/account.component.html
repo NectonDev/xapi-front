@@ -5,6 +5,7 @@
   </div>
   <div class="account-body">
     <div class="account-credit">
+      <span class="currency-flag {{currencyFlagsService.getCurrencyFlagFromCurrencyName(account.getCurrencyType())}}"></span>
       {{currencySymbolsService.getSymbolFor(account.getCurrencyType())}}{{account.getCredit()}}
     </div>
     <div class="account-balance">

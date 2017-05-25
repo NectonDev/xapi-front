@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { state, style, trigger } from '@angular/animations';
 import { Recipient } from '../../models/recipient';
+import {CurrencySymbolsService} from "../currency-symbols.service";
+import {CurrencyFlagsService} from "../currency-flags.service";
 
 @Component({
   selector: 'app-recipient',
@@ -16,7 +18,11 @@ import { Recipient } from '../../models/recipient';
   ]
 })
 export class RecipientComponent {
-
   @Input() recipient: Recipient;
   @Input() selected: boolean;
+  currencyFlagsService: CurrencyFlagsService;
+
+  constructor(currencyFlagsService: CurrencyFlagsService) {
+    this.currencyFlagsService = currencyFlagsService;
+  }
 }

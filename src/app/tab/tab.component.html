@@ -1,4 +1,6 @@
-<div #contentEl class="content" (click)="onClick.emit()">
+<div #contentEl class="content"
+     [class.is-selected]="isSelected"
+     [class.is-first]="isFirst" (click)="onClick.emit()">
   <div #titleEl class="title" >{{title}}</div>
   <div #selectedContentEl class="selected-content" [appSmoothFade]="isSelected">
     <ng-content></ng-content>

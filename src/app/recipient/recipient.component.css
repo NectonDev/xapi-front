@@ -1,14 +1,15 @@
 .recipient-container {
   display: inline-block;
   position: relative;
-  width: 170px;
-  max-width: 170px;
+  width: 150px;
+  max-width: 150px;
   background: white;
   font-family: Roboto, Helvetica Neue, sans-serif;
   box-shadow: 0 2px 5px lightgray;
   font-size: 17px;
   text-align: center;
   cursor: pointer;
+  transition: box-shadow 200ms;
 }
 
 .recipient-container:hover {
@@ -22,7 +23,7 @@
 
 .recipient-header {
   position: relative;
-  padding: 15px 15px 10px;
+  padding: 15px 15px 5px;
   background: white;
   color: #FF0000;
   white-space: nowrap;
@@ -68,8 +69,9 @@
 }
 
 .recipient-body {
-  padding: 15px;
+  padding: 10px 10px 20px;
   color: gray;
+  position: relative;
 }
 
 .account {
@@ -84,15 +86,27 @@
   color: gray;
 }
 
-@media (max-width: 768px) {
-  .recipient-container {
-    width: 100%;
-    max-width: none;
-  }
+.text {
+  font-size: 100% !important;
+  width: 100%;
+  overflow: hidden;
+  text-transform: capitalize;
 }
 
-@media (max-width: 480px) {
-  .recipient-container + .recipient-container {
-    margin-top: 20px;
-  }
+.flag {
+  display: block;
+  border-bottom: 1px solid lightgray;
+}
+
+.recipient-body-description {
+  position: absolute;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  color: lightgray;
+  font-size: 70%;
+  height: 10px;
 }

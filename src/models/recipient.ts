@@ -5,12 +5,8 @@ export class Recipient {
   private account: Account;
 
   constructor(name: string, account: Account) {
-    if (name && account && account.getAccountType() === Account.ACCOUNT_BANK) {
-      this.name = name;
-      this.account = account;
-    } else {
-      throw new DOMException();
-    }
+    this.name = name;
+    this.account = account;
   }
 
   public getName(): string {
@@ -21,6 +17,7 @@ export class Recipient {
     return new Account(
       this.account.getCurrencyType(),
       this.account.getAccountType(),
+      this.account.getCountry(),
       this.account.getCredit(),
       this.account.getNumber(),
       this.account.getName()

@@ -12,6 +12,20 @@ import { Recipient } from '../../models/recipient';
   styleUrls: ['./recipient-selector.component.css']
 })
 export class RecipientSelectorComponent implements AfterContentChecked {
+  recipients: Recipient[] = RECIPIENTS;
+  listWidth: number;
+  listContainerWidth: number;
+  listContainerOffset = 0;
+  _isScrollNeeded: boolean;
+  _selectedRecipient: Recipient;
+  @ViewChild('recipientListContainer') recipientListContainer: ElementRef;
+  @ViewChild('recipientList') recipientList: ElementRef;
+
+  constructor() {
+    setInterval(() => {
+      this.onWindowResize();
+    }, 100);
+  }
 
   // isScrollNeeded getter and setter
   get isScrollNeeded(): boolean {
@@ -22,20 +36,6 @@ export class RecipientSelectorComponent implements AfterContentChecked {
     if (!value) {
       this.recipientList.nativeElement.style.left = '';
     }
-  }
-
-  recipients: Recipient[] = RECIPIENTS;
-  listWidth: number;
-  listContainerWidth: number;
-  listContainerOffset = 0;
-  _isScrollNeeded: boolean;
-  _selectedRecipient: Recipient;
-  @ViewChild('recipientListContainer') recipientListContainer: ElementRef;
-  @ViewChild('recipientList') recipientList: ElementRef;
-  constructor() {
-    setInterval(() => {
-      this.onWindowResize();
-    }, 1000);
   }
 
   // selectedRecipient setter and getter
@@ -50,7 +50,7 @@ export class RecipientSelectorComponent implements AfterContentChecked {
   }
 
   ngAfterContentChecked() {
-    this.listWidth = 180 * this.recipients.length - 10;
+    this.listWidth = 160 * this.recipients.length - 10;
     this.updateComputedValues();
   }
 
@@ -70,9 +70,9 @@ export class RecipientSelectorComponent implements AfterContentChecked {
   scrollList(direction: number) {
     this.updateComputedValues();
     this.listContainerOffset += Math.round(this.listContainerWidth / 2) * direction;
-    let maxOffset = this.listWidth + 20 - this.listContainerWidth;
-    let offsetIsGreaterThanAllowed = this.listContainerOffset > maxOffset;
-    let offsetUnderZero = this.listContainerOffset < 0;
+    const maxOffset = this.listWidth + 20 - this.listContainerWidth;
+    const offsetIsGreaterThanAllowed = this.listContainerOffset > maxOffset;
+    const offsetUnderZero = this.listContainerOffset < 0;
     this.listContainerOffset = offsetIsGreaterThanAllowed ? maxOffset : offsetUnderZero ? 0 : this.listContainerOffset;
     this.recipientList.nativeElement.style.left = `${-this.listContainerOffset + 10}px`;
   }

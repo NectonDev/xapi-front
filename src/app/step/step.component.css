@@ -137,8 +137,7 @@
 }
 
 .step-content {
-  overflow-y: hidden;
-  max-height: 0;
+  /*max-height: 0;*/
   -webkit-transition: all 500ms ease-out;
   -moz-transition: all 500ms ease-out;
   -ms-transition: all 500ms ease-out;
@@ -150,7 +149,7 @@
   padding-bottom: 20px;
   padding-left: 20px;
   padding-top: 15px;
-  max-height: 1000px;
+  /*max-height: 1000px;*/
 }
 
 .idle-space {

@@ -12,23 +12,27 @@ import {CurrencySymbolsService} from '../currency-symbols.service';
   providers: [ ExchangeRateService ]
 })
 export class TransferComponent {
-  currencyMap = new Map();
-  eta: string;
-  santanderFee: number;
-  exchangeRate: number;
-  @Output() onOperationDone: EventEmitter<any> = new EventEmitter();
+  defaultFeesPaymentModesPerCountry = {
+    'united states': 'shared'
+  };
+  _account: Account;
+  _otherAccount: Account;
+  _recipient: Recipient;
   _fromCredit: string;
   _toCredit: string;
   _fromCurrency: string;
   _toCurrency: string;
+  feesPaymentMode = 'sender';
+  currencyMap = new Map();
+  eta: string;
+  santanderFee: number;
+  exchangeRate: number;
   selectedRbPaymentType: number;
   selectedRbAdvanced: number;
   showingAdvancedOptions = false;
-  _account: Account;
-  _otherAccount: Account;
-  _recipient: Recipient;
   exchangeRateService: ExchangeRateService;
   currencySymbolsService: CurrencySymbolsService;
+  @Output() onOperationDone: EventEmitter<any> = new EventEmitter();
 
   constructor(exchangeRateService: ExchangeRateService, currencySymbolsService: CurrencySymbolsService) {
     this.currencySymbolsService = currencySymbolsService;
@@ -73,6 +77,10 @@ export class TransferComponent {
     this._recipient = value;
     if (!!value) {
       this.toCurrency = value.getAccount().getCurrencyType();
+      let feesPaymentMode;
+      if ((feesPaymentMode = this.defaultFeesPaymentModesPerCountry[this._recipient.getAccount().getCountry().toLowerCase()])) {
+        this.feesPaymentMode = feesPaymentMode;
+      }
     }
   }
 

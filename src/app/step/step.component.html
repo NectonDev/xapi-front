@@ -3,13 +3,13 @@
      [class.unselected]="!isSelected()"
      [class.last-unselected]="!isSelected() && isLastStep()"
      [class.last-selected]="isSelected() && isLastStep()">
-
   <div class="step-header" (click)="onClick()">
     <div class="header-order"><span>{{_step}}</span></div>
     <div class="header-title">{{title}}</div>
   </div>
 
-  <div #content class="step-content">
+  <div #content class="step-content" [appSmoothFade]="isSelected()">
+    <div *ngIf="isSelected()"></div>
     <ng-content></ng-content>
   </div>
 
@@ -20,5 +20,4 @@
 
   <div class="idle-space" *ngIf="!isSelected() && !hasSelection() && !isLastStep()">
   </div>
-
 </div>

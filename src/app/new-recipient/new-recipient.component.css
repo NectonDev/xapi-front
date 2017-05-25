@@ -51,6 +51,7 @@ input {
   background: white;
   box-shadow: 0 2px 5px lightgray;
   height: 40px;
+  color: red;
   -webkit-transition: box-shadow 200ms;
   -moz-transition: box-shadow 200ms;
   -ms-transition: box-shadow 200ms;
@@ -59,7 +60,14 @@ input {
 }
 
 .flags:hover {
+  background: red;
+  color: white;
   box-shadow: -2px 3px 10px lightgray;
+}
+
+.flags.has-selection {
+  background: red;
+  color: white;
 }
 
 input + input {

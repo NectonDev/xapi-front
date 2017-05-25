@@ -23,7 +23,7 @@ export class AccountSelectorComponent implements AfterContentChecked {
   constructor() {
     setInterval(() => {
       this.onWindowResize();
-    }, 1000);
+    }, 100);
   }
 
   // selectedAccount setter and getter
@@ -68,9 +68,9 @@ export class AccountSelectorComponent implements AfterContentChecked {
   // method used to scroll the list by manipulating its left margin using negative values
   scrollList(direction: number) {
     this.listOffset += Math.round(this.listContainerWidth / 2) * direction;
-    let maxOffset = this.listWidth + 20 - this.listContainerWidth;
-    let offsetIsOverTheLimit = this.listOffset > maxOffset;
-    let offsetUnderZero = this.listOffset < 0;
+    const maxOffset = this.listWidth + 20 - this.listContainerWidth;
+    const offsetIsOverTheLimit = this.listOffset > maxOffset;
+    const offsetUnderZero = this.listOffset < 0;
     this.listOffset = offsetIsOverTheLimit ? maxOffset : offsetUnderZero ? 0 : this.listOffset;
     this.accountList.nativeElement.style.marginLeft = `${-this.listOffset}px`;
   }
