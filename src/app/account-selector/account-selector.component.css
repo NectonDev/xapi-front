@@ -46,11 +46,7 @@ span:hover {
 .account-list {
   position: absolute;
   white-space: nowrap;
-  padding-top: 1px;
-  -webkit-transition: margin-left 200ms ease-out;
-  -moz-transition: margin-left 200ms ease-out;
-  -ms-transition: margin-left 200ms ease-out;
-  -o-transition: margin-left 200ms ease-out;
+  padding-top: 5px;
   transition: margin-left 200ms ease-out;
 }
 

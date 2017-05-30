@@ -52,10 +52,6 @@ input {
   box-shadow: 0 2px 5px lightgray;
   height: 40px;
   color: red;
-  -webkit-transition: box-shadow 200ms;
-  -moz-transition: box-shadow 200ms;
-  -ms-transition: box-shadow 200ms;
-  -o-transition: box-shadow 200ms;
   transition: box-shadow 200ms;
 }
 
@@ -104,6 +100,10 @@ input + input {
   background: white;
   padding: 10px;
   box-shadow: 0 2px 5px lightgray;
+  margin-top: 10px;
+}
+
+* + .check-box {
   margin-top: 10px;
 }
 

@@ -5,10 +5,11 @@ import {Component, EventEmitter, HostListener, Input, Output} from '@angular/cor
   styleUrls: ['./flags-dropdown.component.css']
 })
 export class FlagsDropdownComponent {
-  @Input() keysAndFlagsMap: Map<string, string>;
   _selectedKey: string;
   isShowingList = false;
+  @Input() keysAndFlagsMap: Map<string, string>;
   @Input() allowSelection = true;
+  @Input() flagType: string;
 
   constructor() {
     document.addEventListener('mouseup', () => {
@@ -25,6 +26,15 @@ export class FlagsDropdownComponent {
   set selectedKey(val) {
     this._selectedKey = val;
     this.selectedKeyChange.emit(this._selectedKey);
+  }
+
+  getFlagName(): string {
+    const selectedFlag = this.keysAndFlagsMap.get(this._selectedKey);
+    return selectedFlag ? selectedFlag : '';
+  }
+
+  getSelectedKey(): string {
+    return this.selectedKey ? this.selectedKey.toUpperCase() : 'Select a ' + this.flagType;
   }
 
   toggleList() {

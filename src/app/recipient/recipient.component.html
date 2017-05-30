@@ -6,8 +6,8 @@
     </div>
     <div class="recipient-body">
       <div class="flag">
-        <span class="currency-flag {{currencyFlagsService.getCurrencyFlagFromCurrencyName(recipient.getAccount().getCurrencyType())}}"></span>
-        {{recipient.getAccount().getCurrencyType()}}
+        <span class="currency-flag currency-flag-{{recipient.getAccount().getCurrencyType()}}"></span>
+        {{recipient.getAccount().getCurrencyType().toUpperCase()}}
       </div>
       <div class="recipient-body-description">
         <div class="ending">account ending with {{recipient.getAccount().getLastDigits()}}</div>

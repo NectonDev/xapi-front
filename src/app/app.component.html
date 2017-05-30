@@ -1,6 +1,7 @@
 <div class="title-bar">
   <div class="title">Make a payment</div>
 </div>
+
 <div class="workflow">
   <app-step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
@@ -23,13 +24,21 @@
         [title]="'Pay with:'"
         [selection]="account ? account.getName() : undefined"
         (stepClick)="onStepClick($event)">
-    <app-account-selector [(selectedAccount)]="account"></app-account-selector>
+    <app-tabs-manager>
+      <app-tab [title]="'Select an Account'">
+        <app-account-selector [(selectedAccount)]="account"></app-account-selector>
+      </app-tab>
+    </app-tabs-manager>
   </app-step>
 
   <app-step [stepIndex]="stepIndex"
         [progressIndex]="progressIndex"
         [title]="'Your transfer'"
         (stepClick)="onStepClick($event)">
-    <app-transfer [account]="account" [recipient]="recipient"></app-transfer>
+    <app-tabs-manager>
+      <app-tab [title]="'Fill in the Form and Continue'">
+        <app-transfer [account]="account" [recipient]="recipient"></app-transfer>
+      </app-tab>
+    </app-tabs-manager>
   </app-step>
 </div>

@@ -17,7 +17,6 @@
   position: relative;
   font-size: 40px;
   color: red;
-  margin-left: 20px;
   text-align: center;
   transform: translateY(50%);
   z-index: 100;
@@ -36,6 +35,10 @@
 .arrow span:hover{
   color: white;
   background: red;
+}
+
+.recipient-list-container .arrow {
+  margin-left: 20px;
 }
 
 .blank-recipient {
@@ -61,12 +64,8 @@
 .recipient-list {
   position: absolute;
   white-space: nowrap;
-  padding-top: 1px;
+  padding-top: 5px;
   left: 10px;
-  -webkit-transition: left 200ms ease-out;
-  -moz-transition: left 200ms ease-out ;
-  -ms-transition: left 200ms ease-out ;
-  -o-transition: left 200ms ease-out ;
   transition: left 200ms ease-out ;
 }
 

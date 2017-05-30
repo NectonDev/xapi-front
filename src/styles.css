@@ -17,16 +17,11 @@ body {
 }
 
 input {
-  border: none;
   background: white !important;
   color: black !important;
   border: 1px solid lightgrey;
   padding: 8px 10px 8px 10px;
-  -webkit-transition: all 200ms;
-  -moz-transition: all 200ms;
-  -ms-transition: all 200ms;
-  -o-transition: all 200ms;
-  transition: all 200ms;
+  transition: color 100ms, background 200ms, border 200ms, outline 100ms, padding 100ms;
 }
 
 input:hover {
@@ -45,7 +40,8 @@ input:focus {
 input.inverted {
   background: red !important;
   color: white !important;
-  border: 0;
+  border: 0 solid red;
+  outline: 0 solid red;
 }
 
 input.inverted::-webkit-input-placeholder { /* WebKit, Blink, Edge */
@@ -101,11 +97,8 @@ button, button:focus {
   -moz-border-radius: 10px;
   border-radius: 0;
   padding: 8px 10px;
-  -webkit-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
-  -moz-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
-  -ms-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
-  -o-transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
-  transition: background 200ms, color 200ms, box-shadow 200ms, outline 100ms;
+  outline: 0 solid red;
+  transition: background 200ms, color 100ms, box-shadow 200ms, outline 100ms;
 }
 
 button:hover {
@@ -154,10 +147,6 @@ span {
   cursor: default !important;
 }
 
-* .check-box {
-  margin-top: 10px;
-}
-
 .check-box {
   display: inline-block;
 }
@@ -167,17 +156,158 @@ span {
 }
 
 .check-box span {
-  display: inline-block;
-  width: 20px;
-  height: 20px;
-  border: 2px solid red;
-  color: transparent;
+  display: inline-block !important;
+  width: 20px !important;
+  height: 20px !important;
+  border: 2px solid red !important;
+  color: transparent !important;
+  transform: none !important;;
 }
 
 .check-box input:checked + span {
-  color: red;
+  color: red !important;
 }
 
 .check-box label {
   color: red !important;
+}
+
+.radio-button {
+  position: relative;
+  margin-left: 10px !important;
+  transition: color 200ms;
+}
+
+.radio-button * {
+  cursor: pointer;
+}
+
+.radio-button.deselected {
+  color: gray;
+}
+
+.radio-button.deselected:hover {
+  color: darkslategray;
+}
+
+.radio-button input {
+  display: none !important;
+}
+
+.radio-button .dot {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+  border-radius: 100%;
+  transition: border 200ms;
+}
+
+.radio-button.selected .dot {
+  border: 2px solid red;
+}
+
+.radio-button.deselected .dot {
+  border: 2px solid gray;
+}
+
+.radio-button.deselected:hover .dot {
+  border: 2px solid darkslategray;
+}
+
+.radio-button .dot::before {
+  display: block;
+  position: absolute;
+  content: "";
+  width: 10px;
+  height: 10px;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  background: none;
+  border-radius: 100%;
+  transition: background 200ms;
+}
+
+.radio-button.selected .dot::before {
+  background: red;
+}
+
+.card {
+  display: inline-block;
+  background: white !important;
+  padding: 20px;
+  width: 90%;
+  box-shadow: 0 2px 5px lightgray;
+  color: red;
+}
+
+.card + .card {
+  margin-top: 10px;
+}
+
+.sub-card {
+  display: block;
+  position: relative;
+}
+
+* + .sub-card {
+  margin-top: 10px;
+}
+
+.sub-card-title {
+  display: block;
+  position: relative;
+  padding-left: 10px;
+}
+
+.sub-card-title::before {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  width: 1px;
+  height: 50%;
+  background: red;
+}
+
+.sub-card-title::after {
+  display: block;
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 50%;
+  width: 5px;
+  height: 1px;
+  background: red;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.sub-card-body {
+  display: block;
+  position: relative;
+  border-left: 1px solid red;
+  padding-left: 10px;
+}
+
+/* Mobile devices */
+@media only screen and (max-width : 480px) {
+  .card {
+    //padding: 0;
+    width: 100%;
+  }
+  .check-box {
+    display: block;
+  }
+  .radio-button {
+    display: block !important;
+    margin-top: 10px !important;
+  }
 }

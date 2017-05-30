@@ -18,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsManagerComponent } from './tabs-manager/tabs-manager.component';
 import { TabComponent } from './tab/tab.component';
 import { CurrencySymbolsService } from './currency-symbols.service';
-import {CurrencyFlagsService} from './currency-flags.service';
 
 @NgModule({
   declarations: [
@@ -43,8 +42,7 @@ import {CurrencyFlagsService} from './currency-flags.service';
     BrowserAnimationsModule
   ],
   providers: [
-    CurrencySymbolsService,
-    CurrencyFlagsService
+    CurrencySymbolsService
   ],
   bootstrap: [AppComponent]
 })

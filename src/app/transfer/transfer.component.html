@@ -27,9 +27,11 @@
       <div class="money-input" style="margin-top: 10px">
         <input type="text" name="from-credit"
                placeholder="{{currencySymbolsService.getSymbolFor(fromCurrency)}}0.00 (Original amount)"
-               [(ngModel)]="fromCredit" value="{{fromCredit}}">
+               [(ngModel)]="fromCredit">
         <div class="currency" style="border:none; border-bottom: 1px solid lightgrey">
-          <app-flags-dropdown [(selectedKey)]="fromCurrency" [keysAndFlagsMap]="currencyMap"
+          <app-flags-dropdown [(selectedKey)]="fromCurrency"
+                              [flagType]="'currency'"
+                              [keysAndFlagsMap]="currencyMap"
                               [allowSelection]="false"></app-flags-dropdown>
         </div>
       </div>
@@ -48,10 +50,11 @@
       <div class="money-input">
         <input class="inverted" type="text" name="to-credit"
                placeholder="{{currencySymbolsService.getSymbolFor(toCurrency)}}0.00 (Amount after conversion and fees)"
-               style="border: 1px solid lightgray"
-               [(ngModel)]="toCredit" value="{{toCredit}}">
+               [(ngModel)]="toCredit">
         <div class="currency">
-          <app-flags-dropdown [(selectedKey)]="toCurrency" [keysAndFlagsMap]="currencyMap"></app-flags-dropdown>
+          <app-flags-dropdown [(selectedKey)]="toCurrency"
+                              [flagType]="'currency'"
+                              [keysAndFlagsMap]="currencyMap"></app-flags-dropdown>
         </div>
       </div>
 
@@ -61,7 +64,12 @@
 
       <div class="transaction-reference-container">
         <span style="display: block;margin-bottom:5px">Transaction Reference</span>
-        <input #reference name="reference" placeholder="Enter a reference" id="reference">
+        <input name="reference1" style="display: block;margin-top: 10px" placeholder="Enter a reference">
+        <div *ngIf="!!recipient && recipient.getAccount().getCountry() !== 'United States'">
+          <input name="reference2" style="display: block;margin-top: 10px" placeholder="Reference #2">
+          <input name="reference3" style="display: block;margin-top: 10px" placeholder="Reference #3">
+          <input name="reference4" style="margin-top: 10px" placeholder="Reference #4">
+        </div>
       </div>
 
       <div class="advanced-options-container non-selectable" [class.expanded]="showingAdvancedOptions">
@@ -78,6 +86,17 @@
               <option value="shared">Shared</option>
               <option value="receiver">Receiver</option>
             </select>
+            <div *ngIf="'sender' === feesPaymentMode || 'shared' === feesPaymentMode" class="check-box">
+              <input [(ngModel)]="useFeesAccount" style="display:inline-block;width:auto" type="checkbox" id="use-account-for-fees">
+              <span class="glyphicon glyphicon-ok"></span>
+              <label for="use-account-for-fees">Use dedicated account</label>
+            </div>
+          </div>
+          <div [appSmoothFade]="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && showingAdvancedOptions && useFeesAccount" style="margin-top: 10px">
+            <div *ngIf="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && showingAdvancedOptions && useFeesAccount"
+                 style="display: block;">
+              <app-account-selector [(selectedAccount)]="feesAccount"></app-account-selector>
+            </div>
           </div>
         </div>
       </div>

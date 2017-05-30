@@ -12,17 +12,22 @@ export class TabsManagerComponent implements AfterContentInit {
 
   ngAfterContentInit() {
     const tabs = this.components.toArray();
-    for (let i = 0; i < tabs.length; i++) {
-      tabs[i].isFirst = i === 0;
-      tabs[i].onClick.subscribe(() => {
-        tabs[i].isSelected = true;
-        for (let i1 = 0; i1 < tabs.length; i1++) {
-          tabs[i1].hasSelection = true;
-          if (i1 !== i) {
-            tabs[i1].isSelected = false;
+    if (tabs.length === 1) {
+      tabs[0].isSelected = true;
+      tabs[0].hasSelection = true;
+    } else {
+      for (let i = 0; i < tabs.length; i++) {
+        tabs[i].isFirst = i === 0;
+        tabs[i].onClick.subscribe(() => {
+          tabs[i].isSelected = true;
+          for (let i1 = 0; i1 < tabs.length; i1++) {
+            tabs[i1].hasSelection = true;
+            if (i1 !== i) {
+              tabs[i1].isSelected = false;
+            }
           }
-        }
-      });
+        });
+      }
     }
   }
 }

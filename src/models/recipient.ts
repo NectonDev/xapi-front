@@ -18,6 +18,7 @@ export class Recipient {
       this.account.getCurrencyType(),
       this.account.getAccountType(),
       this.account.getCountry(),
+      this.account.getCountryCode(),
       this.account.getCredit(),
       this.account.getNumber(),
       this.account.getName()

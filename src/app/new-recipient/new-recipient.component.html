@@ -1,14 +1,14 @@
 <div class="content">
 
   <div class="form-container">
-    <div class="flags" [class.has-selection]="hasSelection()">
-      <app-flags-dropdown [(selectedKey)]="selectedCountry" [keysAndFlagsMap]="countryFlags"></app-flags-dropdown>
+    <div class="flags">
+      <app-flags-dropdown [(selectedKey)]="selectedCountry" [flagType]="'country'" [keysAndFlagsMap]="countryFlags"></app-flags-dropdown>
     </div>
 
     <div class="horizontal-sm">
       <div [appSmoothFade]="hasSelection()">
         <div class="vertical-input important-input" *ngIf="hasSelection()">
-          <input [(ngModel)]="name" type="text" placeholder="Payee's full name">
+          <input class="inverted" [(ngModel)]="name" type="text" placeholder="Payee's full name">
           <input [(ngModel)]="address" type="text" placeholder="Payee's address">
           <div class="check-box">
             <input [(ngModel)]="save" style="display:inline-block;width:auto" type="checkbox" id="save-for-later">

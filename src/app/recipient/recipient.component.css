@@ -9,12 +9,12 @@
   font-size: 17px;
   text-align: center;
   cursor: pointer;
-  transition: box-shadow 200ms;
+  transition: box-shadow 200ms, transform 200ms;
 }
 
 .recipient-container:hover {
-  box-shadow: 0 5px 10px lightgray;
-  outline: 1px solid lightgrey;
+  box-shadow: 0 5px 15px lightgray;
+  transform: scale(1.05);
 }
 
 .recipient-container * {
@@ -26,13 +26,10 @@
   padding: 15px 15px 5px;
   background: white;
   color: #FF0000;
+  outline: 0 solid red;
   white-space: nowrap;
   text-overflow: ellipsis;
   z-index: 0;
-  -webkit-transition: color 100ms;
-  -moz-transition: color 100ms;
-  -ms-transition: color 100ms;
-  -o-transition: color 100ms;
   transition: color 100ms;
 }
 
@@ -46,10 +43,6 @@
   height: 100%;
   background: red;
   max-height: 0;
-  -webkit-transition: max-height 500ms;
-  -moz-transition: max-height 500ms;
-  -ms-transition: max-height 500ms;
-  -o-transition: max-height 500ms;
   transition: max-height 500ms;
   z-index: -1;
 }

@@ -9,6 +9,7 @@ export class Account {
   private currencyType: string;
   private accountType: string;
   private country: string;
+  private countryCode: string;
   private number: string;
   private credit: number;
   private name: string;
@@ -16,19 +17,21 @@ export class Account {
   constructor(currencyType: string,
               accountType: string,
               country: string,
+              countryCode: string,
               credit: number,
               number: string,
               name: string) {
     this.currencyType = currencyType;
     this.accountType = accountType;
     this.country = country;
+    this.countryCode = countryCode;
     this.credit = credit;
     this.number = number;
     this.name = name;
   }
 
   public getCurrencyType(): string {
-    return this.currencyType;
+    return this.currencyType.toLowerCase();
   }
 
   public getAccountType(): string {
@@ -36,7 +39,11 @@ export class Account {
   }
 
   public getCountry(): string {
-    return this.country;
+    return this.country.toLowerCase();
+  }
+
+  public getCountryCode(): string {
+    return this.countryCode.toLowerCase();
   }
 
   public getCredit(): number {

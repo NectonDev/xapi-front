@@ -32,6 +32,8 @@ export class TransferComponent {
   showingAdvancedOptions = false;
   exchangeRateService: ExchangeRateService;
   currencySymbolsService: CurrencySymbolsService;
+  useFeesAccount: boolean;
+  feesAccount: Account;
   @Output() onOperationDone: EventEmitter<any> = new EventEmitter();
 
   constructor(exchangeRateService: ExchangeRateService, currencySymbolsService: CurrencySymbolsService) {
@@ -76,9 +78,11 @@ export class TransferComponent {
   set recipient(value: Recipient) {
     this._recipient = value;
     if (!!value) {
+      console.log(value);
+      console.log(value.getAccount());
       this.toCurrency = value.getAccount().getCurrencyType();
       let feesPaymentMode;
-      if ((feesPaymentMode = this.defaultFeesPaymentModesPerCountry[this._recipient.getAccount().getCountry().toLowerCase()])) {
+      if ((feesPaymentMode = this.defaultFeesPaymentModesPerCountry[value.getAccount().getCountry().toLowerCase()])) {
         this.feesPaymentMode = feesPaymentMode;
       }
     }
@@ -106,26 +110,52 @@ export class TransferComponent {
     });
   }
 
-  // toCredit getter and setter
-  get toCredit(): string {
-    return this._toCredit;
-  }
-  set toCredit(value: string) {
-    if ((isNumeric(value) || !value) && value !== this._toCredit) {
-      this._toCredit = value;
-      this.calculateFromCredit();
-    }
-  }
-
   // fromCredit getter and setter
   get fromCredit(): string {
-    return this._fromCredit;
+    if (!this._fromCredit) {
+      return '';
+    } else {
+      return this.currencySymbolsService.getSymbolFor(this._fromCurrency) + this._fromCredit;
+    }
   }
   set fromCredit(value: string) {
-    if ((isNumeric(value) || !value) && value !== this._fromCredit) {
-      this._fromCredit = value;
-      this.calculateToCredit();
+    value = value.trim();
+    if (!!value && value.length > 0 && !isNumeric(value)) {
+      value = value.substr(1, value.length - 1);
     }
+    if (!value || value.length === 0) {
+      value = '';
+    }
+    const previousCredit = this._fromCredit;
+    this._fromCredit = !this._fromCredit ? ' ' : this._fromCredit + ' ';
+    setTimeout(() => {
+      this._fromCredit = (!isNumeric(value) && value !== '' ? previousCredit.trim() : value);
+      this.calculateToCredit();
+    }, 1);
+  }
+
+  // toCredit getter and setter
+  get toCredit(): string {
+    if (!this._toCredit) {
+      return '';
+    } else {
+      return this.currencySymbolsService.getSymbolFor(this._toCurrency) + this._toCredit;
+    }
+  }
+  set toCredit(value: string) {
+    value = value.trim();
+    if (!!value && value.length > 0 && !isNumeric(value)) {
+      value = value.substr(1, value.length - 1);
+    }
+    if (!value || value.length === 0) {
+      value = '';
+    }
+    const previousCredit = this._toCredit;
+    this._toCredit = !this._toCredit ? ' ' : this._toCredit + ' ';
+    setTimeout(() => {
+      this._toCredit = (!isNumeric(value) && value !== '' ? previousCredit.trim() : value);
+      this.calculateFromCredit();
+    }, 1);
   }
 
   setExchangeRateFromToCurrency(from: string, to: string): Promise<any> {
@@ -143,12 +173,12 @@ export class TransferComponent {
 
   calculateToCredit() {
     this._toCredit = !this._fromCredit  ? this._fromCredit  :
-      (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toString();
+      (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(2).toString();
   }
 
   calculateFromCredit() {
     this._fromCredit = !this._toCredit  ? this._toCredit  :
-      (Number.parseFloat(this._toCredit ) / this.exchangeRate).toString();
+      (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(2).toString();
   }
 
   isPaymentTypeRbSelected(id: number): boolean {

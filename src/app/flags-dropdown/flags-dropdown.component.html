@@ -1,21 +1,35 @@
 <div class="content" [class.expandable]="allowSelection" *ngIf="keysAndFlagsMap" (click)="toggleList()">
 
   <div class="selection">
-    <div class="selection-content">
-      <div class="currency-flag currency-flag-{{selectedKey ? keysAndFlagsMap.get(selectedKey).toLowerCase() : ''}}"></div>
-      <span class="text">{{selectedKey ? selectedKey.toUpperCase() : ''}}</span>
+    <div class="selection-content" *ngIf="flagType === 'currency'">
+      <div class="currency-flag currency-flag-{{getFlagName()}}"></div>
+      <span class="text">{{getSelectedKey()}}</span>
+      <span class="selection-arrow glyphicon glyphicon-chevron-down" *ngIf="allowSelection"></span>
+    </div>
+    <div class="selection-content" *ngIf="flagType === 'country'">
+      <div class="flag-icon flag-icon-{{getFlagName()}}"></div>
+      <span class="text">{{getSelectedKey()}}</span>
       <span class="selection-arrow glyphicon glyphicon-chevron-down" *ngIf="allowSelection"></span>
     </div>
   </div>
 
   <div class="selection-list" [appSmoothFade]="isShowingList">
-    <ul *ngIf="isShowingList">
-      <li *ngFor="let key of keysAndFlagsMap.keys();"
-          (mousedown)="selectedKey = key; toggleList()">
-        <div class="currency-flag currency-flag-{{keysAndFlagsMap.get(key)}}"></div>
-        <span>{{key}}</span>
-      </li>
-    </ul>
+    <div *ngIf="isShowingList">
+      <ul *ngIf="flagType === 'currency'">
+        <li *ngFor="let key of keysAndFlagsMap.keys();"
+            (mousedown)="selectedKey = key; toggleList()">
+          <div class="currency-flag currency-flag-{{keysAndFlagsMap.get(key)}}"></div>
+          <span>{{key}}</span>
+        </li>
+      </ul>
+      <ul *ngIf="flagType === 'country'">
+        <li *ngFor="let key of keysAndFlagsMap.keys();"
+            (mousedown)="selectedKey = key; toggleList()">
+          <div class="flag-icon flag-icon-{{keysAndFlagsMap.get(key)}}"></div>
+          <span>{{key}}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 
 </div>
