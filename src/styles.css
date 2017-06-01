@@ -145,14 +145,14 @@ button.deactivated::before {
   background: linear-gradient(to bottom, red, lightgray); /* Standard syntax */
 }
 
-label {
+label, label * {
   display: inline-block !important;
   font-weight: 100 !important;
   cursor: pointer !important;
 }
 
 span {
-  cursor: default !important;
+  cursor: default;
 }
 
 .check-box {
@@ -165,19 +165,27 @@ span {
 
 .check-box span {
   display: inline-block !important;
-  width: 20px !important;
-  height: 20px !important;
-  border: 2px solid red !important;
+  outline: 2px solid gray !important;
   color: transparent !important;
-  transform: none !important;;
+  transform: none !important;
+  margin-right: 5px;
+  padding: 2px;
 }
 
-.check-box input:checked + span {
-  color: red !important;
+.check-box:hover span {
+  outline-color: darkslategray !important;
+}
+
+.check-box input:checked + label span {
+  color: darkslategray !important;
 }
 
 .check-box label {
-  color: red !important;
+  color: gray !important;
+}
+
+.check-box:hover label {
+  color: darkslategray !important;
 }
 
 .radio-button {

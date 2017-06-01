@@ -51,6 +51,11 @@
   border: 1px solid lightgrey;
 }
 
+.advanced-options-list .check-box {
+  display: block !important;
+  margin: 0;
+}
+
 .currency select {
   padding: 5px;
   border: 1px lightgrey solid;

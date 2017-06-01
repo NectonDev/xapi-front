@@ -109,8 +109,9 @@ export class TransferComponent {
   set fromCurrency(value: string) {
     this._fromCurrency = value;
     this.fromCurrencyChange.emit(this._fromCurrency);
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
-    this.calculateToCredit();
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
+      this.calculateToCredit();
+    });
   }
 
   @Input()
@@ -121,8 +122,9 @@ export class TransferComponent {
   set toCurrency(value: string) {
     this._toCurrency = value;
     this.toCurrencyChange.emit(this._toCurrency);
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
-    this.calculateToCredit();
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
+      this.calculateToCredit();
+    });
   }
 
   constructor(exchangeRateService: ExchangeRateService,
@@ -156,7 +158,7 @@ export class TransferComponent {
   }
 
   calculateToCredit() {
-    this._toCredit = !this._fromCredit  ? this._fromCredit  :
+    this._toCredit = !this._fromCredit ? this._fromCredit  :
       (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(4).toString();
     this.toCreditChange.emit(this._toCredit);
   }

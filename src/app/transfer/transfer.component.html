@@ -88,8 +88,10 @@
             </select>
             <div *ngIf="'sender' === feesPaymentMode || 'shared' === feesPaymentMode" class="check-box">
               <input [(ngModel)]="useFeesAccount" style="display:inline-block;width:auto" type="checkbox" id="use-account-for-fees">
-              <span class="glyphicon glyphicon-ok"></span>
-              <label for="use-account-for-fees">Use dedicated account</label>
+              <label for="use-account-for-fees">
+                <span class="glyphicon glyphicon-ok"></span>
+                Use dedicated account
+              </label>
             </div>
           </div>
           <div [appSmoothFade]="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && showingAdvancedOptions && useFeesAccount" style="margin-top: 10px">
