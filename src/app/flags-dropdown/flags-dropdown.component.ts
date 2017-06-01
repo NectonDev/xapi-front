@@ -11,21 +11,21 @@ export class FlagsDropdownComponent {
   @Input() allowSelection = true;
   @Input() flagType: string;
 
-  constructor() {
-    document.addEventListener('mouseup', () => {
-      this.isShowingList = false;
-    }, true);
-  }
-
   // selectedCurrency getter and setter
   @Input()
   get selectedKey() {
     return this._selectedKey;
   }
-  @Output()selectedKeyChange = new EventEmitter();
+  @Output() selectedKeyChange: EventEmitter<string> = new EventEmitter();
   set selectedKey(val) {
     this._selectedKey = val;
     this.selectedKeyChange.emit(this._selectedKey);
+  }
+
+  constructor() {
+    document.addEventListener('mouseup', () => {
+      this.isShowingList = false;
+    }, true);
   }
 
   getFlagName(): string {

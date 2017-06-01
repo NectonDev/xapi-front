@@ -1,0 +1,17 @@
+<div [appSmoothFade]="isVisible">
+  <div class="wrap" *ngIf="isVisible">
+    <div class="content">
+      <div class="card title-card">
+        <div class="title">
+          {{title}}
+        </div>
+        <div class="back" (click)="onExit()">
+          <span class="glyphicon glyphicon-remove"></span>
+        </div>
+      </div>
+      <div class="card message-card">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Account } from '../models/account';
-import { Recipient } from '../models/recipient';
+import { Payee } from '../models/payee';
 import { StepComponent } from './step/step.component';
+import {PopupService} from './popup.service';
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,21 @@ import { StepComponent } from './step/step.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
+  _recipient: Payee;
+  _account: Account;
+  stepIndex = 1;
+  progressIndex = 1;
+  popupService: PopupService;
+  transactionFromCredit: string;
+  transactionToCredit: string;
+  transactionFromCurrency: string;
+  transactionToCurrency: string;
 
-  // recipient setter and getter
-  get recipient(): Recipient {
+  // payee setter and getter
+  get recipient(): Payee {
     return this._recipient;
   }
-  set recipient(value: Recipient) {
+  set recipient(value: Payee) {
     this._recipient = value;
     if (!!value) {
       this.doProgress(1);
@@ -32,10 +42,25 @@ export class AppComponent  {
     }
   }
 
-  _account: Account;
-  _recipient: Recipient;
-  stepIndex = 1;
-  progressIndex = 1;
+  constructor(popupService: PopupService) {
+    this.popupService = popupService;
+  }
+
+  updateFromCredit(fromCredit: string) {
+    this.transactionFromCredit = fromCredit;
+  }
+
+  updateToCredit(toCredit: string) {
+    this.transactionToCredit = toCredit;
+  }
+
+  updateFromCurrency(fromCurrency: string) {
+    this.transactionFromCurrency = fromCurrency;
+  }
+
+  updateToCurrency(toCurrency: string) {
+    this.transactionToCurrency = toCurrency;
+  }
 
   doProgress(step: number): void {
     if (this.progressIndex === step) {

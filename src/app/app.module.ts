@@ -8,8 +8,8 @@ import { AccountComponent } from './account/account.component';
 import { AccountSelectorComponent } from './account-selector/account-selector.component';
 import { FlagsDropdownComponent } from './flags-dropdown/flags-dropdown.component';
 import { IbanComponent } from './iban/iban.component';
-import { NewRecipientComponent } from './new-recipient/new-recipient.component';
-import { RecipientComponent } from './recipient/recipient.component';
+import { NewRecipientComponent } from './new-payee/new-payee.component';
+import { PayeeComponent } from './payee/payee.component';
 import { RecipientSelectorComponent } from './recipient-selector/recipient-selector.component';
 import { StepComponent } from './step/step.component';
 import { TransferComponent } from './transfer/transfer.component';
@@ -18,6 +18,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TabsManagerComponent } from './tabs-manager/tabs-manager.component';
 import { TabComponent } from './tab/tab.component';
 import { CurrencySymbolsService } from './currency-symbols.service';
+import { PopupComponent } from './popup/popup.component';
+import { PopupService } from './popup.service';
+import { PopupOptionComponent } from './popup-option/popup-option.component';
+import { TransactionReviewComponent } from './transaction-review/transaction-review.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +31,16 @@ import { CurrencySymbolsService } from './currency-symbols.service';
     FlagsDropdownComponent,
     IbanComponent,
     NewRecipientComponent,
-    RecipientComponent,
+    PayeeComponent,
     RecipientSelectorComponent,
     StepComponent,
     TransferComponent,
     SmoothFadeDirective,
     TabsManagerComponent,
-    TabComponent
+    TabComponent,
+    PopupComponent,
+    PopupOptionComponent,
+    TransactionReviewComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ import { CurrencySymbolsService } from './currency-symbols.service';
     BrowserAnimationsModule
   ],
   providers: [
-    CurrencySymbolsService
+    CurrencySymbolsService,
+    PopupService
   ],
   bootstrap: [AppComponent]
 })

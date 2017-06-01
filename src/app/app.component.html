@@ -10,7 +10,7 @@
         (stepClick)="onStepClick($event)">
     <app-tabs-manager>
       <app-tab [title]="'New Payee'">
-        <app-new-recipient (submitNewRecipient)="recipient = $event"></app-new-recipient>
+        <app-new-payee (submitNewRecipient)="recipient = $event"></app-new-payee>
       </app-tab>
 
       <app-tab [title]="'Existing Payee'">
@@ -37,8 +37,29 @@
         (stepClick)="onStepClick($event)">
     <app-tabs-manager>
       <app-tab [title]="'Fill in the Form and Continue'">
-        <app-transfer [account]="account" [recipient]="recipient"></app-transfer>
+        <app-transfer [(account)]="account"
+                      [(recipient)]="recipient"
+                      (fromCreditChange)="updateFromCredit($event)"
+                      (toCreditChange)="updateToCredit($event)"
+                      (fromCurrencyChange)="updateFromCurrency($event)"
+                      (toCurrencyChange)="updateToCurrency($event)"></app-transfer>
       </app-tab>
     </app-tabs-manager>
   </app-step>
 </div>
+
+<app-popup>
+  <app-popup-option [name]="'review'" [title]="'Please check the data below'">
+    <app-transaction-review [fromAccount]="account"
+                            [toPayee]="recipient"
+                            [fromCredit]="transactionFromCredit"
+                            [toCredit]="transactionToCredit"
+                            [fromCurrency]="transactionFromCurrency"
+                            [toCurrency]="transactionToCurrency"></app-transaction-review>
+    <button type="button" (click)="popupService.changeOption('check')">Data is correct</button>
+  </app-popup-option>
+  <app-popup-option [name]="'check'" [title]="'Are you sure?'">
+    <button type="button" (click)="popupService.changeOption('review')">Go back</button>
+    <button type="button" (click)="popupService.changeVisibility(false)">Proceed</button>
+  </app-popup-option>
+</app-popup>

@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {isNumeric} from 'rxjs/util/isNumeric';
 import {ExchangeRateService} from '../exchange-rate.service';
 import {Account} from '../../models/account';
-import {Recipient} from '../../models/recipient';
+import {Payee} from '../../models/payee';
 import {CurrencySymbolsService} from '../currency-symbols.service';
+import {PopupService} from '../popup.service';
 
 @Component({
   selector: 'app-transfer',
@@ -15,13 +15,13 @@ export class TransferComponent {
   defaultFeesPaymentModesPerCountry = {
     'united states': 'shared'
   };
-  _account: Account;
-  _otherAccount: Account;
-  _recipient: Recipient;
-  _fromCredit: string;
-  _toCredit: string;
-  _fromCurrency: string;
-  _toCurrency: string;
+  private _account: Account;
+  private _recipient: Payee;
+  private _otherAccount: Account;
+  private _fromCredit: string;
+  private _toCredit: string;
+  private _fromCurrency: string;
+  private _toCurrency: string;
   feesPaymentMode = 'sender';
   currencyMap = new Map();
   eta: string;
@@ -34,10 +34,102 @@ export class TransferComponent {
   currencySymbolsService: CurrencySymbolsService;
   useFeesAccount: boolean;
   feesAccount: Account;
-  @Output() onOperationDone: EventEmitter<any> = new EventEmitter();
+  popupService: PopupService;
 
-  constructor(exchangeRateService: ExchangeRateService, currencySymbolsService: CurrencySymbolsService) {
+  // account getter and setter
+  @Input()
+  get account(): Account {
+    return this._account;
+  }
+  @Output() accountChange: EventEmitter<Account> = new EventEmitter();
+  set account(value: Account) {
+    if (!!value) {
+      this._account = value;
+      this._fromCurrency = value.getCurrencyType().toUpperCase();
+      this.accountChange.emit(value);
+    }
+  }
+
+  // payee getter and setter
+  @Input()
+  get recipient(): Payee {
+    return this._recipient;
+  }
+  @Output() recipientChange: EventEmitter<Payee> = new EventEmitter();
+  set recipient(value: Payee) {
+    if (!!value) {
+      this._recipient = value;
+      this._toCurrency = value.getAccount().getCurrencyType().toUpperCase();
+      let feesPaymentMode;
+      if ((feesPaymentMode = this.defaultFeesPaymentModesPerCountry[value.getAccount().getCountry().toLowerCase()])) {
+        this.feesPaymentMode = feesPaymentMode;
+      }
+      this.recipientChange.emit(value);
+    }
+  }
+
+  // otherAccount getter and setter
+  @Input()
+  get otherAccount(): Account {
+    return this._otherAccount;
+  }
+  @Output() otherAccountChange: EventEmitter<Account> = new EventEmitter();
+  set otherAccount(value: Account) {
+    this._otherAccount = value;
+    this.otherAccountChange.emit(value);
+  }
+
+  get fromCredit(): string {
+    return this._fromCredit;
+  }
+  @Output() fromCreditChange: EventEmitter<string> = new EventEmitter();
+  set fromCredit(value: string) {
+    value = value.replace(',', '.');
+    this._fromCredit = value;
+    this.calculateToCredit();
+    this.fromCreditChange.emit(this._fromCredit);
+  }
+
+  get toCredit(): string {
+    return this._toCredit;
+  }
+  @Output() toCreditChange: EventEmitter<string> = new EventEmitter();
+  set toCredit(value: string) {
+    value = value.replace(',', '.');
+    this._toCredit = value;
+    this.calculateFromCredit();
+    this.toCreditChange.emit(this._toCredit);
+  }
+
+  @Input()
+  get fromCurrency(): string {
+    return this._fromCurrency;
+  }
+  @Output() fromCurrencyChange: EventEmitter<string> = new EventEmitter();
+  set fromCurrency(value: string) {
+    this._fromCurrency = value;
+    this.fromCurrencyChange.emit(this._fromCurrency);
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
+    this.calculateToCredit();
+  }
+
+  @Input()
+  get toCurrency(): string {
+    return this._toCurrency;
+  }
+  @Output() toCurrencyChange: EventEmitter<string> = new EventEmitter();
+  set toCurrency(value: string) {
+    this._toCurrency = value;
+    this.toCurrencyChange.emit(this._toCurrency);
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
+    this.calculateToCredit();
+  }
+
+  constructor(exchangeRateService: ExchangeRateService,
+              currencySymbolsService: CurrencySymbolsService,
+              popupService: PopupService) {
     this.currencySymbolsService = currencySymbolsService;
+    this.popupService = popupService;
     this.currencyMap.set('EUR', 'eur');
     this.currencyMap.set('GBP', 'gbp');
     this.currencyMap.set('USD', 'usd');
@@ -48,114 +140,6 @@ export class TransferComponent {
     this.selectedRbAdvanced = 1;
     this.setSantanderFee('fast');
     this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
-  }
-
-  // otherAccount getter and setter
-  get otherAccount(): Account {
-    return this._otherAccount;
-  }
-  set otherAccount(value: Account) {
-    this._otherAccount = value;
-  }
-
-  // account getter and setter
-  @Input('account')
-  get account(): Account {
-    return this._account;
-  }
-  set account(value: Account) {
-    this._account = value;
-    if (!!value) {
-      this.fromCurrency = value.getCurrencyType();
-    }
-  }
-
-  // recipient getter and setter
-  @Input('recipient')
-  get recipient(): Recipient {
-    return this._recipient;
-  }
-  set recipient(value: Recipient) {
-    this._recipient = value;
-    if (!!value) {
-      console.log(value);
-      console.log(value.getAccount());
-      this.toCurrency = value.getAccount().getCurrencyType();
-      let feesPaymentMode;
-      if ((feesPaymentMode = this.defaultFeesPaymentModesPerCountry[value.getAccount().getCountry().toLowerCase()])) {
-        this.feesPaymentMode = feesPaymentMode;
-      }
-    }
-  }
-
-  // fromCurrency getter and setter
-  get fromCurrency(): string {
-    return this._fromCurrency;
-  }
-  set fromCurrency(value: string) {
-    this._fromCurrency = value.toUpperCase();
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
-      this.calculateToCredit();
-    });
-  }
-
-  // toCurrency getter and setter
-  get toCurrency(): string {
-    return this._toCurrency;
-  }
-  set toCurrency(value: string) {
-    this._toCurrency = value.toUpperCase();
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
-      this.calculateToCredit();
-    });
-  }
-
-  // fromCredit getter and setter
-  get fromCredit(): string {
-    if (!this._fromCredit) {
-      return '';
-    } else {
-      return this.currencySymbolsService.getSymbolFor(this._fromCurrency) + this._fromCredit;
-    }
-  }
-  set fromCredit(value: string) {
-    value = value.trim();
-    if (!!value && value.length > 0 && !isNumeric(value)) {
-      value = value.substr(1, value.length - 1);
-    }
-    if (!value || value.length === 0) {
-      value = '';
-    }
-    const previousCredit = this._fromCredit;
-    this._fromCredit = !this._fromCredit ? ' ' : this._fromCredit + ' ';
-    setTimeout(() => {
-      this._fromCredit = (!isNumeric(value) && value !== '' ? previousCredit.trim() : value);
-      this.calculateToCredit();
-    }, 1);
-  }
-
-  // toCredit getter and setter
-  get toCredit(): string {
-    if (!this._toCredit) {
-      return '';
-    } else {
-      return this.currencySymbolsService.getSymbolFor(this._toCurrency) + this._toCredit;
-    }
-  }
-  set toCredit(value: string) {
-    value = value.trim();
-    if (!!value && value.length > 0 && !isNumeric(value)) {
-      value = value.substr(1, value.length - 1);
-    }
-    if (!value || value.length === 0) {
-      value = '';
-    }
-    const previousCredit = this._toCredit;
-    this._toCredit = !this._toCredit ? ' ' : this._toCredit + ' ';
-    setTimeout(() => {
-      this._toCredit = (!isNumeric(value) && value !== '' ? previousCredit.trim() : value);
-      this.calculateFromCredit();
-    }, 1);
   }
 
   setExchangeRateFromToCurrency(from: string, to: string): Promise<any> {
@@ -173,12 +157,14 @@ export class TransferComponent {
 
   calculateToCredit() {
     this._toCredit = !this._fromCredit  ? this._fromCredit  :
-      (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(2).toString();
+      (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(4).toString();
+    this.toCreditChange.emit(this._toCredit);
   }
 
   calculateFromCredit() {
     this._fromCredit = !this._toCredit  ? this._toCredit  :
-      (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(2).toString();
+      (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(4).toString();
+    this.fromCreditChange.emit(this._fromCredit);
   }
 
   isPaymentTypeRbSelected(id: number): boolean {
@@ -191,5 +177,9 @@ export class TransferComponent {
 
   toggleAdvancedOptions() {
     this.showingAdvancedOptions = !this.showingAdvancedOptions;
+  }
+
+  onReviewTransfer() {
+    this.popupService.changeOption('review');
   }
 }

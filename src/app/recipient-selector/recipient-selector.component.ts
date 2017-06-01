@@ -3,8 +3,8 @@ import {
   AfterViewChecked, AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, Output,
   ViewChild
 } from '@angular/core';
-import { RECIPIENTS } from '../../mocks/recipient.mock';
-import { Recipient } from '../../models/recipient';
+import { PAYEES } from '../../mocks/payee.mock';
+import { Payee } from '../../models/payee';
 
 @Component({
   selector: 'app-recipient-selector',
@@ -12,12 +12,12 @@ import { Recipient } from '../../models/recipient';
   styleUrls: ['./recipient-selector.component.css']
 })
 export class RecipientSelectorComponent implements AfterContentChecked {
-  recipients: Recipient[] = RECIPIENTS;
+  recipients: Payee[] = PAYEES;
   listWidth: number;
   listContainerWidth: number;
   listContainerOffset = 0;
   _isScrollNeeded: boolean;
-  _selectedRecipient: Recipient;
+  _selectedRecipient: Payee;
   @ViewChild('recipientListContainer') recipientListContainer: ElementRef;
   @ViewChild('recipientList') recipientList: ElementRef;
 
@@ -40,11 +40,11 @@ export class RecipientSelectorComponent implements AfterContentChecked {
 
   // selectedRecipient setter and getter
   @Input()
-  get selectedRecipient(): Recipient {
+  get selectedRecipient(): Payee {
     return this._selectedRecipient;
   }
-  @Output() selectedRecipientChange: EventEmitter<Recipient> = new EventEmitter();
-  set selectedRecipient(recipient: Recipient) {
+  @Output() selectedRecipientChange: EventEmitter<Payee> = new EventEmitter();
+  set selectedRecipient(recipient: Payee) {
     this._selectedRecipient = recipient;
     this.selectedRecipientChange.emit(this._selectedRecipient);
   }
@@ -63,7 +63,7 @@ export class RecipientSelectorComponent implements AfterContentChecked {
     this.isScrollNeeded = this.listWidth > this.listContainerWidth;
   }
 
-  onSubmitNewRecipient(recipient: Recipient) {
+  onSubmitNewRecipient(recipient: Payee) {
     this.selectedRecipient = recipient;
   }
 

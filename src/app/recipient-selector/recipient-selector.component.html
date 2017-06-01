@@ -6,9 +6,9 @@
 
     <div #recipientListContainer class="recipient-list-container">
       <div #recipientList class="recipient-list">
-        <app-recipient class="recipient" *ngFor="let recipient of recipients"
+        <app-payee class="recipient" *ngFor="let recipient of recipients"
                    [selected]="selectedRecipient === recipient"
-                   [recipient]="recipient" (click)="selectedRecipient = recipient"></app-recipient>
+                   [recipient]="recipient" (click)="selectedRecipient = recipient"></app-payee>
       </div>
     </div>
 

@@ -47,41 +47,49 @@ input.inverted {
 input.inverted::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color: white;
 }
+
 input.inverted:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
   color: white;
   opacity:  1;
 }
+
 input.inverted::-moz-placeholder { /* Mozilla Firefox 19+ */
   color: white;
   opacity:  1;
 }
+
 input.inverted:-ms-input-placeholder { /* Internet Explorer 10-11 */
   color: white;
 }
+
 input.inverted:-ms-input-placeholder { /* Microsoft Edge */
   color: white;
 }
 
 input.inverted:hover, input.inverted:focus {
   background: white !important;
-  color: red !important;
+  color: black !important;
   outline: 3px solid red;
 }
 
 input.inverted:hover::-webkit-input-placeholder, input.inverted:focus::-webkit-input-placeholder { /* WebKit, Blink, Edge */
   color: red;
 }
+
 input.inverted:hover:-moz-placeholder, input.inverted:focus:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
   color: red;
   opacity:  1;
 }
+
 input.inverted:hover::-moz-placeholder, input.inverted:focus::-moz-placeholder { /* Mozilla Firefox 19+ */
   color: red;
   opacity:  1;
 }
+
 input.inverted:hover:-ms-input-placeholder, input.inverted:focus:-ms-input-placeholder { /* Internet Explorer 10-11 */
   color: red;
 }
+
 input.inverted:hover:-ms-input-placeholder, input.inverted:focus:-ms-input-placeholder { /* Microsoft Edge */
   color: red;
 }
@@ -297,6 +305,44 @@ span {
   padding-left: 10px;
 }
 
+.input-validation-parent {
+  position: relative;
+}
+
+.input-validation {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.input-validation::after {
+  display: block;
+  position: absolute;
+  background: teal;
+  color: white;
+  padding: 2px 10px;
+  right: 0;
+  top: 0;
+  pointer-events: none;
+  border-radius: 0 0 0 5px;
+  transition: transform 200ms, border-radius 200ms, padding 200ms;
+}
+
+input:hover + .input-validation::after, input:focus + .input-validation::after {
+  transform: translateY(-100%);
+  border-radius: 5px 5px 0 0;
+  padding: 1px 10px;
+}
+
+.input-validation-empty.input-validation::after {
+  content: "This field should not be left empty!";
+}
+
+.input-validation-enter.input-validation::after {
+  content: "Please fill in this field before continuing!";
+}
+
 /* Mobile devices */
 @media only screen and (max-width : 480px) {
   .card {
@@ -309,5 +355,12 @@ span {
   .radio-button {
     display: block !important;
     margin-top: 10px !important;
+  }
+  .input-validation-empty.input-validation::after {
+    content: "Please fill!";
+  }
+
+  .input-validation-enter.input-validation::after {
+    content: "This is required!";
   }
 }

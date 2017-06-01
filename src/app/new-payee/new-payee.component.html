@@ -1,0 +1,112 @@
+<div class="content">
+
+  <div class="form-container">
+    <div class="flags">
+      <app-flags-dropdown [(selectedKey)]="selectedCountry" [flagType]="'country'" [keysAndFlagsMap]="countryFlags"></app-flags-dropdown>
+    </div>
+
+    <div class="horizontal-sm">
+      <div [appSmoothFade]="hasSelection()">
+        <div class="vertical-input important-input" *ngIf="hasSelection()">
+          <div class="input input-validation-parent">
+            <input [(ngModel)]="name" type="text" placeholder="Payee's full name">
+            <div style="margin-bottom: 10px" class="input-validation" [class.input-validation-empty]="payeeNameValidationError"></div>
+          </div>
+          <input [(ngModel)]="address" type="text" placeholder="Payee's address">
+          <div class="check-box">
+            <input [(ngModel)]="save" style="display:inline-block;width:auto" type="checkbox" id="save-for-later">
+            <span class="glyphicon glyphicon-ok"></span>
+            <label for="save-for-later">Save for future payments</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="horizontal-sm">
+      <div [appSmoothFade]="isSelected('Spain')">
+        <div *ngIf="isSelected('Spain')">
+          <div class="horizontal-input important-input">
+            <div class="input input-validation-parent">
+              <input [(ngModel)]="iban" name="iban" placeholder="IBAN of Account">
+              <div class="input-validation" [class.input-validation-enter]="ibanValidationError"></div>
+            </div>
+            <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('United Kingdom')">
+        <div *ngIf="isSelected('United Kingdom')">
+          <div class="horizontal-input important-input">
+            <div style="margin-bottom: 10px" class="input-validation-parent">
+              <input [(ngModel)]="sortCode" name="sort-code" placeholder="Sort Code">
+              <div class="input-validation" [class.input-validation-enter]="sortCodeValidationError"></div>
+            </div>
+            <div class="input input-validation-parent">
+              <input [(ngModel)]="accountNumber" name="account-number" placeholder="Account Number">
+              <div class="input-validation" [class.input-validation-enter]="accountNumberValidationError"></div>
+            </div>
+            <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check Account</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('India')">
+        <div *ngIf="isSelected('India')">
+          <div class="horizontal-input important-input">
+            <div class="input input-validation-parent">
+              <input [(ngModel)]="iban" name="iban" placeholder="IBAN of Account">
+              <div class="input-validation" [class.input-validation-enter]="ibanValidationError"></div>
+            </div>
+            <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check IBAN</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div [appSmoothFade]="isSelected('United States')">
+        <div *ngIf="isSelected('United States')">
+          <div class="horizontal-input important-input">
+            <div class="input input-validation-parent">
+              <input [(ngModel)]="routingNumber" name="routing-number" placeholder="Routing Number">
+              <div class="input-validation" [class.input-validation-enter]="routingNumberValidationError"></div>
+            </div>
+            <div class="input input-validation-parent">
+              <input [(ngModel)]="accountNumber" name="account-number" placeholder="Account Number">
+              <div class="input-validation" [class.input-validation-enter]="accountNumberValidationError"></div>
+            </div>
+            <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
+            <button [class.inverted]="ibanValid" type="button" (click)="checkIban()">Check Account</button>
+            <button class="submit-button"
+                    [class.deactivated]="!ibanValid"
+                    type="button" style="margin-top: 20px;"
+                    *ngIf="hasSelection()" (click)="onSubmit()">
+              Continue
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
