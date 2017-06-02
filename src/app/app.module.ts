@@ -24,6 +24,9 @@ import { PopupOptionComponent } from './popup-option/popup-option.component';
 import { TransactionReviewComponent } from './transaction-review/transaction-review.component';
 import { StepManagerComponent } from './step-manager/step-manager.component';
 import {StepManagerService} from './step-manager.service';
+import { RbComponent } from './rb/rb.component';
+import { CbComponent } from './cb/cb.component';
+import { RbGroupComponent } from './rb-group/rb-group.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +46,10 @@ import {StepManagerService} from './step-manager.service';
     PopupComponent,
     PopupOptionComponent,
     TransactionReviewComponent,
-    StepManagerComponent
+    StepManagerComponent,
+    RbComponent,
+    CbComponent,
+    RbGroupComponent
   ],
   imports: [
     BrowserModule,

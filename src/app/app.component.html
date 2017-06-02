@@ -32,10 +32,10 @@
         <app-tab [title]="'Fill in the Form and Continue'">
           <app-transfer [(account)]="account"
                         [(recipient)]="recipient"
-                        (fromCreditChange)="updateFromCredit($event)"
-                        (toCreditChange)="updateToCredit($event)"
-                        (fromCurrencyChange)="updateFromCurrency($event)"
-                        (toCurrencyChange)="updateToCurrency($event)"></app-transfer>
+                        (fromCreditChange)="transactionFromCreditChange($event)"
+                        (toCreditChange)="transactionToCreditChange($event)"
+                        (fromCurrencyChange)="transactionFromCurrencyChange($event)"
+                        (toCurrencyChange)="transactionToCurrencyChange($event)"></app-transfer>
         </app-tab>
       </app-tabs-manager>
     </app-step>

@@ -46,19 +46,19 @@ export class AppComponent  {
     this.stepManagerService = stepManagerService;
   }
 
-  updateFromCredit(fromCredit: string) {
+  transactionFromCreditChange(fromCredit: string) {
     this.transactionFromCredit = fromCredit;
   }
 
-  updateToCredit(toCredit: string) {
+  transactionToCreditChange(toCredit: string) {
     this.transactionToCredit = toCredit;
   }
 
-  updateFromCurrency(fromCurrency: string) {
+  transactionFromCurrencyChange(fromCurrency: string) {
     this.transactionFromCurrency = fromCurrency;
   }
 
-  updateToCurrency(toCurrency: string) {
+  transactionToCurrencyChange(toCurrency: string) {
     this.transactionToCurrency = toCurrency;
   }
 }

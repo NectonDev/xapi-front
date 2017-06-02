@@ -22,13 +22,13 @@ export class TransferComponent {
   private _toCredit: string;
   private _fromCurrency: string;
   private _toCurrency: string;
+  private _selectionIndex: number;
+  private _selectedPaymentTypeIndex: number;
   feesPaymentMode = 'sender';
   currencyMap = new Map();
   eta: string;
   santanderFee: number;
   exchangeRate: number;
-  selectedRbPaymentType: number;
-  selectedRbAdvanced: number;
   showingAdvancedOptions = false;
   exchangeRateService: ExchangeRateService;
   currencySymbolsService: CurrencySymbolsService;
@@ -127,6 +127,15 @@ export class TransferComponent {
     });
   }
 
+  // selectedPaymentTypeIndex getter and setter
+  get selectedPaymentTypeIndex(): number {
+    return this._selectedPaymentTypeIndex;
+  }
+  set selectedPaymentTypeIndex(value: number) {
+    this._selectedPaymentTypeIndex = value;
+    this.setSantanderFee(value === 0 ? 'fast' : 'cheap');
+  }
+
   constructor(exchangeRateService: ExchangeRateService,
               currencySymbolsService: CurrencySymbolsService,
               popupService: PopupService) {
@@ -138,8 +147,7 @@ export class TransferComponent {
     this.exchangeRateService = exchangeRateService;
     this.fromCurrency = 'EUR';
     this.toCurrency = 'GBP';
-    this.selectedRbPaymentType = 1;
-    this.selectedRbAdvanced = 1;
+    this.selectedPaymentTypeIndex = 0;
     this.setSantanderFee('fast');
     this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
   }
@@ -167,14 +175,6 @@ export class TransferComponent {
     this._fromCredit = !this._toCredit  ? this._toCredit  :
       (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(4).toString();
     this.fromCreditChange.emit(this._fromCredit);
-  }
-
-  isPaymentTypeRbSelected(id: number): boolean {
-    return this.selectedRbPaymentType === id;
-  }
-
-  isAdvancedRbSelected(id: number): boolean {
-    return this.selectedRbAdvanced === id;
   }
 
   toggleAdvancedOptions() {

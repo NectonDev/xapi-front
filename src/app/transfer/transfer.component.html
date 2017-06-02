@@ -1,38 +1,26 @@
 <div class="content">
-
   <div class="card">
-
     <div class="section">
       <div class="payment-type-container">
         <span>Payment type:</span>
-        <div class="radio-button" (click)="selectedRbPaymentType = 1;setSantanderFee('fast')"
-             [class.selected]="isPaymentTypeRbSelected(1)"
-             [class.deselected]="!isPaymentTypeRbSelected(1)">
-          <input type="radio" name="payment-type" value="fast" id="fast-radio">
-          <div class="dot"></div>
-          <label for="fast-radio">fast</label>
-        </div>
-
-        <div class="radio-button" (click)="selectedRbPaymentType = 2;setSantanderFee('cheap')"
-             [class.selected]="isPaymentTypeRbSelected(2)"
-             [class.deselected]="!isPaymentTypeRbSelected(2)">
-          <input type="radio" name="payment-type" value="cheap" id="cheap-radio">
-          <div class="dot"></div>
-          <label for="cheap-radio">cheap</label>
-        </div>
+        <app-rb-group [(selectionIndex)]="selectedPaymentTypeIndex">
+          <app-rb [title]="'fast'"></app-rb>
+          <app-rb [title]="'cheap'"></app-rb>
+        </app-rb-group>
       </div>
     </div>
 
     <div class="section">
       <div class="money-input" style="margin-top: 10px">
         <input type="text" name="from-credit"
-               placeholder="{{currencySymbolsService.getSymbolFor(fromCurrency)}}0.00 (Original amount)"
+               placeholder="{{currencySymbolsService.getSymbolFor(fromCurrency)}}0.0000 (Original amount)"
                [(ngModel)]="fromCredit">
         <div class="currency" style="border:none; border-bottom: 1px solid lightgrey">
           <app-flags-dropdown [(selectedKey)]="fromCurrency"
                               [flagType]="'currency'"
                               [keysAndFlagsMap]="currencyMap"
-                              [allowSelection]="false"></app-flags-dropdown>
+                              [allowSelection]="false">
+          </app-flags-dropdown>
         </div>
       </div>
 
@@ -49,12 +37,13 @@
 
       <div class="money-input">
         <input class="inverted" type="text" name="to-credit"
-               placeholder="{{currencySymbolsService.getSymbolFor(toCurrency)}}0.00 (Amount after conversion and fees)"
+               placeholder="{{currencySymbolsService.getSymbolFor(toCurrency)}}0.0000 (To be paid)"
                [(ngModel)]="toCredit">
         <div class="currency">
           <app-flags-dropdown [(selectedKey)]="toCurrency"
                               [flagType]="'currency'"
-                              [keysAndFlagsMap]="currencyMap"></app-flags-dropdown>
+                              [keysAndFlagsMap]="currencyMap">
+          </app-flags-dropdown>
         </div>
       </div>
 
@@ -94,6 +83,7 @@
               </label>
             </div>
           </div>
+
           <div [appSmoothFade]="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && showingAdvancedOptions && useFeesAccount" style="margin-top: 10px">
             <div *ngIf="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && showingAdvancedOptions && useFeesAccount"
                  style="display: block;">
@@ -108,5 +98,4 @@
       <button type="button" (click)="onReviewTransfer()">Review your transfer</button>
     </div>
   </div>
-
 </div>

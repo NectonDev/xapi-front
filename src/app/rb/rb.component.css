@@ -1,0 +1,46 @@
+.content, .content * {
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  pointer-events: all;
+  color: gray;
+  border-color: gray;
+  transition: color 200ms, border-color 200ms;
+}
+
+.content:hover * {
+  color: darkslategray;
+  border-color: darkslategray;
+}
+
+.content.selected * {
+  color: red;
+  border-color: red;
+}
+
+.dot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+  border: 2px solid red;
+  border-radius: 100%;
+}
+
+.dot::before {
+  display: block;
+  position: absolute;
+  content: '';
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  border-radius: 100%;
+  transition: background 200ms;
+}
+
+.content.selected .dot::before {
+  background: red;
+}
