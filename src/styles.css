@@ -188,69 +188,6 @@ span {
   color: darkslategray !important;
 }
 
-.radio-button {
-  position: relative;
-  margin-left: 10px !important;
-  transition: color 200ms;
-}
-
-.radio-button * {
-  cursor: pointer;
-}
-
-.radio-button.deselected {
-  color: gray;
-}
-
-.radio-button.deselected:hover {
-  color: darkslategray;
-}
-
-.radio-button input {
-  display: none !important;
-}
-
-.radio-button .dot {
-  display: inline-block;
-  position: relative;
-  width: 20px;
-  height: 20px;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
-  border-radius: 100%;
-  transition: border 200ms;
-}
-
-.radio-button.selected .dot {
-  border: 2px solid red;
-}
-
-.radio-button.deselected .dot {
-  border: 2px solid gray;
-}
-
-.radio-button.deselected:hover .dot {
-  border: 2px solid darkslategray;
-}
-
-.radio-button .dot::before {
-  display: block;
-  position: absolute;
-  content: "";
-  width: 10px;
-  height: 10px;
-  left: 50%;
-  top: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  background: none;
-  border-radius: 100%;
-  transition: background 200ms;
-}
-
-.radio-button.selected .dot::before {
-  background: red;
-}
-
 .card {
   display: inline-block;
   background: white !important;
