@@ -3,49 +3,43 @@
 </div>
 
 <div class="workflow">
-  <app-step [stepIndex]="stepIndex"
-        [progressIndex]="progressIndex"
-        [title]="'Send money to:'"
-        [selection]="recipient ? recipient.getName() : undefined"
-        (stepClick)="onStepClick($event)">
-    <app-tabs-manager>
-      <app-tab [title]="'New Payee'">
-        <app-new-payee (submitNewRecipient)="recipient = $event"></app-new-payee>
-      </app-tab>
+  <app-step-manager>
+    <!--STEP ONE: PAYEE SELECTION-->
+    <app-step [name]="'payeeSelect'" [title]="'Send money to:'" [selection]="recipient ? recipient.getName() : undefined">
+      <app-tabs-manager>
+        <app-tab [title]="'New Payee'">
+          <app-new-payee (submitNewRecipient)="recipient = $event"></app-new-payee>
+        </app-tab>
 
-      <app-tab [title]="'Existing Payee'">
-        <app-recipient-selector [(selectedRecipient)]="recipient"></app-recipient-selector>
-      </app-tab>
-    </app-tabs-manager>
-  </app-step>
+        <app-tab [title]="'Existing Payee'">
+          <app-recipient-selector [(selectedRecipient)]="recipient"></app-recipient-selector>
+        </app-tab>
+      </app-tabs-manager>
+    </app-step>
 
-  <app-step [stepIndex]="stepIndex"
-        [progressIndex]="progressIndex"
-        [title]="'Pay with:'"
-        [selection]="account ? account.getName() : undefined"
-        (stepClick)="onStepClick($event)">
-    <app-tabs-manager>
-      <app-tab [title]="'Select an Account'">
-        <app-account-selector [(selectedAccount)]="account"></app-account-selector>
-      </app-tab>
-    </app-tabs-manager>
-  </app-step>
+    <!--STEP TWO: ACCOUNT SELECTION-->
+    <app-step [name]="'accountSelect'" [title]="'Pay with:'" [selection]="account ? account.getName() : undefined">
+      <app-tabs-manager>
+        <app-tab [title]="'Select an Account'">
+          <app-account-selector [(selectedAccount)]="account"></app-account-selector>
+        </app-tab>
+      </app-tabs-manager>
+    </app-step>
 
-  <app-step [stepIndex]="stepIndex"
-        [progressIndex]="progressIndex"
-        [title]="'Your transfer'"
-        (stepClick)="onStepClick($event)">
-    <app-tabs-manager>
-      <app-tab [title]="'Fill in the Form and Continue'">
-        <app-transfer [(account)]="account"
-                      [(recipient)]="recipient"
-                      (fromCreditChange)="updateFromCredit($event)"
-                      (toCreditChange)="updateToCredit($event)"
-                      (fromCurrencyChange)="updateFromCurrency($event)"
-                      (toCurrencyChange)="updateToCurrency($event)"></app-transfer>
-      </app-tab>
-    </app-tabs-manager>
-  </app-step>
+    <!--STEP THREE: TRANSACTION FORM-->
+    <app-step [name]="'formFill'" [title]="'Your transfer'">
+      <app-tabs-manager>
+        <app-tab [title]="'Fill in the Form and Continue'">
+          <app-transfer [(account)]="account"
+                        [(recipient)]="recipient"
+                        (fromCreditChange)="updateFromCredit($event)"
+                        (toCreditChange)="updateToCredit($event)"
+                        (fromCurrencyChange)="updateFromCurrency($event)"
+                        (toCurrencyChange)="updateToCurrency($event)"></app-transfer>
+        </app-tab>
+      </app-tabs-manager>
+    </app-step>
+  </app-step-manager>
 </div>
 
 <app-popup>

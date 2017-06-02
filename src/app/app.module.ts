@@ -22,6 +22,8 @@ import { PopupComponent } from './popup/popup.component';
 import { PopupService } from './popup.service';
 import { PopupOptionComponent } from './popup-option/popup-option.component';
 import { TransactionReviewComponent } from './transaction-review/transaction-review.component';
+import { StepManagerComponent } from './step-manager/step-manager.component';
+import {StepManagerService} from './step-manager.service';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { TransactionReviewComponent } from './transaction-review/transaction-rev
     TabComponent,
     PopupComponent,
     PopupOptionComponent,
-    TransactionReviewComponent
+    TransactionReviewComponent,
+    StepManagerComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +53,8 @@ import { TransactionReviewComponent } from './transaction-review/transaction-rev
   ],
   providers: [
     CurrencySymbolsService,
-    PopupService
+    PopupService,
+    StepManagerService
   ],
   bootstrap: [AppComponent]
 })

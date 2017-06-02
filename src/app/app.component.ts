@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Account } from '../models/account';
 import { Payee } from '../models/payee';
-import { StepComponent } from './step/step.component';
 import {PopupService} from './popup.service';
+import {StepManagerService} from './step-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,10 @@ import {PopupService} from './popup.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent  {
+  popupService: PopupService;
+  stepManagerService: StepManagerService;
   _recipient: Payee;
   _account: Account;
-  stepIndex = 1;
-  progressIndex = 1;
-  popupService: PopupService;
   transactionFromCredit: string;
   transactionToCredit: string;
   transactionFromCurrency: string;
@@ -27,7 +26,7 @@ export class AppComponent  {
   set recipient(value: Payee) {
     this._recipient = value;
     if (!!value) {
-      this.doProgress(1);
+      this.stepManagerService.doProgress('accountSelect');
     }
   }
 
@@ -38,12 +37,13 @@ export class AppComponent  {
   set account(value: Account) {
     this._account = value;
     if (!!value) {
-      this.doProgress(2);
+      this.stepManagerService.doProgress('formFill');
     }
   }
 
-  constructor(popupService: PopupService) {
+  constructor(popupService: PopupService, stepManagerService: StepManagerService) {
     this.popupService = popupService;
+    this.stepManagerService = stepManagerService;
   }
 
   updateFromCredit(fromCredit: string) {
@@ -60,18 +60,5 @@ export class AppComponent  {
 
   updateToCurrency(toCurrency: string) {
     this.transactionToCurrency = toCurrency;
-  }
-
-  doProgress(step: number): void {
-    if (this.progressIndex === step) {
-      this.progressIndex++;
-    }
-    this.onStepClick(step + 1);
-  }
-
-  onStepClick(step: number): void {
-    if (step <= this.progressIndex && step <= StepComponent.STEP_COUNT) {
-      this.stepIndex = step;
-    }
   }
 }
