@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, Output, ElementRef, ViewChild} from '@angular/core';
+
 @Component({
   selector: 'app-step',
   templateUrl: './step.component.html',
@@ -11,7 +12,7 @@ export class StepComponent {
   @Input() stepIndex: number;
   @Input() name: string;
   @Input() title: string;
-  @Input() selection: string;
+  @Input() selectedProperties: StepSelection[];
   @ViewChild('content') _contentEl: ElementRef;
   @Output() stepClick: EventEmitter<any> = new EventEmitter();
 
@@ -33,8 +34,8 @@ export class StepComponent {
   public getName(): string {
     return this.name;
   }
+}
 
-  hasSelection(): boolean {
-    return this.selection !== undefined && this.selection.length > 0;
-  }
+export class StepSelection {
+  constructor(public propertyName: string, public propertyValue: string) {}
 }

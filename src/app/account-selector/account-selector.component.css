@@ -35,8 +35,7 @@ span {
 }
 
 span:hover {
-  color: white;
-  background: red;
+  color: gray;
 }
 
 .account-list-container + .glyphicon-container span {

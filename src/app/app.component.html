@@ -5,37 +5,33 @@
 <div class="workflow">
   <app-step-manager>
     <!--STEP ONE: PAYEE SELECTION-->
-    <app-step [name]="'payeeSelect'" [title]="'Send money to:'" [selection]="recipient ? recipient.getName() : undefined">
+    <app-step [name]="'payeeSelect'" [title]="'Send money to:'" [selectedProperties]="payeeSelectedProperties">
       <app-tabs-manager>
-        <app-tab [title]="'New Payee'">
-          <app-new-payee (submitNewRecipient)="recipient = $event"></app-new-payee>
+        <app-tab [title]="'Create a new payee'">
+          <app-new-payee (submitNewRecipient)="payee = $event"></app-new-payee>
         </app-tab>
 
-        <app-tab [title]="'Existing Payee'">
-          <app-recipient-selector [(selectedRecipient)]="recipient"></app-recipient-selector>
+        <app-tab [title]="'Select an existing payee'">
+          <app-recipient-selector [(selectedRecipient)]="payee"></app-recipient-selector>
         </app-tab>
       </app-tabs-manager>
     </app-step>
 
     <!--STEP TWO: ACCOUNT SELECTION-->
-    <app-step [name]="'accountSelect'" [title]="'Pay with:'" [selection]="account ? account.getName() : undefined">
+    <app-step [name]="'accountSelect'" [title]="'Pay with:'" [selectedProperties]="accountSelectedProperties">
       <app-tabs-manager>
-        <app-tab [title]="'Select an Account'">
+        <app-tab [title]="'Select an account to pay with'">
           <app-account-selector [(selectedAccount)]="account"></app-account-selector>
         </app-tab>
       </app-tabs-manager>
     </app-step>
 
     <!--STEP THREE: TRANSACTION FORM-->
-    <app-step [name]="'formFill'" [title]="'Your transfer'">
+    <app-step [name]="'formFill'" [title]="'Set up your transfer'" [selectedProperties]="formSelectedProperties">
       <app-tabs-manager>
-        <app-tab [title]="'Fill in the Form and Continue'">
+        <app-tab [title]="'Create the transaction'">
           <app-transfer [(account)]="account"
-                        [(recipient)]="recipient"
-                        (fromCreditChange)="transactionFromCreditChange($event)"
-                        (toCreditChange)="transactionToCreditChange($event)"
-                        (fromCurrencyChange)="transactionFromCurrencyChange($event)"
-                        (toCurrencyChange)="transactionToCurrencyChange($event)"></app-transfer>
+                        [(recipient)]="payee"></app-transfer>
         </app-tab>
       </app-tabs-manager>
     </app-step>
@@ -43,17 +39,18 @@
 </div>
 
 <app-popup>
-  <app-popup-option [name]="'review'" [title]="'Please check the data below'">
+  <app-popup-option [name]="'review'" [title]="'Please review your transaction'">
     <app-transaction-review [fromAccount]="account"
-                            [toPayee]="recipient"
-                            [fromCredit]="transactionFromCredit"
-                            [toCredit]="transactionToCredit"
-                            [fromCurrency]="transactionFromCurrency"
-                            [toCurrency]="transactionToCurrency"></app-transaction-review>
-    <button type="button" (click)="popupService.changeOption('check')">Data is correct</button>
+                            [toPayee]="payee"
+                            [fromCredit]="transactionTransferAmount"
+                            [toCredit]="transactionFinalAmount"></app-transaction-review>
+    <button type="button" (click)="popupService.changeOption('check')">
+      Everything is correct
+      <span class="glyphicon glyphicon-arrow-right"></span>
+    </button>
   </app-popup-option>
   <app-popup-option [name]="'check'" [title]="'Are you sure?'">
-    <button type="button" (click)="popupService.changeOption('review')">Go back</button>
-    <button type="button" (click)="popupService.changeVisibility(false)">Perform transaction</button>
+    <button type="button" (click)="popupService.changeVisibility(false)">I need to change something</button>
+    <button type="button" (click)="popupService.changeVisibility(false)">Place transaction</button>
   </app-popup-option>
 </app-popup>

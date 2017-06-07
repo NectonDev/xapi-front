@@ -9,6 +9,12 @@ body {
   overflow-x: hidden;
 }
 
+select {
+  padding: 5px 10px;
+  color: black;
+  border: 1px solid lightgrey;
+}
+
 .non-selectable, .non-selectable * {
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -149,10 +155,15 @@ label, label * {
   display: inline-block !important;
   font-weight: 100 !important;
   cursor: pointer !important;
+  color: gray !important;
 }
 
 span {
   cursor: default;
+}
+
+* .check-box {
+  margin-top: 10px;
 }
 
 .check-box {

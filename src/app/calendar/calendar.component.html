@@ -1,0 +1,65 @@
+<div class="content" [class.showing-popup]="isShowingPopup" (mouseover)="isDraggingMouse = true" (mouseleave)="isDraggingMouse = false">
+  <div class="strip">
+    <div class="date-cell">
+      <span class="value">{{selectedDate.getDate()}}</span>
+      <span class="title">day</span>
+    </div>
+
+    <div class="date-cell">
+      <span class="value">{{selectedDate.getMonth() + 1}}</span>
+      <span class="title">month</span>
+    </div>
+
+    <div class="date-cell">
+      <span class="value">{{selectedDate.getFullYear()}}</span>
+      <span class="title">year</span>
+    </div>
+
+    <div class="calendar-glyphicon" (mousedown)="toggleIsShowingPopup()">
+      <span class="glyphicon glyphicon-calendar"></span>
+    </div>
+  </div>
+  <div class="popup" *ngIf="isShowingPopup">
+    <div class="top">
+      <h1>
+        <span class="arrow arrow-left glyphicon glyphicon-chevron-left" (click)="moveYearRelative(-1)"></span>
+        <span class="arrow arrow-right glyphicon glyphicon-chevron-right" (click)="moveYearRelative(1)"></span>
+        <span>{{getYear()}}</span>
+      </h1>
+
+      <h2>
+        <span class="arrow arrow-left glyphicon glyphicon-chevron-left" (click)="moveMonthRelative(-1)"></span>
+        <span class="arrow arrow-right glyphicon glyphicon-chevron-right" (click)="moveMonthRelative(1)"></span>
+        {{getMonthName()}}
+      </h2>
+
+      <ul class="days-titles">
+        <li *ngFor="let day of getDayNames()" class="day-header">{{day}}</li>
+      </ul>
+    </div>
+
+    <div class="bottom">
+      <ul class="days-table">
+        <li *ngFor="let day of getStartingDays()">
+          <div class="day-wrapper starting-day">
+            <span>{{day}}</span>
+          </div>
+        </li>
+
+        <li *ngFor="let day of getDaysOfMonth()"
+            (click)="onDayClick(day)">
+          <div class="day-wrapper" [class.selected-day]="isDaySelected(day)">
+            <span>{{day}}</span>
+          </div>
+        </li>
+
+        <li *ngFor="let day of getEndingDays()">
+          <div class="day-wrapper starting-day">
+            <span>{{day}}</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+

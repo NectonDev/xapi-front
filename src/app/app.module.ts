@@ -23,10 +23,14 @@ import { PopupService } from './popup.service';
 import { PopupOptionComponent } from './popup-option/popup-option.component';
 import { TransactionReviewComponent } from './transaction-review/transaction-review.component';
 import { StepManagerComponent } from './step-manager/step-manager.component';
-import {StepManagerService} from './step-manager.service';
+import { StepManagerService } from './step-manager.service';
 import { RbComponent } from './rb/rb.component';
 import { CbComponent } from './cb/cb.component';
 import { RbGroupComponent } from './rb-group/rb-group.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { ExpandableBoxComponent } from './expandable-box/expandable-box.component';
+import { StepSelectionComponent } from './step-selection/step-selection.component';
+import { TransactionService } from './transaction.service';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,10 @@ import { RbGroupComponent } from './rb-group/rb-group.component';
     StepManagerComponent,
     RbComponent,
     CbComponent,
-    RbGroupComponent
+    RbGroupComponent,
+    CalendarComponent,
+    ExpandableBoxComponent,
+    StepSelectionComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +67,8 @@ import { RbGroupComponent } from './rb-group/rb-group.component';
   providers: [
     CurrencySymbolsService,
     PopupService,
-    StepManagerService
+    StepManagerService,
+    TransactionService
   ],
   bootstrap: [AppComponent]
 })

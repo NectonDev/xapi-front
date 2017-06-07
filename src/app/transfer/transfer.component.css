@@ -43,14 +43,6 @@
   -moz-box-shadow: none !important;
   box-shadow: none !important;
 }
-
-.advanced-options-list select {
-  padding: 5px 10px;
-  margin-left: 10px;
-  color: black;
-  border: 1px solid lightgrey;
-}
-
 .advanced-options-list .check-box {
   display: block !important;
   margin: 0;
@@ -77,7 +69,6 @@ input {
 }
 
 .estimated-arrival {
-  margin-top: 10px;
   color: gray;
 }
 
@@ -119,10 +110,6 @@ input {
 
 .check-box + .check-box {
   margin-top: 0
-}
-
-.check-box label {
-  color: gray;
 }
 
 .transaction-reference-container {

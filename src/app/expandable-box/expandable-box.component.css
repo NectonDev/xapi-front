@@ -1,0 +1,28 @@
+.title {
+  position: relative;
+}
+
+.content.expanded .title span {
+  transform: translateX(calc(100% + 5px)) translateY(-50%) rotateZ(90deg);
+}
+
+.title, .title * {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.title span {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateX(calc(100% + 5px)) translateY(-50%) rotateZ(0deg);
+}
+
+.body {
+  color: gray;
+  margin-left: 10px;
+}
+.content.expanded .body {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}

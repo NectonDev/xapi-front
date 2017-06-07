@@ -11,6 +11,12 @@ export class FlagsDropdownComponent {
   @Input() allowSelection = true;
   @Input() flagType: string;
 
+  constructor() {
+    document.addEventListener('mouseup', () => {
+      this.isShowingList = false;
+    }, true);
+  }
+
   // selectedCurrency getter and setter
   @Input()
   get selectedKey() {
@@ -20,12 +26,6 @@ export class FlagsDropdownComponent {
   set selectedKey(val) {
     this._selectedKey = val;
     this.selectedKeyChange.emit(this._selectedKey);
-  }
-
-  constructor() {
-    document.addEventListener('mouseup', () => {
-      this.isShowingList = false;
-    }, true);
   }
 
   getFlagName(): string {

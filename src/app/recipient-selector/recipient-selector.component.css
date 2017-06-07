@@ -33,8 +33,7 @@
 }
 
 .arrow span:hover{
-  color: white;
-  background: red;
+  color: gray;
 }
 
 .recipient-list-container .arrow {

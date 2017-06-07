@@ -4,8 +4,8 @@ import {Directive, ElementRef, Input} from '@angular/core';
 export class SmoothFadeDirective {
 
   constructor(private el: ElementRef) {
-    this.el.nativeElement.style.webkitTransition = 'opacity ease 200ms, max-height linear 1ms, max-width linear 1ms';
-    this.el.nativeElement.style.transition = 'opacity ease 200ms, max-height linear 1ms, max-width linear 1ms';
+    this.el.nativeElement.style.webkitTransition = 'opacity ease 350ms, max-height linear 1ms, max-width linear 1ms';
+    this.el.nativeElement.style.transition = 'opacity ease 350ms, max-height linear 1ms, max-width linear 1ms';
   }
 
   @Input('appSmoothFade')

@@ -4,6 +4,8 @@ import {Account} from '../../models/account';
 import {Payee} from '../../models/payee';
 import {CurrencySymbolsService} from '../currency-symbols.service';
 import {PopupService} from '../popup.service';
+import {StepManagerService} from '../step-manager.service';
+import {TransactionService} from '../transaction.service';
 
 @Component({
   selector: 'app-transfer',
@@ -24,17 +26,19 @@ export class TransferComponent {
   private _toCurrency: string;
   private _selectionIndex: number;
   private _selectedPaymentTypeIndex: number;
+
   feesPaymentMode = 'sender';
-  currencyMap = new Map();
   eta: string;
   santanderFee: number;
   exchangeRate: number;
-  showingAdvancedOptions = false;
   exchangeRateService: ExchangeRateService;
   currencySymbolsService: CurrencySymbolsService;
   useFeesAccount: boolean;
   feesAccount: Account;
   popupService: PopupService;
+  stepManagerService: StepManagerService;
+  transactionService: TransactionService;
+  currencyMap = new Map();
 
   // account getter and setter
   @Input()
@@ -68,60 +72,71 @@ export class TransferComponent {
     }
   }
 
+  constructor(exchangeRateService: ExchangeRateService,
+              currencySymbolsService: CurrencySymbolsService,
+              popupService: PopupService,
+              stepManagerService: StepManagerService,
+              transactionService: TransactionService) {
+    this.currencySymbolsService = currencySymbolsService;
+    this.popupService = popupService;
+    this.currencyMap.set('EUR', 'eur');
+    this.currencyMap.set('GBP', 'gbp');
+    this.currencyMap.set('USD', 'usd');
+    this.exchangeRateService = exchangeRateService;
+    this.stepManagerService = stepManagerService;
+    this.transactionService = transactionService;
+    this.fromCurrency = 'EUR';
+    this.toCurrency = 'GBP';
+    this.selectedPaymentTypeIndex = 0;
+    this.setSantanderFee('fast');
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
+  }
+
   // otherAccount getter and setter
-  @Input()
   get otherAccount(): Account {
     return this._otherAccount;
   }
-  @Output() otherAccountChange: EventEmitter<Account> = new EventEmitter();
   set otherAccount(value: Account) {
     this._otherAccount = value;
-    this.otherAccountChange.emit(value);
   }
 
   get fromCredit(): string {
     return this._fromCredit;
   }
-  @Output() fromCreditChange: EventEmitter<string> = new EventEmitter();
   set fromCredit(value: string) {
     value = value.replace(',', '.');
     this._fromCredit = value;
     this.calculateToCredit();
-    this.fromCreditChange.emit(this._fromCredit);
+    this.transactionService.transferAmount = Number.parseFloat(value);
   }
 
   get toCredit(): string {
     return this._toCredit;
   }
-  @Output() toCreditChange: EventEmitter<string> = new EventEmitter();
   set toCredit(value: string) {
     value = value.replace(',', '.');
     this._toCredit = value;
     this.calculateFromCredit();
-    this.toCreditChange.emit(this._toCredit);
+    this.transactionService.finalAmount = Number.parseFloat(value);
   }
 
-  @Input()
   get fromCurrency(): string {
     return this._fromCurrency;
   }
-  @Output() fromCurrencyChange: EventEmitter<string> = new EventEmitter();
   set fromCurrency(value: string) {
     this._fromCurrency = value;
-    this.fromCurrencyChange.emit(this._fromCurrency);
+    this.transactionService.fromCurrency = value;
     this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
       this.calculateToCredit();
     });
   }
 
-  @Input()
   get toCurrency(): string {
     return this._toCurrency;
   }
-  @Output() toCurrencyChange: EventEmitter<string> = new EventEmitter();
   set toCurrency(value: string) {
     this._toCurrency = value;
-    this.toCurrencyChange.emit(this._toCurrency);
+    this.transactionService.toCurrency = value;
     this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
       this.calculateToCredit();
     });
@@ -134,22 +149,7 @@ export class TransferComponent {
   set selectedPaymentTypeIndex(value: number) {
     this._selectedPaymentTypeIndex = value;
     this.setSantanderFee(value === 0 ? 'fast' : 'cheap');
-  }
-
-  constructor(exchangeRateService: ExchangeRateService,
-              currencySymbolsService: CurrencySymbolsService,
-              popupService: PopupService) {
-    this.currencySymbolsService = currencySymbolsService;
-    this.popupService = popupService;
-    this.currencyMap.set('EUR', 'eur');
-    this.currencyMap.set('GBP', 'gbp');
-    this.currencyMap.set('USD', 'usd');
-    this.exchangeRateService = exchangeRateService;
-    this.fromCurrency = 'EUR';
-    this.toCurrency = 'GBP';
-    this.selectedPaymentTypeIndex = 0;
-    this.setSantanderFee('fast');
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
+    this.transactionService.paymentType = value === 0 ? 'Fast' : 'Cheap';
   }
 
   setExchangeRateFromToCurrency(from: string, to: string): Promise<any> {
@@ -168,20 +168,12 @@ export class TransferComponent {
   calculateToCredit() {
     this._toCredit = !this._fromCredit ? this._fromCredit  :
       (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(4).toString();
-    this.toCreditChange.emit(this._toCredit);
+    this.transactionService.finalAmount = Number.parseFloat(this._toCredit);
   }
 
   calculateFromCredit() {
     this._fromCredit = !this._toCredit  ? this._toCredit  :
       (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(4).toString();
-    this.fromCreditChange.emit(this._fromCredit);
-  }
-
-  toggleAdvancedOptions() {
-    this.showingAdvancedOptions = !this.showingAdvancedOptions;
-  }
-
-  onReviewTransfer() {
-    this.popupService.changeOption('review');
+    this.transactionService.transferAmount = Number.parseFloat(this._fromCredit);
   }
 }

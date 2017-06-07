@@ -1,0 +1,11 @@
+<div class="content" [class.expanded]="isBodyVisible">
+  <div class="title" (click)="toggleBody()">
+    {{title}}
+    <span class="glyphicon glyphicon-chevron-right"></span>
+  </div>
+  <div class="body" [appSmoothFade]="isBodyVisible">
+    <div *ngIf="isBodyVisible">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
