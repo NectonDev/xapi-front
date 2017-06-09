@@ -1,10 +1,6 @@
 <div class="content">
   <div class="card">
     <div class="section">
-      <div style="max-width:400px">
-        <app-input [placeholder]="'Transaction\'s reference'"></app-input>
-      </div>
-
       <div class="payment-type-container" style="margin-top:10px">
         <span style="color:gray">Payment type:</span>
         <app-rb-group [(selectionIndex)]="selectedPaymentTypeIndex">
@@ -12,26 +8,6 @@
           <app-rb [title]="'cheap'"></app-rb>
           <app-rb [title]="'scheduled'"></app-rb>
         </app-rb-group>
-      </div>
-
-      <div [appSmoothFade]="selectedPaymentTypeIndex === 2">
-        <div *ngIf="selectedPaymentTypeIndex === 2" style="max-width:400px;margin-top:10px">
-          <app-calendar></app-calendar>
-        </div>
-      </div>
-
-      <div style="margin-top:10px;max-width:400px" *ngIf="!!recipient && recipient.getAccount().getCountry() !== 'united states'">
-        <app-expandable-box [title]="'Additional reference fields'">
-          <div>
-            <app-input [placeholder]="'Reference #2'"></app-input>
-          </div>
-          <div style="margin-top:10px">
-            <app-input [placeholder]="'Reference #3'"></app-input>
-          </div>
-          <div style="margin-top:10px">
-            <app-input [placeholder]="'Reference #4'"></app-input>
-          </div>
-        </app-expandable-box>
       </div>
     </div>
 
@@ -67,35 +43,62 @@
         </div>
       </div>
 
-      <div style="margin-top:10px;">
-        <app-expandable-box [title]="'Show advanced options'">
-          <label for="select-fees-payment">Select how to pay the fees</label>
-          <select [(ngModel)]="feesPaymentMode" id="select-fees-payment">
-            <option value="sender">Sender</option>
-            <option value="shared">Shared</option>
-            <option value="receiver">Receiver</option>
-          </select>
+      <div style="margin-top:10px" class="estimated-arrival">
+        Estimated arrival: <span>{{eta}}</span>
+      </div>
+    </div>
 
-          <div *ngIf="'sender' === feesPaymentMode || 'shared' === feesPaymentMode" style="display:block;margin-left:0" class="check-box">
-            <input [(ngModel)]="useFeesAccount" style="display:inline-block;width:auto" type="checkbox" id="use-account-for-fees">
-            <label for="use-account-for-fees">
-              <span class="glyphicon glyphicon-ok"></span>
-              Pay fees with another account
-            </label>
+    <div class="section">
+      <div style="max-width:400px">
+        <app-input [placeholder]="'Transaction\'s reference'"></app-input>
+      </div>
+
+      <div style="margin-top:10px;max-width:400px" *ngIf="!!recipient && recipient.getAccount().getCountry() !== 'united states'">
+        <app-expandable-box [title]="'Additional reference fields'">
+          <div>
+            <app-input [placeholder]="'Reference #2'"></app-input>
           </div>
-
-          <div [appSmoothFade]="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && useFeesAccount">
-            <div *ngIf="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && useFeesAccount" style="display: block;margin-top: 10px">
-              <app-account-selector [(selectedAccount)]="feesAccount"></app-account-selector>
-            </div>
+          <div style="margin-top:10px">
+            <app-input [placeholder]="'Reference #3'"></app-input>
+          </div>
+          <div style="margin-top:10px">
+            <app-input [placeholder]="'Reference #4'"></app-input>
           </div>
         </app-expandable-box>
       </div>
     </div>
+
     <div class="section">
-      <div style="margin-top:0" class="estimated-arrival">
-        Estimated arrival: <span>{{eta}}</span>
-      </div>
+      <app-expandable-box [title]="'Show advanced options'">
+        <label for="select-fees-payment">Select how to pay the fees</label>
+        <select [(ngModel)]="feesPaymentMode" id="select-fees-payment">
+          <option value="sender">Sender</option>
+          <option value="shared">Shared</option>
+          <option value="receiver">Receiver</option>
+        </select>
+
+        <div *ngIf="'sender' === feesPaymentMode || 'shared' === feesPaymentMode" style="display:block;margin-left:0" class="check-box">
+          <input [(ngModel)]="useFeesAccount" style="display:inline-block;width:auto" type="checkbox" id="use-account-for-fees">
+          <label for="use-account-for-fees">
+            <span class="glyphicon glyphicon-ok"></span>
+            Pay fees with another account
+          </label>
+        </div>
+
+        <div [appSmoothFade]="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && useFeesAccount">
+          <div *ngIf="('sender' === feesPaymentMode || 'shared' === feesPaymentMode) && useFeesAccount" style="display: block;margin-top: 10px">
+            <app-account-selector [(selectedAccount)]="feesAccount"></app-account-selector>
+          </div>
+        </div>
+
+        <div style="max-width:400px;margin-top:10px">
+          <span>Pay on:</span>
+          <app-calendar></app-calendar>
+        </div>
+      </app-expandable-box>
+    </div>
+
+    <div class="section">
       <button type="button" (click)="popupService.changeOption('review')">
         Continue to the final configuration
         <span class="glyphicon glyphicon-arrow-right"></span>
