@@ -43,7 +43,6 @@ button.submit-button::before {
 
 input {
   width: 100%;
-  padding: 8px 10px;
 }
 
 .input {
@@ -53,21 +52,12 @@ input {
 .flags {
   padding: 0 10px;
   background: white;
-  box-shadow: 0 2px 5px lightgray;
   height: 40px;
-  color: red;
-  transition: box-shadow 200ms;
+  box-shadow: 0 2px 5px lightgray;
 }
 
 .flags:hover {
-  background: red;
-  color: white;
   box-shadow: -2px 3px 10px lightgray;
-}
-
-.flags.has-selection {
-  background: red;
-  color: white;
 }
 
 input + input, .input + .input, input + .input, .input + input {

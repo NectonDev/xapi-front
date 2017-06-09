@@ -1,5 +1,4 @@
 <div class="content">
-
   <div class="form-container">
     <div class="flags">
       <app-flags-dropdown [(selectedKey)]="selectedCountry" [flagType]="'country'" [keysAndFlagsMap]="countryFlags"></app-flags-dropdown>
@@ -9,10 +8,12 @@
       <div [appSmoothFade]="hasSelection()">
         <div class="vertical-input important-input" *ngIf="hasSelection()">
           <div class="input input-validation-parent">
-            <input [(ngModel)]="name" type="text" placeholder="Payee's full name">
+            <app-input [(value)]="name" [placeholder]="'Payee\'s full name'"></app-input>
             <div style="margin-bottom: 10px" class="input-validation" [class.input-validation-empty]="payeeNameValidationError"></div>
           </div>
-          <input [(ngModel)]="address" type="text" placeholder="Payee's address">
+          <div class="input">
+            <app-input [(value)]="address" [placeholder]="'Payee\'s address'"></app-input>
+          </div>
           <div class="check-box">
             <input [(ngModel)]="save" style="display:inline-block;width:auto" type="checkbox" id="save-for-later">
             <label for="save-for-later">
@@ -29,7 +30,7 @@
         <div *ngIf="isSelected('Spain')">
           <div class="horizontal-input important-input">
             <div class="input input-validation-parent">
-              <input [(ngModel)]="iban" name="iban" placeholder="IBAN of Account">
+              <app-input [(value)]="iban" [placeholder]="'IBAN of Account'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="ibanValidationError"></div>
             </div>
             <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
@@ -47,12 +48,12 @@
       <div [appSmoothFade]="isSelected('United Kingdom')">
         <div *ngIf="isSelected('United Kingdom')">
           <div class="horizontal-input important-input">
-            <div style="margin-bottom: 10px" class="input-validation-parent">
-              <input [(ngModel)]="sortCode" name="sort-code" placeholder="Sort Code">
+            <div class="input input-validation-parent">
+              <app-input [(value)]="sortCode" [placeholder]="'Sort Code'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="sortCodeValidationError"></div>
             </div>
             <div class="input input-validation-parent">
-              <input [(ngModel)]="accountNumber" name="account-number" placeholder="Account Number">
+              <app-input [(value)]="accountNumber" [placeholder]="'Account Number'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="accountNumberValidationError"></div>
             </div>
             <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
@@ -71,7 +72,7 @@
         <div *ngIf="isSelected('India')">
           <div class="horizontal-input important-input">
             <div class="input input-validation-parent">
-              <input [(ngModel)]="iban" name="iban" placeholder="IBAN of Account">
+              <app-input [(value)]="iban" [placeholder]="'IBAN of Account'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="ibanValidationError"></div>
             </div>
             <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
@@ -90,11 +91,11 @@
         <div *ngIf="isSelected('United States')">
           <div class="horizontal-input important-input">
             <div class="input input-validation-parent">
-              <input [(ngModel)]="routingNumber" name="routing-number" placeholder="Routing Number">
+              <app-input [(value)]="routingNumber" [placeholder]="'Routing Number'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="routingNumberValidationError"></div>
             </div>
             <div class="input input-validation-parent">
-              <input [(ngModel)]="accountNumber" name="account-number" placeholder="Account Number">
+              <app-input [(value)]="accountNumber" [placeholder]="'Account Number'"></app-input>
               <div class="input-validation" [class.input-validation-enter]="accountNumberValidationError"></div>
             </div>
             <app-iban [iban]="ibanObject" [(isValid)]="ibanValid"></app-iban>
@@ -110,5 +111,4 @@
       </div>
     </div>
   </div>
-
 </div>

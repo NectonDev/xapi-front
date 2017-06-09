@@ -5,7 +5,7 @@ import {PopupService} from './popup.service';
 import {StepManagerService} from './step-manager.service';
 import {StepSelection} from './step/step.component';
 import {TransactionService} from './transaction.service';
-import {CurrencySymbolsService} from "./currency-symbols.service";
+import {CurrencySymbolsService} from './currency-symbols.service';
 
 @Component({
   selector: 'app-root',
@@ -36,9 +36,11 @@ export class AppComponent {
               stepManagerService: StepManagerService,
               transactionService: TransactionService,
               currencySymbolsService: CurrencySymbolsService) {
+
     this.popupService = popupService;
     this.stepManagerService = stepManagerService;
     this.currencySymbolsService = currencySymbolsService;
+
     transactionService.addOnFinalAmountChangeListener((finalAmount: number) => {
       this.transactionFinalAmount = finalAmount;
       this.updateFormSelectedProperties();

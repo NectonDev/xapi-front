@@ -9,7 +9,7 @@
   font-size: 17px;
   text-align: center;
   cursor: pointer;
-  transition: box-shadow 200ms, transform 200ms;
+  transition: box-shadow 250ms, transform 250ms;
 }
 
 .recipient-container:hover {

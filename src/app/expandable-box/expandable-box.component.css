@@ -1,5 +1,10 @@
 .title {
   position: relative;
+  color: gray;
+}
+
+.title:hover {
+  color: darkslategray;
 }
 
 .content.expanded .title span {

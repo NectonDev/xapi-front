@@ -4,7 +4,17 @@
   width: 100%;
   height: 100%;
   cursor: default;
+  color: lightgray;
 }
+
+.content:hover, .content.has-selection {
+  color: gray;
+}
+
+.content:hover .selection-arrow {
+  color: red;
+}
+
 .selection {
   display: flex;
   position: relative;
@@ -33,6 +43,7 @@
   right: 0;
   transform: translateY(-50%);
   font-size: 15px;
+  color: gray;
 }
 .selection-list {
   display: block;

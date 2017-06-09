@@ -31,6 +31,9 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { ExpandableBoxComponent } from './expandable-box/expandable-box.component';
 import { StepSelectionComponent } from './step-selection/step-selection.component';
 import { TransactionService } from './transaction.service';
+import {NumberFormattingService} from './number-formatting.service';
+import { MoneyInputComponent } from './money-input/money-input.component';
+import { InputComponent } from './input/input.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +59,9 @@ import { TransactionService } from './transaction.service';
     RbGroupComponent,
     CalendarComponent,
     ExpandableBoxComponent,
-    StepSelectionComponent
+    StepSelectionComponent,
+    MoneyInputComponent,
+    InputComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { TransactionService } from './transaction.service';
     CurrencySymbolsService,
     PopupService,
     StepManagerService,
-    TransactionService
+    TransactionService,
+    NumberFormattingService
   ],
   bootstrap: [AppComponent]
 })

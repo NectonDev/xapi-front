@@ -42,4 +42,8 @@ export class FlagsDropdownComponent {
       this.isShowingList = !this.isShowingList;
     }
   }
+
+  hasSelection(): boolean {
+    return !!this._selectedKey && this._selectedKey.length !== 0;
+  }
 }

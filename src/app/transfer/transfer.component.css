@@ -97,7 +97,7 @@ input {
 .advanced-options-header .glyphicon {
   display: inline-block;
   vertical-align: middle;
-  transition: transform 200ms;
+  transition: transform 250ms;
 }
 
 .advanced-options-container.expanded .glyphicon {
@@ -132,7 +132,7 @@ input {
     font-size: 120%;
     text-align: center;
     border: 1px solid lightgray;
-    transition: border 200ms, box-shadow 200ms;
+    transition: border 250ms, box-shadow 250ms;
   }
 
   .money-input .currency:hover {
@@ -164,10 +164,6 @@ input {
     color: gray;
   }
 
-  .fees-box .names-box span.important {
-    color: red;
-  }
-
   .fees-box .values-box {
     display: inline-block;
     position: relative;
@@ -180,13 +176,13 @@ input {
     position: relative;
     list-style: none;
     color: gray;
-    padding-left: 10px;
+    margin-left: 10px;
   }
 
   .fees-box .values-box li::before {
     display: block;
     position: absolute;
-    left: -10px;
+    left: -20px;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
@@ -202,7 +198,7 @@ input {
   .fees-box .values-box li::after {
     display: block;
     position: absolute;
-    left: 0;
+    left: -10px;
     top: 50%;
     -webkit-transform: translateY(-50%);
     -moz-transform: translateY(-50%);
@@ -215,8 +211,11 @@ input {
     background: gray;
   }
 
-  .fees-box .values-box li.important {
-    color: red;
+  .fees-box .values-box li.important, .fees-box .names-box span.important {
+    color: white;
+    padding: 1px 5px;
+    background: red;
+    border-radius: 3px;
   }
 }
 
@@ -234,9 +233,6 @@ input {
     font-size: 120%;
     height: 30px;
     border: none !important;
-  }
-
-  .money-input input {
   }
 
   .fees-box {
@@ -285,10 +281,6 @@ input {
     border-bottom: 1px solid lightgray;
   }
 
-  .fees-box .names-box span.important {
-    color: red;
-  }
-
   .fees-box .values-box {
     display: inline-block;
     position: relative;
@@ -300,15 +292,5 @@ input {
     list-style: none;
     color: gray;
     border-bottom: 1px solid lightgray;
-  }
-
-  .fees-box .values-box li::before {
-  }
-
-  .fees-box .values-box li::after {
-  }
-
-  .fees-box .values-box li.important {
-    color: red;
   }
 }

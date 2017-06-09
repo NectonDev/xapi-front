@@ -10,7 +10,7 @@
   box-shadow: -2px 5px 5px lightgray;
   margin-top: 10px;
   outline: 0 solid red;
-  transition: margin 1000ms, transform 1000ms, width 1000ms, padding 1000ms, border 200ms, background 200ms, color 0ms,
+  transition: margin 1000ms, transform 1000ms, width 1000ms, padding 1000ms, border 250ms, background 250ms, color 0ms,
   outline 100ms;
 }
 
@@ -31,7 +31,7 @@
   left: 0;
   transform: translateY(-50%) translateX(-100%);
   box-shadow: -2px 5px 5px lightgray;
-  transition: width 1000ms, transform 200ms;
+  transition: width 1000ms, transform 250ms;
 }
 
 .content.is-selected::before {
@@ -62,7 +62,7 @@
   display: inline-block;
   text-align: center;
   padding: 8px 10px;
-  transition: all 200ms !important;
+  transition: all 250ms !important;
 }
 
 .selected-content {
@@ -86,7 +86,7 @@
   border-left: 3px solid red;
   outline: none;
   color: red;
-  transition: margin 1000ms, transform 1000ms, width 1000ms, padding 1000ms, border 200ms, background 1000ms, color 0ms,
+  transition: margin 1000ms, transform 1000ms, width 1000ms, padding 1000ms, border 250ms, background 1000ms, color 0ms,
   outline 100ms;
 }
 

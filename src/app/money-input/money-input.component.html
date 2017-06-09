@@ -1,0 +1,12 @@
+<div class="content"
+     [class.focused]="isFocused"
+     [class.has-value]="!!value && value.length !== 0"
+     [class.hover]="isHovering">
+  <div class="currency-symbol">
+    <span>{{currency}}</span>
+  </div>
+  <input type="text" [(ngModel)]="value"
+         (focus)="isFocused = true" (blur)="onBlur();isFocused = false"
+         (mouseenter)="isHovering = true" (mouseleave)="isHovering = false">
+  <div class="placeholder">{{placeholder}}</div>
+</div>

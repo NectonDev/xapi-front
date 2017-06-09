@@ -5,7 +5,7 @@
   pointer-events: all;
   color: gray;
   border-color: gray;
-  transition: color 200ms, border-color 200ms;
+  transition: color 250ms, border-color 250ms;
 }
 
 .content:hover * {
@@ -38,7 +38,7 @@
   height: 10px;
   background: transparent;
   border-radius: 100%;
-  transition: background 200ms;
+  transition: background 250ms;
 }
 
 .content.selected .dot::before {

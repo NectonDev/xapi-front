@@ -6,6 +6,7 @@ import {CurrencySymbolsService} from '../currency-symbols.service';
 import {PopupService} from '../popup.service';
 import {StepManagerService} from '../step-manager.service';
 import {TransactionService} from '../transaction.service';
+import {NumberFormattingService} from '../number-formatting.service';
 
 @Component({
   selector: 'app-transfer',
@@ -14,38 +15,35 @@ import {TransactionService} from '../transaction.service';
   providers: [ ExchangeRateService ]
 })
 export class TransferComponent {
-  defaultFeesPaymentModesPerCountry = {
-    'united states': 'shared'
-  };
-  private _account: Account;
-  private _recipient: Payee;
-  private _otherAccount: Account;
-  private _fromCredit: string;
-  private _toCredit: string;
-  private _fromCurrency: string;
-  private _toCurrency: string;
-  private _selectionIndex: number;
-  private _selectedPaymentTypeIndex: number;
 
-  feesPaymentMode = 'sender';
-  eta: string;
-  santanderFee: number;
-  exchangeRate: number;
-  exchangeRateService: ExchangeRateService;
-  currencySymbolsService: CurrencySymbolsService;
-  useFeesAccount: boolean;
-  feesAccount: Account;
-  popupService: PopupService;
-  stepManagerService: StepManagerService;
-  transactionService: TransactionService;
-  currencyMap = new Map();
+  get toCredit(): string {
+    return this._toCredit;
+  }
+  set toCredit(value: string) {
+    if (this._toCredit !== value) {
+      this._toCredit = value;
+      this.calculateFromCredit();
+    }
+  }
+
+  get fromCredit(): string {
+    return this._fromCredit;
+  }
+  set fromCredit(value: string) {
+    if (this._fromCredit !== value) {
+      this._fromCredit = value;
+      this.calculateToCredit();
+    }
+  }
 
   // account getter and setter
   @Input()
   get account(): Account {
     return this._account;
   }
+
   @Output() accountChange: EventEmitter<Account> = new EventEmitter();
+
   set account(value: Account) {
     if (!!value) {
       this._account = value;
@@ -59,7 +57,9 @@ export class TransferComponent {
   get recipient(): Payee {
     return this._recipient;
   }
+
   @Output() recipientChange: EventEmitter<Payee> = new EventEmitter();
+
   set recipient(value: Payee) {
     if (!!value) {
       this._recipient = value;
@@ -72,57 +72,10 @@ export class TransferComponent {
     }
   }
 
-  constructor(exchangeRateService: ExchangeRateService,
-              currencySymbolsService: CurrencySymbolsService,
-              popupService: PopupService,
-              stepManagerService: StepManagerService,
-              transactionService: TransactionService) {
-    this.currencySymbolsService = currencySymbolsService;
-    this.popupService = popupService;
-    this.currencyMap.set('EUR', 'eur');
-    this.currencyMap.set('GBP', 'gbp');
-    this.currencyMap.set('USD', 'usd');
-    this.exchangeRateService = exchangeRateService;
-    this.stepManagerService = stepManagerService;
-    this.transactionService = transactionService;
-    this.fromCurrency = 'EUR';
-    this.toCurrency = 'GBP';
-    this.selectedPaymentTypeIndex = 0;
-    this.setSantanderFee('fast');
-    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
-  }
-
-  // otherAccount getter and setter
-  get otherAccount(): Account {
-    return this._otherAccount;
-  }
-  set otherAccount(value: Account) {
-    this._otherAccount = value;
-  }
-
-  get fromCredit(): string {
-    return this._fromCredit;
-  }
-  set fromCredit(value: string) {
-    value = value.replace(',', '.');
-    this._fromCredit = value;
-    this.calculateToCredit();
-    this.transactionService.transferAmount = Number.parseFloat(value);
-  }
-
-  get toCredit(): string {
-    return this._toCredit;
-  }
-  set toCredit(value: string) {
-    value = value.replace(',', '.');
-    this._toCredit = value;
-    this.calculateFromCredit();
-    this.transactionService.finalAmount = Number.parseFloat(value);
-  }
-
   get fromCurrency(): string {
     return this._fromCurrency;
   }
+
   set fromCurrency(value: string) {
     this._fromCurrency = value;
     this.transactionService.fromCurrency = value;
@@ -134,11 +87,12 @@ export class TransferComponent {
   get toCurrency(): string {
     return this._toCurrency;
   }
+
   set toCurrency(value: string) {
     this._toCurrency = value;
     this.transactionService.toCurrency = value;
     this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency).then(() => {
-      this.calculateToCredit();
+      this.calculateFromCredit();
     });
   }
 
@@ -146,10 +100,61 @@ export class TransferComponent {
   get selectedPaymentTypeIndex(): number {
     return this._selectedPaymentTypeIndex;
   }
+
   set selectedPaymentTypeIndex(value: number) {
     this._selectedPaymentTypeIndex = value;
     this.setSantanderFee(value === 0 ? 'fast' : 'cheap');
     this.transactionService.paymentType = value === 0 ? 'Fast' : 'Cheap';
+  }
+
+  defaultFeesPaymentModesPerCountry = {
+    'united states': 'shared'
+  };
+  private _account: Account;
+  private _recipient: Payee;
+  private _fromCurrency: string;
+  private _toCurrency: string;
+  private _selectionIndex: number;
+  private _selectedPaymentTypeIndex: number;
+  private _fromCredit: string;
+  private _toCredit: string;
+
+  eta: string;
+  santanderFee: number;
+  exchangeRate: number;
+  useFeesAccount: boolean;
+  feesPaymentMode = 'sender';
+  currencyMap = new Map();
+  feesAccount: Account;
+  otherAccount: Account;
+
+  exchangeRateService: ExchangeRateService;
+  css: CurrencySymbolsService;
+  popupService: PopupService;
+  stepManagerService: StepManagerService;
+  transactionService: TransactionService;
+  nfs: NumberFormattingService;
+
+  constructor(exchangeRateService: ExchangeRateService,
+              currencySymbolsService: CurrencySymbolsService,
+              popupService: PopupService,
+              stepManagerService: StepManagerService,
+              transactionService: TransactionService,
+              numberFormattingService: NumberFormattingService) {
+    this.css = currencySymbolsService;
+    this.popupService = popupService;
+    this.exchangeRateService = exchangeRateService;
+    this.stepManagerService = stepManagerService;
+    this.transactionService = transactionService;
+    this.nfs = numberFormattingService;
+    this.currencyMap.set('EUR', 'eur');
+    this.currencyMap.set('GBP', 'gbp');
+    this.currencyMap.set('USD', 'usd');
+    this.fromCurrency = 'EUR';
+    this.toCurrency = 'GBP';
+    this.selectedPaymentTypeIndex = 0;
+    this.setSantanderFee('fast');
+    this.setExchangeRateFromToCurrency(this._fromCurrency, this._toCurrency);
   }
 
   setExchangeRateFromToCurrency(from: string, to: string): Promise<any> {
@@ -166,14 +171,12 @@ export class TransferComponent {
   }
 
   calculateToCredit() {
-    this._toCredit = !this._fromCredit ? this._fromCredit  :
-      (Number.parseFloat(this._fromCredit ) * this.exchangeRate).toFixed(4).toString();
-    this.transactionService.finalAmount = Number.parseFloat(this._toCredit);
+    const fromCredit = this.nfs.parseNumber(this._fromCredit);
+    this._toCredit = this.nfs.toLocaleString(fromCredit * (this.exchangeRate - this.santanderFee / 100), 2, 2);
   }
 
   calculateFromCredit() {
-    this._fromCredit = !this._toCredit  ? this._toCredit  :
-      (Number.parseFloat(this._toCredit ) / this.exchangeRate).toFixed(4).toString();
-    this.transactionService.transferAmount = Number.parseFloat(this._fromCredit);
+    const toCredit = this.nfs.parseNumber(this._toCredit);
+    this._fromCredit = this.nfs.toLocaleString(toCredit / (this.exchangeRate - this.santanderFee / 100), 2, 2);
   }
 }

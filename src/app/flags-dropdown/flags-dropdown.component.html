@@ -1,5 +1,5 @@
-<div class="content" [class.expandable]="allowSelection" *ngIf="keysAndFlagsMap" (click)="toggleList()">
-
+<div class="content" [class.expandable]="allowSelection" [class.has-selection]="hasSelection()"
+     *ngIf="keysAndFlagsMap" (click)="toggleList()">
   <div class="selection">
     <div class="selection-content" *ngIf="flagType === 'currency'">
       <div class="currency-flag currency-flag-{{getFlagName()}}"></div>
@@ -31,5 +31,4 @@
       </ul>
     </div>
   </div>
-
 </div>

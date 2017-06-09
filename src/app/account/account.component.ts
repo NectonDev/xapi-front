@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {Account} from '../../models/account';
 import {state, style, trigger} from '@angular/animations';
 import {CurrencySymbolsService} from '../currency-symbols.service';
+import {NumberFormattingService} from '../number-formatting.service';
 
 @Component({
   selector: 'app-account',
@@ -19,9 +20,12 @@ import {CurrencySymbolsService} from '../currency-symbols.service';
 export class AccountComponent {
   @Input() account: Account;
   @Input() accountSelected: boolean;
-  currencySymbolsService: CurrencySymbolsService;
+  css: CurrencySymbolsService;
+  nfs: NumberFormattingService;
 
-  constructor(currencySymbolsService: CurrencySymbolsService) {
-    this.currencySymbolsService = currencySymbolsService;
+  constructor(currencySymbolsService: CurrencySymbolsService,
+              numberFormattingService: NumberFormattingService) {
+    this.css = currencySymbolsService;
+    this.nfs = numberFormattingService;
   }
 }

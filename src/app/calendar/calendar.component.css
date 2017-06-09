@@ -15,7 +15,7 @@
   border-radius: 5px;
   border: 1px solid lightgray;
   background: white;
-  transition: 200ms;
+  transition: 250ms;
 }
 
 .strip:hover {
@@ -42,7 +42,7 @@
   top: 0;
   transform: translateX(-50%);
   color: white;
-  background: lightgray;
+  background: gray;
   border-radius: 0 0 5px 5px;
   padding: 0 10px;
   font-size: 80%;
@@ -69,10 +69,11 @@
   transform: translateY(-50%);
   font-size: 20px;
   cursor: pointer;
+  color: gray;
 }
 
 .strip .calendar-glyphicon:hover .glyphicon {
-  color: gray;
+  color: red;
 }
 
 .popup {
@@ -102,14 +103,14 @@
 }
 
 .arrow {
-  color: red;
+  color: gray;
   position: absolute;
   top: 50%;
   cursor: pointer;
 }
 
 .arrow:hover {
-  color: gray;
+  color: red;
 }
 
 .arrow-left {

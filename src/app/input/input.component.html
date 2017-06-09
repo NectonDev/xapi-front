@@ -1,0 +1,8 @@
+<div class="content" [class.focused]="isFocused"
+     [class.has-value]="!!value && value.length !== 0"
+     [class.hover]="isHovering">
+  <input type="text" [(ngModel)]="value"
+         (focus)="isFocused = true" (blur)="isFocused = false"
+         (mouseenter)="isHovering = true" (mouseleave)="isHovering = false">
+  <div class="placeholder">{{placeholder}}</div>
+</div>

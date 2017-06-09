@@ -16,7 +16,7 @@
 .arrow {
   position: relative;
   font-size: 40px;
-  color: red;
+  color: gray;
   text-align: center;
   transform: translateY(50%);
   z-index: 100;
@@ -33,7 +33,7 @@
 }
 
 .arrow span:hover{
-  color: gray;
+  color: red;
 }
 
 .recipient-list-container .arrow {
@@ -65,7 +65,7 @@
   white-space: nowrap;
   padding-top: 5px;
   left: 10px;
-  transition: left 200ms ease-out ;
+  transition: left 250ms ease-out ;
 }
 
 .recipient {
