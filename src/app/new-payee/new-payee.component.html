@@ -8,11 +8,13 @@
       <div [appSmoothFade]="hasSelection()">
         <div class="vertical-input important-input" *ngIf="hasSelection()">
           <div class="input input-validation-parent">
-            <app-input [(value)]="name" [placeholder]="'Payee\'s full name'"></app-input>
+            <app-input [(value)]="name" [placeholder]="'Payee\'s full name'"
+                       [tooltip]="'The full name of the new payee. Please insert both the names and surnames.'"></app-input>
             <div style="margin-bottom: 10px" class="input-validation" [class.input-validation-empty]="payeeNameValidationError"></div>
           </div>
           <div class="input">
-            <app-input [(value)]="address" [placeholder]="'Payee\'s address'"></app-input>
+            <app-input [(value)]="address" [placeholder]="'Payee\'s address'"
+                       [tooltip]="'The home address of the payee. Please include the postcode and building number (and room if available)'"></app-input>
           </div>
           <div class="check-box">
             <input [(ngModel)]="save" style="display:inline-block;width:auto" type="checkbox" id="save-for-later">

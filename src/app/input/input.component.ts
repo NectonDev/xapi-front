@@ -16,7 +16,9 @@ export class InputComponent {
     this.valueChange.emit(value);
   }
   private _value: string;
-  @Input() placeholder: string = 'value placeholder';
+  @Input() placeholder;
+  @Input() tooltip;
   isFocused: boolean;
   isHovering: boolean;
+  isShowingTooltip: boolean;
 }

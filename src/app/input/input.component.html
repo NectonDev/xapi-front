@@ -1,8 +1,19 @@
 <div class="content" [class.focused]="isFocused"
      [class.has-value]="!!value && value.length !== 0"
      [class.hover]="isHovering">
-  <input type="text" [(ngModel)]="value"
-         (focus)="isFocused = true" (blur)="isFocused = false"
-         (mouseenter)="isHovering = true" (mouseleave)="isHovering = false">
+  <div class="wrapper">
+    <input type="text" [(ngModel)]="value"
+           (focus)="isFocused = true" (blur)="isFocused = false"
+           (mouseenter)="isHovering = true" (mouseleave)="isHovering = false">
+    <div class="input-tooltip" *ngIf="!!tooltip && tooltip.length !== 0">
+      <span class="glyphicon glyphicon-exclamation-sign"
+            (mouseenter)="isShowingTooltip = true" (mouseleave)="isShowingTooltip = false"></span>
+      <div [appSmoothFade]="isShowingTooltip">
+        <div class="tooltip-body" *ngIf="isShowingTooltip">
+          {{tooltip}}
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="placeholder">{{placeholder}}</div>
 </div>
